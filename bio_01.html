@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>學士後中醫生物學 完整考點知識庫 (全集)</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&family=Noto+Sans+TC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0f1117;
+  --surface: #1a1d27;
+  --surface2: #22263a;
+  --border: #2e3350;
+  --text: #e8eaf0;
+  --muted: #8890a8;
+  --red: #e05c5c;
+  --red-dim: rgba(224,92,92,0.12);
+  --amber: #e8b84b;
+  --amber-dim: rgba(232,184,75,0.12);
+  --teal: #4ecdc4;
+  --teal-dim: rgba(78,205,196,0.12);
+  --blue: #5b9cf6;
+  --blue-dim: rgba(91,156,246,0.12);
+  --purple: #a78bfa;
+  --purple-dim: rgba(167,139,250,0.12);
+  --green: #6bcb77;
+  --green-dim: rgba(107,203,119,0.12);
+  --line-h: 1.75;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 12.5px;
+  line-height: var(--line-h);
+}
+
+/* ── PRINT ── */
+@media print {
+  :root {
+    --bg: #fff; --surface: #f8f8fc; --surface2: #f0f0f8;
+    --border: #d0d4e8; --text: #111; --muted: #555;
+    --red:#b91c1c; --red-dim:#fff0f0;
+    --amber:#92650a; --amber-dim:#fffbeb;
+    --teal:#0f7068; --teal-dim:#f0fdfb;
+    --blue:#1d4ed8; --blue-dim:#eff6ff;
+    --purple:#6d28d9; --purple-dim:#f5f3ff;
+    --green:#166534; --green-dim:#f0fdf4;
+  }
+  body { background:#fff; font-size:10.5px; }
+  .page-break { page-break-before: always; }
+  .no-break { break-inside: avoid; }
+  header { background: #0f1117 !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .tag, .badge { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .card { box-shadow:none !important; }
+  nav { display:none; }
+}
+
+/* ── LAYOUT ── */
+header {
+  background: var(--surface);
+  border-bottom: 3px solid var(--amber);
+  padding: 24px 40px 18px;
+  display: flex; justify-content: space-between; align-items: flex-end;
+  position: sticky; top:0; z-index:100;
+}
+header h1 {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 18px; font-weight: 900;
+  color: var(--text);
+  letter-spacing: 2px;
+}
+header .sub { font-size:10px; color: var(--muted); margin-top:3px; letter-spacing:1px; }
+
+nav {
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 40px;
+  display: flex; gap: 6px; flex-wrap: wrap;
+}
+nav a {
+  color: var(--muted); font-size:11px; text-decoration:none;
+  padding: 4px 10px; border-radius:4px; border: 1px solid var(--border);
+  transition: all .2s;
+}
+nav a:hover { color: var(--amber); border-color: var(--amber); }
+
+main { max-width: 1160px; margin: 0 auto; padding: 32px 36px 60px; }
+
+/* ── SECTION HEADER ── */
+.section-title {
+  display: flex; align-items: center; gap: 12px;
+  margin: 36px 0 18px; padding-bottom: 10px;
+  border-bottom: 2px solid var(--border);
+}
+.section-title .icon {
+  width: 38px; height: 38px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
+}
+.section-title h2 {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 17px; font-weight: 900; letter-spacing: 1px;
+}
+.section-title .count {
+  margin-left:auto; font-size:11px; color:var(--muted);
+  background:var(--surface2); padding:3px 10px; border-radius:12px;
+  border:1px solid var(--border);
+}
+
+/* ── CARDS ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 14px;
+}
+.card.red   { border-left: 3px solid var(--red);    background: linear-gradient(135deg, var(--red-dim) 0%, var(--surface) 40%); }
+.card.amber { border-left: 3px solid var(--amber);  background: linear-gradient(135deg, var(--amber-dim) 0%, var(--surface) 40%); }
+.card.teal  { border-left: 3px solid var(--teal);   background: linear-gradient(135deg, var(--teal-dim) 0%, var(--surface) 40%); }
+.card.blue  { border-left: 3px solid var(--blue);   background: linear-gradient(135deg, var(--blue-dim) 0%, var(--surface) 40%); }
+.card.purple{ border-left: 3px solid var(--purple); background: linear-gradient(135deg, var(--purple-dim) 0%, var(--surface) 40%); }
+.card.green { border-left: 3px solid var(--green);  background: linear-gradient(135deg, var(--green-dim) 0%, var(--surface) 40%); }
+
+.card-title {
+  font-size: 13px; font-weight: 700; margin-bottom: 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* ── GRID ── */
+.g2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px; }
+.g3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin-bottom:14px; }
+.g2-1 { display:grid; grid-template-columns:2fr 1fr; gap:14px; margin-bottom:14px; }
+.span2 { grid-column: span 2; }
+.span3 { grid-column: span 3; }
+
+/* ── TABLE ── */
+table { width:100%; border-collapse:collapse; font-size:11.5px; }
+th {
+  background: var(--surface2); color: var(--muted);
+  padding: 7px 10px; text-align:left; font-size:10.5px;
+  font-weight:700; letter-spacing:.5px; border-bottom:2px solid var(--border);
+}
+td { padding:7px 10px; border-bottom:1px solid var(--border); vertical-align:top; }
+tr:hover td { background:var(--surface2); }
+.td-center { text-align:center; }
+
+/* ── TAGS ── */
+.tag {
+  display:inline-block; padding:1px 7px; border-radius:3px;
+  font-size:10px; font-weight:700; letter-spacing:.3px; margin:1px;
+}
+.t-red    { background:var(--red);    color:#fff; }
+.t-amber  { background:var(--amber);  color:#fff; }
+.t-teal   { background:var(--teal);   color:#0f1117; }
+.t-blue   { background:var(--blue);   color:#fff; }
+.t-purple { background:var(--purple); color:#fff; }
+.t-green  { background:var(--green);  color:#0f1117; }
+.t-gray   { background:var(--surface2); color:var(--muted); border:1px solid var(--border); }
+.t-outline-red   { background:transparent; border:1px solid var(--red);    color:var(--red); }
+  .t-outline-amber { background:transparent; border:1px solid var(--amber);  color:var(--amber); }
+
+/* ── KNOWLEDGE ROWS ── */
+.krow {
+  display:flex; gap:0;
+  border-bottom:1px solid var(--border);
+  padding: 9px 0;
+  align-items: flex-start;
+}
+.krow:last-child { border-bottom:none; }
+.krow-num {
+  width:24px; height:24px; border-radius:5px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:10px; font-weight:700; flex-shrink:0; margin-right:10px; margin-top:1px;
+}
+.krow-body { flex:1; }
+.krow-title { font-weight:700; font-size:12.5px; margin-bottom:3px; }
+.krow-detail { font-size:11.5px; color:var(--muted); line-height:1.65; }
+.krow-detail strong { color:var(--text); }
+
+/* ── HIGHLIGHT BOX ── */
+.hbox {
+  border-radius:7px; padding:11px 14px; margin:8px 0; font-size:11.5px;
+}
+.hbox-red    { background:var(--red-dim);    border-left:3px solid var(--red); }
+.hbox-amber  { background:var(--amber-dim);  border-left:3px solid var(--amber); }
+.hbox-teal   { background:var(--teal-dim);   border-left:3px solid var(--teal); }
+.hbox-blue   { background:var(--blue-dim);   border-left:3px solid var(--blue); }
+.hbox-purple { background:var(--purple-dim); border-left:3px solid var(--purple); }
+.hbox-green  { background:var(--green-dim);  border-left:3px solid var(--green); }
+.hbox b { display:block; font-weight:700; margin-bottom:3px; }
+
+/* ── FLOW / PATHWAY ── */
+.flow {
+  display:flex; align-items:center; gap:6px; flex-wrap:wrap;
+  font-size:11.5px; padding:10px 12px;
+  background:var(--surface2); border-radius:7px; margin:6px 0;
+  font-family:'JetBrains Mono', monospace;
+}
+.flow-node {
+  background:var(--surface); border:1px solid var(--border);
+  padding:3px 9px; border-radius:4px; color:var(--text); font-size:10.5px;
+}
+.flow-arrow { color:var(--muted); font-size:13px; }
+.flow-note  { color:var(--amber); font-size:10px; font-family:'Noto Sans TC',sans-serif; }
+
+/* ── COMPARE TABLE ── */
+.cmp { background:var(--surface2); border-radius:8px; overflow:hidden; margin:8px 0; }
+.cmp table th { background:var(--border); color:var(--text); }
+
+/* ── TRAP BOX ── */
+.trap {
+  background: linear-gradient(135deg, rgba(224,92,92,0.08), transparent);
+  border:1px solid rgba(224,92,92,.4);
+  border-radius:7px; padding:11px 14px; margin:8px 0; font-size:11.5px;
+}
+.trap::before { content:"⚠ 常見陷阱："; color:var(--red); font-weight:700; display:block; margin-bottom:4px; font-size:11px; }
+
+/* ── FORMULA ── */
+.formula {
+  background:var(--surface2); border:1px solid var(--border);
+  border-radius:6px; padding:10px 14px; margin:6px 0;
+  font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--teal);
+  line-height:1.8;
+}
+
+/* ── ACCENT TEXT ── */
+.hl-red    { color:var(--red); font-weight:700; }
+.hl-amber  { color:var(--amber); font-weight:700; }
+.hl-teal   { color:var(--teal); font-weight:700; }
+.hl-blue   { color:var(--blue); font-weight:700; }
+.hl-purple { color:var(--purple); font-weight:700; }
+.hl-green  { color:var(--green); font-weight:700; }
+
+.divider {
+  border:none; border-top:1px dashed var(--border); margin:28px 0;
+}
+
+/* ── MINI BULLET ── */
+ul.dot { list-style:none; }
+ul.dot li { padding:3px 0 3px 16px; position:relative; font-size:11.5px; color:var(--muted); }
+ul.dot li::before { content:"▸"; position:absolute; left:0; color:var(--amber); font-size:10px; top:4px; }
+ul.dot li strong { color:var(--text); }
+
+.page-num {
+  text-align:center; font-size:10px; color:var(--muted);
+  padding:8px 0; border-top:1px solid var(--border); margin-top:24px;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="sub">完整合訂本 (全 9 章) ｜ 生理 · 分生 · 細胞 · 代謝 · 免疫 · 遺傳 · 植物 · 演化</div>
+    <h1>學士後中醫 生物學 完整考點知識庫</h1>
+  </div>
+  <div style="text-align:right;font-size:10px;color:var(--muted);">
+    來源：中國醫 106・義守 104・慈濟 104/105・高醫 105<br>
+    覆蓋範圍：生物學全領域完整考題解析
+  </div>
+</header>
+
+<nav>
+  <a href="#physio">生理學</a>
+  <a href="#mol">分子生物</a>
+  <a href="#cell">細胞生物</a>
+  <a href="#metab">代謝生化</a>
+  <a href="#immuno">免疫學</a>
+  <a href="#genetics">遺傳族群</a>
+  <a href="#plants">植物生物</a>
+  <a href="#evolution">演化生態</a>
+  <a href="#summary">綜合整理</a>
+</nav>
+
+<main>
+
+<!-- ════════════════════════════════════
+     CHAPTER 1: 生理學
+════════════════════════════════════ -->
+<div id="physio">
+<div class="section-title">
+  <div class="icon" style="background:var(--red-dim)">🫀</div>
+  <h2 style="color:var(--red)">第一類｜生理學（配分最高 ≈22%）</h2>
+  <div class="count">6 大子主題 · 35+ 考點</div>
+</div>
+
+<!-- 1-1 腎元 -->
+<div class="card red no-break">
+  <div class="card-title"><span class="tag t-red">1.1</span> 腎元（Nephron）功能與各段通透性 <span class="tag t-outline-red">★★★ 必考</span></div>
+
+  <div class="cmp">
+    <table>
+      <thead>
+        <tr><th>部位</th><th>水的通透</th><th>Na⁺/溶質</th><th>調控因子</th><th>機制</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>腎小球（過濾）</strong></td><td>通過</td><td>全部通過（小分子）</td><td>腎絲球靜水壓</td><td>超過濾</td></tr>
+        <tr><td><strong>近端小管 PCT</strong></td><td>✅ 被動回收（osmosis）</td><td>Na⁺ <span class="hl-amber">主動</span>回收（65%）</td><td>—</td><td>主動轉運後水跟隨</td></tr>
+        <tr><td><strong>亨耳氏下降細端</strong></td><td>✅ <span class="hl-teal">被動流出</span></td><td>溶質不通透（Na⁺留著）</td><td>—</td><td>髓質高滲 → 水自由擴散出</td></tr>
+        <tr><td><strong>亨耳氏上升細端</strong></td><td>❌ 不通透</td><td>Na⁺ <span class="hl-teal">被動流出</span></td><td>—</td><td>濃度梯度驅動 NaCl 出</td></tr>
+        <tr><td><strong>亨耳氏上升粗端</strong></td><td>❌ <span class="hl-red">絕對不通水</span></td><td>Na⁺ <span class="hl-amber">主動</span>泵出（NKCC2）</td><td>Loop 利尿劑標靶</td><td>建立髓質濃度梯度的關鍵</td></tr>
+        <tr><td><strong>遠端小管 DCT</strong></td><td>有限（受ADH）</td><td>NaCl <span class="hl-amber">主動</span>回收</td><td>Aldosterone</td><td>Thiazide 利尿劑標靶</td></tr>
+        <tr><td><strong>集尿管</strong></td><td>✅ 被動（受ADH ↑）</td><td>Na⁺ 主動回收</td><td><span class="hl-blue">ADH→Aquaporin-2</span></td><td>ADH↑→插入 AQP2→水回收↑</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="trap">粗上升端（thick ascending limb）對水<strong>完全不通透</strong>，Na⁺主動泵出才能建立髓質高滲梯度。選項說「粗上升端水可被動回收」→ 錯誤！（中國醫 106 第 45 題 C）</div>
+
+  <div class="g2" style="margin-top:10px;">
+    <div class="hbox hbox-blue">
+      <b>ADH（抗利尿激素）作用機制</b>
+      高滲透壓/低血量 → 下視丘感應 → ADH 由腦垂腺後葉釋放 → 集尿管 V2 受體（GPCR）→ cAMP↑ → PKA → Aquaporin-2 插入頂端膜 → 水回收↑ → 尿量↓
+    </div>
+    <div class="hbox hbox-teal">
+      <b>Aldosterone 作用機制</b>
+      低血量/低Na⁺ → RAAS→ Aldosterone（腎上腺皮質）→ 遠端小管&集尿管 → 促進 ENaC（Na通道）與 Na/K-ATPase 表現 → Na⁺ 回收↑、K⁺ 排出↑、H⁺ 排出↑
+    </div>
+  </div>
+
+  <div class="hbox hbox-amber" style="margin-top:8px;">
+    <b>HCO₃⁻ 再吸收（碳酸氫根）</b>
+    大部分（~80-90%）在<strong>近端小管</strong>再吸收（義守 104 第 34 題）。腎小管細胞中 CO₂ + H₂O → H₂CO₃ → H⁺ + HCO₃⁻，H⁺ 分泌至管腔，HCO₃⁻ 回到血液。
+  </div>
+</div>
+
+<!-- 1-2 心臟 -->
+<div class="card red no-break">
+  <div class="card-title"><span class="tag t-red">1.2</span> 心臟生理 <span class="tag t-outline-red">★★★ 必考</span></div>
+
+  <div class="g2">
+    <div>
+      <div class="hbox hbox-blue">
+        <b>心臟傳導系統（順序）</b>
+        <div class="flow">
+          <span class="flow-node">竇房結 SA node</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-node">房室結 AV node</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-node">His 束</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-node">Purkinje 纖維</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-node">心室肌</span>
+        </div>
+      </div>
+      <div class="hbox hbox-teal" style="margin-top:8px;">
+        <b>心肌鈣離子觸發機制（CICR）</b>
+        動作電位 → L-type Ca²⁺ channel 開（胞外Ca²⁺進入）→ 觸發肌漿網（SR）大量釋放 Ca²⁺（RyR receptor）→ troponin C 結合 Ca²⁺→ actin-myosin 結合 → 收縮
+      </div>
+    </div>
+    <div>
+      <table>
+        <thead><tr><th>特性</th><th>骨骼肌</th><th>心肌</th></tr></thead>
+        <tbody>
+          <tr><td>自律性</td><td>無</td><td>✅ 有</td></tr>
+          <tr><td>完全強直收縮</td><td>✅ 可以</td><td><span class="hl-red">❌ 不能</span></td></tr>
+          <tr><td>不應期 vs 收縮期</td><td>不應期短</td><td>不應期 ≥ 收縮期</td></tr>
+          <tr><td>細胞連接</td><td>無 gap junction</td><td>intercalated disc（gap junction）</td></tr>
+          <tr><td>鈣來源</td><td>主要 SR 內</td><td>SR + 胞外（CICR）</td></tr>
+          <tr><td>肌腱蛋白</td><td>有 troponin</td><td>有 troponin（cardiac isoform）</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="trap">
+    <strong>心肌不會完全強直收縮</strong>（tetanus）。心肌的不應期特別長（覆蓋整個收縮期），因此動作電位無法在收縮結束前再次觸發，這是防止心臟「鎖死」的保護機制。（中國醫 106 第 39 題 D 為錯誤選項）
+  </div>
+
+  <div class="g2" style="margin-top:10px;">
+    <div class="hbox hbox-amber">
+      <b>ANP（心房利納肽）</b>
+      心房壁<strong>血量擴張</strong>（非血鈉下降）→ 分泌 ANP → 促進腎臟 Na⁺排出 + 抑制 ADH/Aldosterone → 降低血壓。
+      心房利納肽<span class="hl-red">不是</span>因血鈉低而分泌。
+    </div>
+    <div class="hbox hbox-purple">
+      <b>迷走神經對心臟的作用</b>
+      迷走神經（副交感）→ 釋放 ACh（乙醯膽鹼）→ 心肌 M2 受體（GPCR）→ Gᵢ蛋白 → cAMP↓ + K⁺通道打開 → 心跳率↓（負性變時效應）。（中國醫 106 第 39 題 A）
+    </div>
+  </div>
+</div>
+
+<!-- 1-3 荷爾蒙 -->
+<div class="card amber no-break">
+  <div class="card-title"><span class="tag t-amber">1.3</span> 荷爾蒙系統 <span class="tag t-outline-amber">★★★ 必考</span></div>
+
+  <div class="g2">
+    <div>
+      <table>
+        <thead><tr><th>荷爾蒙</th><th>分泌腺體</th><th>主要功能</th><th>分類</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Cortisol</strong></td><td>腎上腺皮質（束狀帶）</td><td>血糖↑、蛋白質分解↑、免疫↓、抗炎↓</td><td>類固醇</td></tr>
+          <tr><td><strong>Aldosterone</strong></td><td>腎上腺皮質（球狀帶）</td><td>Na⁺回收↑、K⁺排出↑</td><td>類固醇</td></tr>
+          <tr><td><strong>Epinephrine</strong></td><td>腎上腺<span class="hl-red">髓質</span></td><td>fight-or-flight、血糖↑</td><td>胺基酸衍生物</td></tr>
+          <tr><td><strong>ADH（Vasopressin）</strong></td><td>下視丘合成／腦垂腺後葉釋放</td><td>集尿管水回收↑</td><td>胜肽</td></tr>
+          <tr><td><strong>PTH</strong></td><td>副甲狀腺</td><td>血鈣↑（骨骼釋Ca²⁺、腎臟回收Ca²⁺）</td><td>胜肽</td></tr>
+          <tr><td><strong>Calcitonin</strong></td><td>甲狀腺（濾泡旁C細胞）</td><td>血鈣↓（抑制蝕骨細胞）</td><td>胜肽</td></tr>
+          <tr><td><strong>ANP</strong></td><td>心房</td><td>Na⁺排出↑、血壓↓</td><td>胜肽</td></tr>
+          <tr><td><strong>Leptin</strong></td><td>脂肪細胞</td><td>下視丘飽食中樞→食慾↓、代謝率↑</td><td>胜肽</td></tr>
+          <tr><td><strong>Ghrelin</strong></td><td>胃壁細胞</td><td>飢餓感↑（食慾↑）</td><td>胜肽</td></tr>
+          <tr><td><strong>Insulin</strong></td><td>胰島 β 細胞</td><td>血糖↓（促進葡萄糖攝取、糖原合成）</td><td>胜肽</td></tr>
+          <tr><td><strong>Glucagon</strong></td><td>胰島 α 細胞</td><td>血糖↑（促進肝糖分解、糖質新生）</td><td>胜肽</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <div class="hbox hbox-red">
+        <b>⚠ 類固醇荷爾蒙不儲存於囊泡</b>
+        Cortisol、Aldosterone、Estrogen 等類固醇荷爾蒙為脂溶性，細胞不能大量儲存，需要時立即合成分泌。
+        <span class="hl-red">胞吐作用（vesicle exocytosis）</span>是胜肽/胺基酸衍生物荷爾蒙的分泌方式（如胰島素）。
+        中國醫 106 第 30 題（B）說「cortisol 存於囊泡」→ <span class="hl-red">錯誤陷阱</span>
+      </div>
+      <div class="hbox hbox-amber" style="margin-top:8px;">
+        <b>下視丘-腦垂腺-靶器官軸</b>
+        <div class="flow" style="flex-direction:column; align-items:flex-start; gap:3px;">
+          <span>下視丘：GnRH → FSH/LH（腦垂腺前葉）→ 性腺</span>
+          <span>下視丘：TRH → TSH → 甲狀腺 T3/T4</span>
+          <span>下視丘：CRH → ACTH → 腎上腺皮質 cortisol</span>
+          <span>下視丘：GHRH → GH → IGF-1（肝臟）</span>
+        </div>
+      </div>
+      <div class="hbox hbox-purple" style="margin-top:8px;">
+        <b>懷孕期雌激素（Estrogen）功能</b>
+        ① 子宮肌肉層持續生長 ② 刺激乳腺發育 ③ 與 relaxin 共同使骨盆韌帶鬆弛 ④ 增加子宮對催產素的敏感性（<span class="hl-red">非降低</span>）→ 準備分娩
+        中國醫 106 第 50 題（B）說「降低對催產素敏感性」→ 錯誤
+      </div>
+    </div>
+  </div>
+
+  <div class="hbox hbox-red" style="margin-top:8px;">
+    <b>腎上腺皮質功能喪失（類艾迪生氏病）各指標變化</b>
+    Cortisol↓：血糖↓、蛋白質分解↓，<strong>BUN（血尿素氮）↑</strong>（因蛋白質分解減少→BUN 應下降？注意：皮質醇缺乏→醛固酮也↓→腎臟保Na⁺能力↓→水鹽失衡→間接影響BUN）。
+    Aldosterone↓：Na⁺↓、K⁺↑、H⁺瀦留→血液偏<strong>酸（pH↓）</strong>。皮膚暗黑（ACTH↑代償，刺激黑色素沉積）。
+    中國醫 106 第 22 題（E）說「BUN 下降」→ 錯誤
+  </div>
+</div>
+
+<!-- 1-4 神經 -->
+<div class="card blue no-break">
+  <div class="card-title"><span class="tag t-blue">1.4</span> 神經系統生理 <span class="tag t-gray">★★</span></div>
+
+  <div class="g2">
+    <div>
+      <div class="hbox hbox-blue">
+        <b>動作電位（Action Potential）機制</b>
+        靜止膜電位 ≈ −70mV（K⁺通透，Na⁺主動泵出）<br>
+        去極化：Na⁺快速內流（電壓門控 Na⁺通道開）<br>
+        再極化：K⁺外流（電壓門控 K⁺通道開、Na⁺通道關）<br>
+        後過極化（hyperpolarization）：K⁺通道延遲關閉<br>
+        不應期：Na⁺通道處於失活狀態
+      </div>
+      <div class="hbox hbox-purple" style="margin-top:8px;">
+        <b>突觸後電位加成</b>
+        <strong>空間加成（spatial summation）</strong>：多個突觸同時輸入<br>
+        <strong>時間加成（temporal summation）</strong>：同一突觸連續輸入（高醫 105 慈濟 105）<br>
+        IPSP（抑制性）：K⁺或Cl⁻通透性增加 → 膜電位更負 → 難以觸發 AP（義守 104 第 18 題）
+      </div>
+    </div>
+    <div>
+      <div class="hbox hbox-teal">
+        <b>超極化（Hyperpolarization）特徵</b>
+        膜電位比靜止電位更負（如 −80mV）<br>
+        K⁺ 和/或 Cl⁻ 通道開放<br>
+        此時更難觸發動作電位<br>
+        高醫 105 第 55 題：超極化時 Na⁺/Cl⁻ 通道打開→此說法<span class="hl-red">錯誤</span>（正確為 K⁺ 或 Cl⁻）
+      </div>
+      <div class="hbox hbox-amber" style="margin-top:8px;">
+        <b>自主神經系統</b>
+        <strong>副交感（迷走）</strong>：ACh → M受體 → 心跳↓、消化↑、支氣管縮小、唾液↑<br>
+        <strong>交感</strong>：NE/Epi → α/β受體 → 心跳↑、消化↓、支氣管擴大<br>
+        刺激副交感 → 唾液分泌↑（慈濟 105 第 34 題）
+      </div>
+    </div>
+  </div>
+
+  <div class="hbox hbox-amber">
+    <b>感官生理要點</b>
+    <strong>視覺</strong>：桿細胞（rod）暗光；錐細胞（cone）色覺。Rhodopsin = G-protein coupled receptor（GPCR）。光照 → rhodopsin 活化 → transducin（Gi）→ cGMP↓ → 陽離子通道關 → 超極化 → 麩胺酸釋放↓（高醫 105 第 18 題）。<br>
+    <strong>盲點</strong>：神經節細胞軸突聚集處，無感光受器（義守 104 第 20 題）<br>
+    <strong>Umami 受體</strong>：偵測麩胺酸鈉（MSG）（義守 104 第 21 題）
+  </div>
+</div>
+
+<!-- 1-5 消化 -->
+<div class="card teal no-break">
+  <div class="card-title"><span class="tag t-teal">1.5</span> 消化系統 <span class="tag t-gray">★★</span></div>
+  <div class="g2">
+    <div>
+      <table>
+        <thead><tr><th>消化液/酵素</th><th>來源</th><th>功能/備註</th></tr></thead>
+        <tbody>
+          <tr><td>鹽酸（HCl）</td><td>胃壁細胞（parietal cell）</td><td>活化胃蛋白酶原、殺菌</td></tr>
+          <tr><td>胃蛋白酶原</td><td>胃主細胞（chief cell）</td><td>HCl 或胃蛋白酶自身活化</td></tr>
+          <tr><td>胰蛋白酶原</td><td>胰腺腺泡細胞</td><td>Enteropeptidase（腸黏膜）活化</td></tr>
+          <tr><td>膽汁（Bile salts）</td><td>肝臟合成，膽囊儲存</td><td>乳化脂肪，非消化脂肪（分散大液滴→小液滴）</td></tr>
+          <tr><td>Secretin</td><td>十二指腸S細胞</td><td>促進胰腺分泌 HCO₃⁻（非胃酸）</td></tr>
+          <tr><td>Enteropeptidase</td><td>小腸黏膜（membrane-bound）</td><td>活化 trypsinogen → trypsin（義守 104 第 27 題）</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <div class="hbox hbox-teal">
+        <b>排便反射（Defecation Reflex）</b>
+        直腸壁擴張 → 感受器 → <span class="hl-teal">副交感神經</span>反射 → 肛門<strong>內括約肌</strong>放鬆（非隨意）→ 肛門外括約肌（可隨意控制）→ 排便。<br>
+        <span class="hl-red">選項說「刺激交感神經」→ 錯誤！</span>（中國醫 106 第 47 題 A）
+      </div>
+      <div class="hbox hbox-amber" style="margin-top:8px;">
+        <b>胃潰瘍誘因</b>
+        主要：H. pylori 感染、NSAIDs（抑制前列腺素→黏膜保護↓）<br>
+        Chief cell 分泌 pepsinogen ↑ → 潰瘍風險↑<br>
+        義守 104 第 43 題：pepsinogen 分泌↑才會增加潰瘍（非C、D選項）
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 1-6 呼吸 & 血液 -->
+<div class="card purple no-break">
+  <div class="card-title"><span class="tag t-purple">1.6</span> 呼吸系統 & 血液生理 <span class="tag t-gray">★★</span></div>
+  <div class="g2">
+    <div>
+      <div class="hbox hbox-purple">
+        <b>氣體分壓正常值</b>
+        肺動脈（靜脈血）：PO₂ ≈ 40 mmHg；PCO₂ ≈ <strong>46 mmHg</strong><br>
+        主動脈（動脈血）：PO₂ ≈ 100 mmHg；PCO₂ ≈ <strong>40 mmHg</strong><br>
+        代謝性酸中毒 → 肺臟代償 → 換氣速率<strong>↑</strong>（中國醫 106 第 48 題）
+      </div>
+      <div class="hbox hbox-blue" style="margin-top:8px;">
+        <b>氧氣解離曲線（O₂ Dissociation Curve）</b>
+        S 形曲線（高壓 saturation 高）<br>
+        右移（親和力↓，釋放O₂）：pH↓、溫度↑、CO₂↑、2,3-DPG↑<br>
+        左移（親和力↑，不易釋放）：胎兒Hb（HbF）、肌紅蛋白（myoglobin）<br>
+        高海拔羊駝（llama）Hb：<strong>左移</strong>（高親和力）= 曲線A（高醫 105 第 52 題）
+      </div>
+    </div>
+    <div>
+      <div class="hbox hbox-red">
+        <b>肺臟功能補充（非只氣體交換）</b>
+        ACE（Angiotensin converting enzyme）由肺臟分泌 → 將 <strong>Angiotensin I → Angiotensin II</strong>（非 angiotensinogen！）。Angiotensinogen 由肝臟分泌，腎素切割。（中國醫 106 第 48 題 C 錯誤）
+      </div>
+      <div class="hbox hbox-teal" style="margin-top:8px;">
+        <b>Surfactant（肺泡表面張力劑）</b>
+        主要成分：磷脂質（phospholipid），以 DPPC 為主<br>
+        功能：降低肺泡表面張力，防止肺泡塌陷<br>
+        早產兒缺乏 surfactant → 呼吸窘迫症候群（RDS）
+      </div>
+    </div>
+  </div>
+</div>
+</div><!-- end physio -->
+
+<hr class="divider">
+
+<!-- ════════════════════════════════════
+     CHAPTER 2: 分子生物學
+════════════════════════════════════ -->
+<div id="mol">
+<div class="section-title">
+  <div class="icon" style="background:var(--amber-dim)">🧬</div>
+  <h2 style="color:var(--amber)">第二類｜分子生物學與遺傳（≈19%）</h2>
+  <div class="count">7 大子主題 · 40+ 考點</div>
+</div>
+
+<!-- 2-1 DNA 複製 -->
+<div class="card amber no-break">
+  <div class="card-title"><span class="tag t-amber">2.1</span> DNA 複製（Replication）</div>
+  <div class="g2">
+    <div>
+      <table>
+        <thead><tr><th>酵素/蛋白</th><th>功能</th></tr></thead>
+        <tbody>
+          <tr><td>Helicase（解旋酶）</td><td>解開雙股 DNA 氫鍵</td></tr>
+          <tr><td>SSB protein</td><td>穩定單股 DNA</td></tr>
+          <tr><td>Topoisomerase I/II</td><td>解除超螺旋（防止複製叉前方纏繞）</td></tr>
+          <tr><td>Primase（引子酶）</td><td>合成 RNA primer（短 RNA 片段）</td></tr>
+          <tr><td><strong>DNA Pol III</strong></td><td>主要合成新股（5'→3'延伸）</td></tr>
+          <tr><td><strong>DNA Pol I</strong></td><td><span class="hl-amber">移除 RNA 引子並填補缺口</span>（5'→3' exonuclease）</td></tr>
+          <tr><td>DNA Ligase</td><td>連結岡崎片段的缺口（nick）</td></tr>
+        </tbody>
+      </table>
+      <div class="trap" style="margin-top:8px;">義守 104 第 4 題：「5'端去除 RNA 引子」→ 答案是 <strong>DNA 聚合酶 I</strong>（非 Helicase 或 Pol III）</div>
+    </div>
+    <div>
+      <div class="hbox hbox-amber">
+        <b>Sanger 定序法（桑格法）原理</b>
+        加入 <strong>ddNTP</strong>（雙去氧核糖核苷酸）→ 缺少 2' 和 <strong>3'</strong> OH → 鏈終止（慈濟 105 第 18 題）<br>
+        ddNTP 的雙去氧位置：<span class="hl-amber">2' 和 3' 位置</span>（選項 C）
+      </div>
+      <div class="hbox hbox-blue" style="margin-top:8px;">
+        <b>次世代定序（NGS）應用</b>
+        ① 個人化醫療（精準醫學）<br>
+        ② 難培養微生物鑑定（metagenomics）<br>
+        ③ 新型 RNA splicing 產物搜尋（RNA-seq）<br>
+        ❌ 不直接用於「蛋白質修飾對活性影響」（慈濟 104 第 7 題 B）
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 2-2 轉錄後加工 -->
+<div class="card amber no-break">
+  <div class="card-title"><span class="tag t-amber">2.2</span> RNA 轉錄後加工（Post-transcriptional Processing）<span class="tag t-outline-amber">★★★ 必考</span></div>
+  <div class="g2">
+    <div>
+      <div class="hbox hbox-amber">
+        <b>5' Capping（加帽）</b>
+        5'端以 <strong>5'-5' 磷酸二酯鍵</strong>加上 7-methylguanosine（m7G）帽<br>
+        功能：防止 5' exonuclease 降解、協助核糖體辨識、促進核輸出
+      </div>
+      <div class="hbox hbox-purple" style="margin-top:8px;">
+        <b>Splicing 三種機制對比</b>
+        <table style="font-size:10.5px; margin-top:4px;">
+          <thead><tr><th>類型</th><th>起始方式</th><th>特色</th></tr></thead>
+          <tbody>
+            <tr><td>Group I Intron</td><td>外加 G（exogenous G）起始第一個酯交換</td><td>Self-splicing ribozyme</td></tr>
+            <tr><td>Group II Intron</td><td>內在 <strong>A</strong>（branch point A）起始</td><td>Self-splicing；與 spliceosome 機制類似</td></tr>
+            <tr><td>Spliceosome</td><td>內在 <strong>A</strong>（branch point A）起始</td><td>snRNA（U1/U2/U4/U5/U6）形成複合體</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="trap" style="margin-top:8px;">Group I 用<strong>外加 G</strong>；Group II 和 Spliceosome 均用<strong>內在 A</strong>。中國醫 106 第 29 題（D）說「spliceosome 有 RNA 5'-5' 連結」→ 錯誤（只有 5' capping 才是 5'-5' 連結）</div>
+    </div>
+    <div>
+      <div class="hbox hbox-teal">
+        <b>Intron 固定特徵（GT-AG rule）</b>
+        5' 端：<span class="hl-amber">GU</span>（DNA 層面：GT）<br>
+        3' 端：<span class="hl-amber">AG</span><br>
+        Branch point A：位在 3' 端上游 <strong>20-50 nt</strong> 處<br>
+        中國醫 106 第 35 題：5'端第一個 G、第二個 U（選項 A 正確）
+      </div>
+      <div class="hbox hbox-blue" style="margin-top:8px;">
+        <b>Polyadenylation（加多聚腺苷酸）</b>
+        辨識序列：<span class="hl-amber">AAUAAA</span>（在 poly-A 訊號下游切斷）→ 加上 ~200 個 A<br>
+        功能：保護 3' 端不被降解、促進核輸出、協助翻譯
+      </div>
+      <div class="hbox hbox-green" style="margin-top:8px;">
+        <b>Ribozyme（核酶）催化的反應</b>
+        RNA 本身具有酵素活性：<br>
+        ① Group I/II intron splicing（自我剪切）<br>
+        ② <span class="hl-green">核糖體 rRNA（23S）催化胜肽鍵形成</span>（中國醫 106 第 34 題 E 正確）<br>
+        ③ RNase P 切割 pre-tRNA
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 2-3 突變 -->
+<div class="card red no-break">
+  <div class="card-title"><span class="tag t-red">2.3</span> DNA 突變類型與 DNA 修復 <span class="tag t-outline-red">★★★ 必考</span></div>
+  <div class="g2">
+    <div>
+      <table>
+        <thead><tr><th>突變類型</th><th>定義</th><th>影響</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Silent mutation</strong></td><td>密碼子改變但胺基酸不變</td><td>無影響（遺傳密碼子退化性）</td></tr>
+          <tr><td><strong>Missense mutation</strong></td><td>密碼子改變 → 不同胺基酸</td><td>蛋白質功能可能改變</td></tr>
+          <tr><td><strong>Nonsense mutation</strong></td><td>密碼子 → 終止密碼子（UAA/UAG/UGA）</td><td><span class="hl-red">蛋白質提早終止</span></td></tr>
+          <tr><td><strong>Frameshift mutation</strong></td><td>插入/缺失 → 讀碼框改變</td><td>後續多個胺基酸全部改變</td></tr>
+          <tr><td><strong>Base transversion</strong></td><td>嘌呤↔嘧啶互換</td><td>點突變</td></tr>
+          <tr><td><strong>Base transition</strong></td><td>嘌呤↔嘌呤 或 嘧啶↔嘧啶</td><td>點突變（較常見）</td></tr>
+        </tbody>
+      </table>
+      <div class="trap" style="margin-top:8px;">Missense mutation <span class="hl-red">不會</span>導致過早終止！Nonsense mutation 才會。（中國醫 106 第 11 題 B 為錯誤選項）</div>
+    </div>
+    <div>
+      <table>
+        <thead><tr><th>DNA 修復機制</th><th>修復傷害</th><th>相關疾病</th></tr></thead>
+        <tbody>
+          <tr><td><strong>BER</strong>（Base excision repair）</td><td>氧化鹼基、去胺基、甲基化</td><td>—</td></tr>
+          <tr><td><strong>NER</strong>（Nucleotide excision repair）</td><td><span class="hl-amber">嘧啶二聚體（UV）</span>、大型加成物</td><td><span class="hl-red">著色性乾皮症（XP）</span></td></tr>
+          <tr><td><strong>MMR</strong>（Mismatch repair）</td><td>複製錯配、插入/缺失</td><td>Lynch syndrome（大腸癌）</td></tr>
+          <tr><td><strong>DSBR/HR</strong>（同源重組）</td><td><span class="hl-amber">雙股斷裂</span></td><td><span class="hl-red">BRCA1/2 乳癌</span></td></tr>
+          <tr><td><strong>NHEJ</strong>（非同源末端接合）</td><td>雙股斷裂（錯誤率較高）</td><td>免疫缺陷</td></tr>
+        </tbody>
+      </table>
+      <div class="hbox hbox-red" style="margin-top:8px;">
+        <b>BRCA1 → DSBR（雙股斷裂修復）</b>
+        中國醫 106 第 41 題：BRCA1 主要參與<span class="hl-red">雙股斷裂修復（DSBR）</span>（答案A），不是 NER 或 MMR。
+      </div>
+    </div>
+  </div>
+</div>
+</div><!-- end mol -->
+
+<hr class="divider">
+
+<!-- ════════════════════════════════════
+     CHAPTER 3: 細胞生物學
+════════════════════════════════════ -->
+<div id="cell">
+<div class="section-title">
+  <div class="icon" style="background:var(--teal-dim)">🔬</div>
+  <h2 style="color:var(--teal)">第三類｜細胞生物學（≈16%）</h2>
+  <div class="count">5 大子主題 · 30+ 考點</div>
+</div>
+
+<!-- 3-1 細胞週期 -->
+<div class="card teal no-break">
+  <div class="card-title"><span class="tag t-teal">3.1</span> 細胞週期（Cell Cycle）與調控 <span class="tag t-outline-amber">★★ 重要</span></div>
+  <div class="g2">
+    <div>
+      <div class="hbox hbox-teal">
+        <b>細胞週期調控核心</b>
+        <div class="flow">
+          <span class="flow-node">G1</span><span class="flow-arrow">→</span>
+          <span class="flow-node">S（DNA合成）</span><span class="flow-arrow">→</span>
+          <span class="flow-node">G2</span><span class="flow-arrow">→</span>
+          <span class="flow-node">M（有絲分裂）</span>
+        </div>
+        <strong>Cyclin</strong>：週期性表達，與 CDK 結合活化激酶<br>
+        <strong>MPF</strong>（M-phase Promoting Factor）= Cyclin B + CDK1 → 促進 M 期進入（非 S 期！）<br>
+        <strong>p53</strong>：DNA 損傷 → p53↑ → p21↑ → CDK 抑制 → G1/S 阻斷<br>
+        <strong>Rb</strong>（視網膜母細胞瘤蛋白）：抑癌基因，抑制 E2F → G1/S 關卡
+      </div>
+    </div>
+    <div>
+      <table>
+        <thead><tr><th>有絲分裂各期</th><th>主要事件</th></tr></thead>
+        <tbody>
+          <tr><td>前期（Prophase）</td><td>染色體凝縮、核膜消失、中心粒分開</td></tr>
+          <tr><td>中期（Metaphase）</td><td>染色體排列在赤道板；秋水仙素阻斷於此期</td></tr>
+          <tr><td>後期（Anaphase）</td><td>著絲點分裂、姊妹染色分體分離</td></tr>
+          <tr><td>末期（Telophase）</td><td>核膜重新形成、染色體去凝縮</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div><!-- end cell -->
+
+<hr class="divider">
+
+<!-- ════════════════════════════════════
+     CHAPTER 4: 代謝生化
+════════════════════════════════════ -->
+<div id="metab">
+<div class="section-title">
+  <div class="icon" style="background:var(--green-dim)">⚗️</div>
+  <h2 style="color:var(--green)">第四類｜代謝與生化（≈11%）</h2>
+  <div class="count">4 大子主題 · 20+ 考點</div>
+</div>
+
+<!-- 4-1 呼吸熵 -->
+<div class="card green no-break">
+  <div class="card-title"><span class="tag t-green">4.1</span> 呼吸熵（RQ）計算 <span class="tag t-outline-amber">★★ 重要</span></div>
+  <div class="g2">
+    <div>
+      <div class="formula">
+        RQ = VCO₂ 產生量 / VO₂ 消耗量<br>
+        純葡萄糖：RQ = 1.0<br>
+        純脂肪：RQ ≈ 0.7<br>
+        純蛋白質：RQ ≈ 0.8
+      </div>
+    </div>
+    <div>
+      <div class="hbox hbox-green">
+        <b>例題（中國醫 106 第 32 題）</b>
+        RQ = 0.85，碳水（1.0）+ 脂肪（0.7）<br>
+        1.0x + 0.7(1-x) = 0.85 → 0.3x = 0.15 → x = 0.5<br>
+        <span class="hl-green">碳水化合物 50%，脂肪 50%</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div><!-- end metab -->
+
+<hr class="divider">
+
+<!-- ════════════════════════════════════
+     CHAPTER 5: 免疫學
+════════════════════════════════════ -->
+<div id="immuno">
+<div class="section-title">
+  <div class="icon" style="background:var(--blue-dim)">🛡️</div>
+  <h2 style="color:var(--blue)">第五類｜免疫學（≈13%）</h2>
+  <div class="count">5 大子主題 · 25+ 考點</div>
+</div>
+
+<div class="card blue no-break">
+  <div class="card-title"><span class="tag t-blue">5.1</span> 先天免疫與 TLR 識別</div>
+  <div class="cmp">
+    <table>
+      <thead><tr><th>TLR</th><th>識別對象</th><th>考試重點</th></tr></thead>
+      <tbody>
+        <tr><td><strong>TLR2</strong></td><td>細菌脂蛋白、肽聚醣</td><td>革蘭氏陽性菌識別</td></tr>
+        <tr><td><strong>TLR3</strong></td><td>病毒雙股 RNA（dsRNA）</td><td>胞內涵體（endosome）中識別</td></tr>
+        <tr><td><strong>TLR4</strong></td><td>革蘭氏陰性菌 LPS</td><td>主要誘發敗血性休克路徑</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="hbox hbox-blue" style="margin-top:8px;">
+    <b>LPS（內毒素）陷阱</b>
+    LPS 屬於<span class="hl-blue">內毒素（Endotoxin）</span>而非外毒素。中國醫 106 Q49：選項稱其為外毒素 → 錯誤。
+  </div>
+</div>
+
+<div class="card blue no-break">
+  <div class="card-title"><span class="tag t-blue">5.2</span> T 細胞與 MHC 呈遞</div>
+  <div class="g2">
+    <div class="hbox hbox-purple">
+      <b>NK 細胞抑制機制 (KIR)</b>
+      NK 細胞的抑制受體識別 <span class="hl-blue">MHC Class I</span>。若目標細胞 MHC-I 下調（病毒/腫瘤常用手段），則 NK 活化。
+    </div>
+    <div class="hbox hbox-red">
+      <b>HIV 感染細胞</b>
+      主要感染表達 CD4 的 Th1, Th2, 巨噬細胞及樹突細胞。
+    </div>
+  </div>
+</div>
+</div><!-- end immuno -->
+
+<hr class="divider">
+
+<!-- ════════════════════════════════════
+     CHAPTER 6: 遺傳族群
+════════════════════════════════════ -->
+<div id="genetics">
+<div class="section-title">
+  <div class="icon" style="background:var(--amber-dim)">🧩</div>
+  <h2 style="color:var(--amber)">第六類｜遺傳學與族群遺傳（≈9%）</h2>
+  <div class="count">5 大子主題 · 25+ 考點</div>
+</div>
+
+<div class="card amber no-break">
+  <div class="card-title"><span class="tag t-amber">6.1</span> Hardy-Weinberg 平衡計算</div>
+  <div class="formula">
+    p² + 2pq + q² = 1 (p+q=1)<br>
+    p: 顯性頻率 | q: 隱性頻率 | 2pq: 攜帶者頻率
+  </div>
+  <div class="hbox hbox-amber">
+    <b>例題：鐮刀血球 (中醫 106)</b>
+    發生率 144/1,000,000 → q² = 0.000144 → q = 0.012 → p = 0.988<br>
+    攜帶者 2pq ≈ 2.37% | p = 98.8%
+  </div>
+</div>
+</div><!-- end genetics -->
+
+<hr class="divider">
+
+<!-- ════════════════════════════════════
+     CHAPTER 7: 植物生物
+════════════════════════════════════ -->
+<div id="plants">
+<div class="section-title">
+  <div class="icon" style="background:var(--green-dim)">🌿</div>
+  <h2 style="color:var(--green)">第七類｜植物生物學（≈7%）</h2>
+  <div class="count">4 大子主題 · 20+ 考點</div>
+</div>
+
+<div class="card green no-break">
+  <div class="card-title"><span class="tag t-green">7.1</span> 植物激素與功能</div>
+  <table>
+    <thead><tr><th>激素</th><th>關鍵功能</th><th>考試重點</th></tr></thead>
+    <tbody>
+      <tr><td>Auxin</td><td>趨光性、頂端優勢</td><td>暗側濃度高 → 生長快 → 彎向光</td></tr>
+      <tr><td>GA</td><td>種子萌發、株高</td><td>打破種子休眠</td></tr>
+      <tr><td>Ethylene</td><td>果實成熟、老化</td><td>乙烯是氣體，具傳遞性</td></tr>
+      <tr><td>ABA</td><td>氣孔關閉、休眠</td><td>抗壓激素（如乾旱時關閉氣孔）</td></tr>
+    </tbody>
+  </table>
+</div>
+</div><!-- end plants -->
+
+<hr class="divider">
+
+<!-- ════════════════════════════════════
+     CHAPTER 8: 演化生態
+════════════════════════════════════ -->
+<div id="evolution">
+<div class="section-title">
+  <div class="icon" style="background:var(--muted)">🌍</div>
+  <h2 style="color:var(--muted)">第八類｜演化與生態（≈3%）</h2>
+</div>
+
+<div class="card teal no-break">
+  <div class="card-title"><span class="tag t-teal">8.1</span> 物種形成與生態</div>
+  <div class="hbox hbox-teal">
+    <b>物種形成</b>
+    異域性 (Allopatric)：地理隔離 | 同域性 (Sympatric)：同一地區分化。<br>
+    多倍體 (Polyploidy)：在植物中最快形成物種的方式。
+  </div>
+</div>
+</div><!-- end evolution -->
+
+<hr class="divider">
+
+<!-- ════════════════════════════════════
+     CHAPTER 9: 綜合整理
+════════════════════════════════════ -->
+<div id="summary">
+<div class="section-title">
+  <div class="icon" style="background:var(--red-dim)">🎯</div>
+  <h2 style="color:var(--red)">第九類｜綜合整理：考前衝刺陷阱表</h2>
+</div>
+
+<div class="card red no-break">
+  <table>
+    <thead><tr><th>錯誤說法</th><th>正確概念</th><th>來源</th></tr></thead>
+    <tbody>
+      <tr><td>腎粗上升端水可回收</td><td><span class="hl-red">絕對不通水</span></td><td>中醫106</td></tr>
+      <tr><td>心肌可強直收縮</td><td><span class="hl-red">絕不強直</span></td><td>中醫106</td></tr>
+      <tr><td>Cortisol 存於囊泡</td><td><span class="hl-red">不儲存於囊泡</span></td><td>中醫106</td></tr>
+      <tr><td>Myosin 沿中間絲移動</td><td><span class="hl-red">沿微絲 (Actin)</span></td><td>中醫106</td></tr>
+    </tbody>
+  </table>
+</div>
+</div><!-- end summary -->
+
+<div class="page-num">學士後中醫生物學考點知識庫（合訂全集）｜全 9 章完整內容</div>
+
+</main>
+</body>
+</html>
