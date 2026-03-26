@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>華爾街分析師：法人日報深度解析</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --wsj-blue: #003366;
+            --wsj-gold: #b8860b;
+            --bg-gray: #f4f4f4;
+            --text-dark: #333;
+            --white: #ffffff;
+            --border-gray: #dddddd;
+        }
+
+        body {
+            font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+            background-color: var(--bg-gray);
+            color: var(--text-dark);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-top: 8px solid var(--wsj-blue);
+        }
+
+        header {
+            border-bottom: 2px solid var(--wsj-blue);
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            color: var(--wsj-blue);
+            margin: 0;
+            letter-spacing: -1px;
+        }
+
+        .date-label {
+            font-size: 0.9rem;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            background-color: var(--wsj-blue);
+            color: var(--white);
+            padding: 8px 15px;
+            font-size: 1.2rem;
+            margin-top: 40px;
+            display: inline-block;
+        }
+
+        .stock-card {
+            border-left: 4px solid var(--wsj-gold);
+            padding: 15px 20px;
+            margin: 20px 0;
+            background-color: #fafafa;
+        }
+
+        .stock-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-gray);
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        .stock-name {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--wsj-blue);
+        }
+
+        .broker {
+            font-size: 0.85rem;
+            background: #eee;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .highlight-text {
+            color: #d9534f;
+            font-weight: bold;
+        }
+
+        .chart-container {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid var(--border-gray);
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f8f8f8;
+            color: var(--wsj-blue);
+        }
+
+        .footer-note {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 50px;
+            border-top: 1px dashed #ccc;
+            padding-top: 10px;
+        }
+
+        .analysis-badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-right: 5px;
+        }
+        .badge-tech { background: #e3f2fd; color: #1976d2; }
+        .badge-consumer { background: #f1f8e9; color: #388e3c; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="date-label">Wall Street Insights | 2026.03.25</div>
+        <h1>法人投資策略日報</h1>
+        <p>掌握台股轉型動能：從 AI 硬體到內需循環的深度解構</p>
+    </header>
+
+    <!-- 核心亮點：AI 結構性成長 -->
+    <div class="section-title">核心聚焦：半導體與 AI 結構性轉型</div>
+    
+    <div class="stock-card">
+        <div class="stock-header">
+            <span class="stock-name">弘塑 (3131)</span>
+            <span class="broker">高盛證券 (Goldman Sachs)</span>
+        </div>
+        <p>高盛將弘塑從 CoWoS 受惠股重新定位為「<b>次世代封裝關鍵設備商</b>」。重點在於技術路徑從 CoWoS 邁向 <strong>SoIC (System on Integrated Chips)</strong> 與 <strong>CPO (共同封裝光學)</strong>。SoIC 的單機價值比 CoWoS 高出 50%，且隨著 2026 年新廠投產，外包比例大幅降低，將帶動利潤率結構性向上。</p>
+        <p><strong>關鍵數據：</strong>目標價上修至 <span class="highlight-text">3,500 元</span>，預估 2028 年 EPS 達 126 元。</p>
+    </div>
+
+    <div class="stock-card">
+        <div class="stock-header">
+            <span class="stock-name">晶心科 (6533)</span>
+            <span class="broker">中信證券</span>
+        </div>
+        <p>公司目前的 AI 營收佔比已達 40%，主要服務 Meta 等雲端服務提供者 (CSP)。最新推出的 <strong>Cuzco</strong> 系列效能提升兩倍，對標 ARM 的高階產品，是公司跨入高性能運算 (HPC) 的關鍵利器。</p>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="epsGrowthChart"></canvas>
+    </div>
+
+    <!-- 關鍵組件與工業自動化 -->
+    <div class="section-title">工業升級：機器人與電子組件</div>
+
+    <div class="stock-card">
+        <div class="stock-header">
+            <span class="stock-name">禾伸堂 (3026)</span>
+            <span class="broker">群益投顧</span>
+        </div>
+        <p>受惠於 GPU/ASIC Server 電壓提高，<strong>NP0 高壓 MLCC</strong> 需求噴發，單價具備溢價空間。公司投入 30 億擴產，預計 2025-2026 年獲利將展現強大爆發力。</p>
+    </div>
+
+    <div class="stock-card">
+        <div class="stock-header">
+            <span class="stock-name">達明 (4585)</span>
+            <span class="broker">華南投顧</span>
+        </div>
+        <p>達明從協作手臂轉型為「AI 行動平台」，與 NVIDIA 合作導入 VLA 模型。這標誌著機器人具備更強的自主學習與視覺辨識能力，預估獲利將翻倍至 3.8 元。</p>
+    </div>
+
+    <!-- 民生內需與法人分歧 -->
+    <div class="section-title">內需與食品：穩定成長中見分歧</div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>個股名稱</th>
+                <th>法人機構</th>
+                <th>觀點總結</th>
+                <th>預估 EPS</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>王品 (2727)</td>
+                <td>永豐 / 凱基</td>
+                <td>多品牌布局穩健，中國子公司計畫在台 IPO，屬於產業自然增長股。</td>
+                <td>17.0 (2026) / 19.0 (2027)</td>
+            </tr>
+            <tr>
+                <td>卜蜂 (1215)</td>
+                <td>永豐</td>
+                <td><strong>樂觀</strong>：食品加工彌補生鮮波動，豬肉裁切廠貢獻。</td>
+                <td>8.7</td>
+            </tr>
+            <tr>
+                <td>卜蜂 (1215)</td>
+                <td>統一</td>
+                <td><strong>保守</strong>：飼料原料成本墊高，毛豬價格回落侵蝕獲利。</td>
+                <td>7.0</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="chart-container">
+        <canvas id="marginTrendChart"></canvas>
+    </div>
+
+    <div class="section-title">生技與民生水利</div>
+    <p><strong>台康生技 (6589)：</strong>進入授權變現期，2月營收倍增是關鍵轉折信號，明年有望挑戰損平。</p>
+    <p><strong>大井泵浦 (6982)：</strong>科技用水泵放量，成功切入 AI 資料中心水冷系統，未來營收佔比挑戰 10%。</p>
+
+    <div class="footer-note">
+        本報告僅供參考，不代表投資建議。投資人應根據自身風險承受能力進行決策。
+    </div>
+</div>
+
+<script>
+    // 圖表一：關鍵成長股 EPS 趨勢
+    const ctxEps = document.getElementById('epsGrowthChart').getContext('2d');
+    new Chart(ctxEps, {
+        type: 'line',
+        data: {
+            labels: ['2025 (E)', '2026 (E)', '2027 (E)', '2028 (E)'],
+            datasets: [
+                {
+                    label: '弘塑 (3131)',
+                    data: [45, 66, 95, 126], // 數據推估
+                    borderColor: '#003366',
+                    backgroundColor: 'rgba(0, 51, 102, 0.1)',
+                    fill: true,
+                    tension: 0.3,
+                    borderWidth: 3
+                },
+                {
+                    label: '禾伸堂 (3026)',
+                    data: [5, 8, 13, null],
+                    borderColor: '#b8860b',
+                    borderDash: [5, 5],
+                    tension: 0.3
+                },
+                {
+                    label: '晶心科 (6533)',
+                    data: [-1, 0.1, 8, null],
+                    borderColor: '#d9534f',
+                    tension: 0.3
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: { display: true, text: '關鍵科技股 EPS 成長趨勢預測', font: { size: 16 } }
+            },
+            scales: {
+                y: { beginAtZero: false, title: { display: true, text: 'EPS (元)' } }
+            }
+        }
+    });
+
+    // 圖表二：弘塑獲利結構改善 (高盛預估)
+    const ctxMargin = document.getElementById('marginTrendChart').getContext('2d');
+    new Chart(ctxMargin, {
+        type: 'bar',
+        data: {
+            labels: ['2026 (E)', '2027 (E)', '2028 (E)'],
+            datasets: [{
+                label: '預估毛利率 (%)',
+                data: [42, 45, 47],
+                backgroundColor: ['#e3f2fd', '#bbdefb', '#90caf9'],
+                borderColor: '#1976d2',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: { display: true, text: '弘塑 (3131) 毛利率擴張路徑', font: { size: 16 } },
+                legend: { display: false }
+            },
+            scales: {
+                y: { min: 35, max: 50, title: { display: true, text: '毛利率 (%)' } }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
