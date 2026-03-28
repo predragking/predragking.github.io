@@ -1,0 +1,2000 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>學士後中醫 化學科 知識講義</title>
+
+<!-- Chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+<!-- MathJax -->
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$','$'],['\\(','\\)']],
+    displayMath: [['$$','$$'],['\\[','\\]']]
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js" async></script>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Noto+Sans+TC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ================================================================
+   ROOT DESIGN SYSTEM — Academic / Laboratory Notebook aesthetic
+   Deep navy spine · Warm ivory pages · Precision typography
+================================================================ */
+:root {
+  /* Core palette */
+  --navy:      #0f1a2e;
+  --navy2:     #1a2d4a;
+  --ink:       #1c1f2e;
+  --paper:     #fefcf7;
+  --warm:      #f5f1e8;
+  --cream:     #ede8db;
+
+  /* Accent system */
+  --red:       #c0392b;   /* organic chemistry */
+  --red-d:     #8b1a1a;
+  --red-bg:    #fef2f2;
+  --red-bdr:   #fecaca;
+
+  --blue:      #1e40af;   /* physical chemistry */
+  --blue-d:    #1e3a5f;
+  --blue-bg:   #eff6ff;
+  --blue-bdr:  #bfdbfe;
+
+  --teal:      #0f766e;   /* acid-base */
+  --teal-d:    #0d4f4a;
+  --teal-bg:   #f0fdfa;
+  --teal-bdr:  #99f6e4;
+
+  --amber:     #b45309;   /* spectroscopy */
+  --amber-d:   #78350f;
+  --amber-bg:  #fffbeb;
+  --amber-bdr: #fde68a;
+
+  --violet:    #6d28d9;   /* electrochemistry */
+  --violet-d:  #4c1d95;
+  --violet-bg: #f5f3ff;
+  --violet-bdr:#c4b5fd;
+
+  --green:     #15803d;   /* general chemistry */
+  --green-d:   #14532d;
+  --green-bg:  #f0fdf4;
+  --green-bdr: #bbf7d0;
+
+  --gold:      #b45309;
+  --gold-lt:   #d97706;
+
+  --rule:      #ddd6c4;
+  --rule2:     #e8e2d4;
+  --muted:     #6b6555;
+}
+
+/* ── Reset ─────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 14px; -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+  background: var(--warm);
+  color: var(--ink);
+  line-height: 1.8;
+}
+
+/* ================================================================
+   PRINT STYLES
+================================================================ */
+@media print {
+  html { font-size: 10px; }
+  body { background: #fff; color: #000; }
+
+  .no-print { display: none !important; }
+
+  /* Cover: own page */
+  .cover-page {
+    page-break-after: always;
+    min-height: 0 !important;
+    height: auto;
+  }
+
+  /* Each major unit on its own page */
+  .unit { page-break-before: always; }
+  .unit:first-of-type { page-break-before: avoid; }
+
+  /* Force explicit page breaks */
+  .force-break { page-break-before: always; }
+
+  /* Prevent orphans */
+  .no-break { page-break-inside: avoid; break-inside: avoid; }
+  h2, h3, h4 { page-break-after: avoid; }
+  table { page-break-inside: auto; }
+  tr { page-break-inside: avoid; }
+
+  /* Preserve colours */
+  .unit-header,
+  .concept-box .cb-head,
+  .warn-box,
+  .tip-box,
+  .key-box,
+  .formula-panel,
+  .badge, .tag,
+  thead tr {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    color-adjust: exact;
+  }
+
+  canvas { max-width: 100% !important; page-break-inside: avoid; }
+
+  @page {
+    size: A4;
+    margin: 1.4cm 1.6cm 1.6cm 1.6cm;
+  }
+  @page :first { margin-top: 0; }
+}
+
+/* ================================================================
+   COVER PAGE
+================================================================ */
+.cover-page {
+  background: var(--navy);
+  color: #fefcf7;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 70px 80px 56px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cover-page::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 55% 45% at 85% 15%, rgba(200,100,40,.14) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 50% at 5% 85%,  rgba(30,64,175,.15) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+.cover-page::after {
+  content: 'CHEMISTRY';
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 130px;
+  font-weight: 600;
+  letter-spacing: -4px;
+  color: rgba(255,255,255,.03);
+  position: absolute;
+  bottom: 30px; right: -20px;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.cover-inner { position: relative; z-index: 1; }
+
+.cover-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: rgba(212,151,70,.85);
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.cover-eyebrow::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(212,151,70,.2);
+}
+
+.cover-rule { width: 50px; height: 3px; background: var(--red); margin-bottom: 30px; }
+
+.cover-page h1 {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 52px;
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 14px;
+  color: #fff;
+}
+
+.cover-page h1 em { color: #f6a623; font-style: normal; }
+
+.cover-desc {
+  font-size: 15px;
+  color: rgba(254,252,247,.5);
+  font-weight: 300;
+  letter-spacing: .5px;
+  margin-bottom: 48px;
+  max-width: 560px;
+}
+
+.cover-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 52px;
+}
+
+.ctag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  padding: 5px 14px;
+  border: 1px solid rgba(255,255,255,.15);
+  color: rgba(255,255,255,.55);
+  background: rgba(255,255,255,.05);
+}
+
+/* TOC grid on cover */
+.cover-toc {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.06);
+  margin-bottom: 0;
+}
+
+.toc-cell {
+  padding: 14px 16px;
+  background: rgba(0,0,0,.2);
+}
+
+.toc-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,.3);
+  display: block;
+  margin-bottom: 5px;
+}
+
+.toc-title {
+  font-size: 12px;
+  color: rgba(255,255,255,.7);
+  line-height: 1.35;
+}
+
+.toc-pct {
+  display: inline-block;
+  margin-top: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--gold-lt);
+}
+
+.cover-footer {
+  position: relative; z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255,255,255,.08);
+  padding-top: 20px;
+  margin-top: 40px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: rgba(255,255,255,.22);
+  letter-spacing: 1px;
+}
+
+/* ================================================================
+   PAGE WRAPPER
+================================================================ */
+.page-wrap {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 32px 80px;
+}
+
+/* ================================================================
+   UNIT (major chapter) HEADER
+================================================================ */
+.unit-header {
+  display: flex;
+  align-items: stretch;
+  margin: 0 -32px 0;
+  border-top: 4px solid;
+  margin-bottom: 28px;
+}
+
+.uh-num {
+  background: var(--navy);
+  color: var(--gold-lt);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  min-width: 70px;
+}
+
+.uh-body {
+  flex: 1;
+  padding: 18px 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.uh-body h2 {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.uh-body .uh-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--muted);
+  margin-top: 4px;
+  text-transform: uppercase;
+}
+
+.uh-pct {
+  display: flex;
+  align-items: center;
+  padding: 18px 22px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 26px;
+  font-weight: 600;
+  border-left: 1px solid var(--rule);
+  flex-shrink: 0;
+}
+
+/* Color themes per unit */
+.unit-organic  .unit-header { border-color: var(--red); }
+.unit-organic  .uh-body     { background: var(--red-bg); }
+.unit-organic  .uh-pct      { color: var(--red); }
+
+.unit-general  .unit-header { border-color: var(--blue); }
+.unit-general  .uh-body     { background: var(--blue-bg); }
+.unit-general  .uh-pct      { color: var(--blue); }
+
+.unit-thermo   .unit-header { border-color: var(--green); }
+.unit-thermo   .uh-body     { background: var(--green-bg); }
+.unit-thermo   .uh-pct      { color: var(--green); }
+
+.unit-acidbase .unit-header { border-color: var(--teal); }
+.unit-acidbase .uh-body     { background: var(--teal-bg); }
+.unit-acidbase .uh-pct      { color: var(--teal); }
+
+.unit-electro  .unit-header { border-color: var(--violet); }
+.unit-electro  .uh-body     { background: var(--violet-bg); }
+.unit-electro  .uh-pct      { color: var(--violet); }
+
+.unit-kinetics .unit-header { border-color: var(--amber); }
+.unit-kinetics .uh-body     { background: var(--amber-bg); }
+.unit-kinetics .uh-pct      { color: var(--amber); }
+
+.unit-spectro  .unit-header { border-color: var(--amber); }
+.unit-spectro  .uh-body     { background: var(--amber-bg); }
+.unit-spectro  .uh-pct      { color: var(--amber); }
+
+.unit-appendix .unit-header { border-color: var(--navy); }
+.unit-appendix .uh-body     { background: var(--warm); }
+.unit-appendix .uh-pct      { color: var(--navy); }
+
+/* ================================================================
+   SECTION HEADINGS
+================================================================ */
+h3.sh {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 30px 0 12px;
+  padding-left: 14px;
+  border-left: 4px solid var(--gold-lt);
+  line-height: 1.3;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+h3.sh .en {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  color: var(--muted);
+  font-weight: 400;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+h4.subh {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy2);
+  margin: 22px 0 9px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+h4.subh::before {
+  content: '▸';
+  color: var(--gold-lt);
+  font-size: 11px;
+}
+
+/* ================================================================
+   CONCEPT BOXES
+================================================================ */
+.concept-box {
+  border: 1px solid;
+  margin: 12px 0;
+  overflow: hidden;
+}
+
+.cb-head {
+  padding: 8px 14px;
+  font-family: 'Noto Serif TC', serif;
+  font-size: 12.5px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: white;
+}
+
+.cb-body {
+  padding: 12px 16px;
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.cb-red   { border-color: var(--red-bdr); }
+.cb-red   .cb-head { background: var(--red); }
+.cb-red   .cb-body { background: var(--red-bg); }
+
+.cb-blue  { border-color: var(--blue-bdr); }
+.cb-blue  .cb-head { background: var(--blue); }
+.cb-blue  .cb-body { background: var(--blue-bg); }
+
+.cb-teal  { border-color: var(--teal-bdr); }
+.cb-teal  .cb-head { background: var(--teal); }
+.cb-teal  .cb-body { background: var(--teal-bg); }
+
+.cb-amber { border-color: var(--amber-bdr); }
+.cb-amber .cb-head { background: var(--amber); }
+.cb-amber .cb-body { background: var(--amber-bg); }
+
+.cb-violet { border-color: var(--violet-bdr); }
+.cb-violet .cb-head { background: var(--violet); }
+.cb-violet .cb-body { background: var(--violet-bg); }
+
+.cb-green { border-color: var(--green-bdr); }
+.cb-green .cb-head { background: var(--green); }
+.cb-green .cb-body { background: var(--green-bg); }
+
+.cb-navy  { border-color: rgba(15,26,46,.2); }
+.cb-navy  .cb-head { background: var(--navy); }
+.cb-navy  .cb-body { background: var(--blue-bg); }
+
+/* ================================================================
+   SPECIAL CALLOUT BOXES
+================================================================ */
+.warn-box {
+  border-left: 5px solid var(--red);
+  background: var(--red-bg);
+  padding: 11px 16px;
+  margin: 12px 0;
+  font-size: 12.5px;
+  line-height: 1.7;
+}
+.warn-box .wb-title {
+  font-weight: 700;
+  color: var(--red-d);
+  font-size: 12px;
+  margin-bottom: 5px;
+  display: flex; align-items: center; gap: 5px;
+}
+
+.tip-box {
+  border-left: 5px solid var(--green);
+  background: var(--green-bg);
+  padding: 11px 16px;
+  margin: 12px 0;
+  font-size: 12.5px;
+  line-height: 1.7;
+}
+.tip-box .tb-title {
+  font-weight: 700;
+  color: var(--green-d);
+  font-size: 12px;
+  margin-bottom: 5px;
+  display: flex; align-items: center; gap: 5px;
+}
+
+.key-box {
+  border-left: 5px solid var(--blue);
+  background: var(--blue-bg);
+  padding: 11px 16px;
+  margin: 12px 0;
+  font-size: 12.5px;
+  line-height: 1.7;
+}
+.key-box .kb-title {
+  font-weight: 700;
+  color: var(--blue-d);
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.example-box {
+  border-left: 5px solid var(--amber);
+  background: var(--amber-bg);
+  padding: 11px 16px;
+  margin: 12px 0;
+  font-size: 12.5px;
+  line-height: 1.7;
+}
+.example-box .ex-title {
+  font-weight: 700;
+  color: var(--amber-d);
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+/* ================================================================
+   FORMULA PANEL
+================================================================ */
+.formula-panel {
+  background: var(--navy);
+  color: #c8ddf8;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  padding: 14px 20px;
+  margin: 12px 0;
+  line-height: 2.1;
+  overflow-x: auto;
+}
+.formula-panel .fc  { color: rgba(246,166,35,.65); font-size: 11px; }
+.formula-panel .fh  { color: #f6a623; font-weight: 600; }
+.formula-panel .key-eqn { color: #93c5fd; }
+
+/* ================================================================
+   MNEMONIC BANNER
+================================================================ */
+.mnemonic {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+  color: #f6a623;
+  font-family: 'Noto Serif TC', serif;
+  font-size: 13.5px;
+  font-weight: 700;
+  padding: 14px 20px;
+  margin: 14px 0;
+  text-align: center;
+  letter-spacing: .5px;
+  border: 1px solid rgba(246,166,35,.15);
+  line-height: 1.6;
+}
+.mnemonic .mn-label {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px;
+  letter-spacing: 3px;
+  color: rgba(246,166,35,.45);
+  margin-bottom: 6px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+/* ================================================================
+   COMPARISON TABLE
+================================================================ */
+table.cmp {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  margin: 10px 0 16px;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+}
+table.cmp thead tr { background: var(--navy); color: white; }
+table.cmp th { padding: 8px 12px; font-weight: 600; font-size: 11px; text-align: left; letter-spacing: .3px; }
+table.cmp td { padding: 7px 12px; border-bottom: 1px solid var(--rule2); vertical-align: top; font-size: 12px; line-height: 1.6; }
+table.cmp tr:nth-child(even) td { background: var(--warm); }
+table.cmp tr:last-child td { border-bottom: none; }
+table.cmp td:first-child { font-weight: 700; color: var(--navy2); }
+table.cmp tr:hover td { background: var(--cream); }
+
+/* ================================================================
+   GRID LAYOUTS
+================================================================ */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 10px 0; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 10px 0; }
+
+@media (max-width: 680px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  .cover-toc { grid-template-columns: repeat(2,1fr); }
+  .cover-page { padding: 40px 30px; }
+  .cover-page h1 { font-size: 36px; }
+}
+
+/* ================================================================
+   MINI INFO CARD
+================================================================ */
+.mini-card {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  padding: 13px 15px;
+  font-size: 12.5px;
+}
+.mini-card .mc-h {
+  font-family: 'Noto Serif TC', serif;
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: 8px;
+  color: var(--ink);
+}
+.mini-card ul { list-style: none; padding: 0; }
+.mini-card ul li {
+  padding: 3px 0 3px 16px;
+  position: relative;
+  border-bottom: 1px solid var(--rule2);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.mini-card ul li:last-child { border-bottom: none; }
+.mini-card ul li::before { content: '·'; position: absolute; left: 5px; color: var(--gold-lt); font-weight: 700; }
+
+/* ================================================================
+   BADGES & TAGS
+================================================================ */
+.badge {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 2px;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.bd-red    { background: var(--red-bg); color: var(--red-d); border: 1px solid var(--red-bdr); }
+.bd-blue   { background: var(--blue-bg); color: var(--blue-d); border: 1px solid var(--blue-bdr); }
+.bd-green  { background: var(--green-bg); color: var(--green-d); border: 1px solid var(--green-bdr); }
+.bd-amber  { background: var(--amber-bg); color: var(--amber-d); border: 1px solid var(--amber-bdr); }
+.bd-navy   { background: var(--navy); color: #f6a623; }
+.bd-must   { background: var(--red); color: white; }
+.bd-star   { color: var(--gold-lt); letter-spacing: 1px; font-family: 'JetBrains Mono', monospace; }
+
+/* ================================================================
+   SECTION LABEL STRIP
+================================================================ */
+.strip {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  color: white;
+  margin: 20px 0 8px;
+}
+.strip-red    { background: var(--red); }
+.strip-blue   { background: var(--blue); }
+.strip-teal   { background: var(--teal); }
+.strip-amber  { background: var(--amber); }
+.strip-violet { background: var(--violet); }
+.strip-green  { background: var(--green); }
+.strip-navy   { background: var(--navy); }
+.strip-gold   { background: var(--gold); }
+
+/* ================================================================
+   STEP LIST (numbered)
+================================================================ */
+ol.steps { list-style: none; padding: 0; counter-reset: s; }
+ol.steps li {
+  counter-increment: s;
+  padding: 6px 0 6px 38px;
+  position: relative;
+  border-bottom: 1px solid var(--rule2);
+  font-size: 13px;
+  line-height: 1.7;
+}
+ol.steps li:last-child { border-bottom: none; }
+ol.steps li::before {
+  content: counter(s);
+  position: absolute; left: 0; top: 6px;
+  width: 26px; height: 26px;
+  background: var(--navy);
+  color: var(--gold-lt);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* ================================================================
+   PRACTICE QUESTION BOX
+================================================================ */
+.pq {
+  border: 1.5px solid var(--navy2);
+  margin: 14px 0;
+  overflow: hidden;
+}
+.pq-head {
+  background: var(--navy2);
+  color: white;
+  padding: 7px 15px;
+  font-size: 10.5px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: .5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.pq-body { padding: 12px 16px; background: var(--paper); font-size: 13px; }
+.pq-ans  {
+  background: var(--green-bg);
+  border-top: 1px solid var(--green-bdr);
+  padding: 10px 16px;
+  font-size: 12.5px;
+  color: var(--green-d);
+}
+
+/* ================================================================
+   DECISION FLOW (text-based)
+================================================================ */
+.flow-box {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  padding: 16px 20px;
+  font-size: 12.5px;
+  line-height: 1.7;
+}
+.flow-q { font-weight: 700; color: var(--blue); }
+.flow-y { color: var(--green); font-weight: 700; }
+.flow-n { color: var(--red); font-weight: 700; }
+.flow-end {
+  display: inline-block;
+  background: var(--navy);
+  color: #f6a623;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 2px 10px;
+  margin: 1px 0;
+}
+.flow-indent { margin-left: 24px; border-left: 2px dashed var(--rule); padding-left: 14px; margin-top: 4px; }
+
+/* ================================================================
+   CHART WRAPPER
+================================================================ */
+.chart-wrap {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  padding: 16px 18px;
+  margin: 12px 0;
+}
+.chart-wrap h5 {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 12px;
+  text-align: center;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+/* ================================================================
+   MISC HELPERS
+================================================================ */
+hr.div { border: none; border-top: 1px solid var(--rule); margin: 26px 0; }
+hr.div-heavy { border: none; border-top: 2px solid var(--ink); margin: 32px 0; }
+
+p { font-size: 13px; line-height: 1.8; margin-bottom: 8px; }
+p:last-child { margin-bottom: 0; }
+
+.inline-code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  background: var(--cream);
+  border: 1px solid var(--rule);
+  padding: 1px 6px;
+}
+
+strong.hl { color: var(--red); }
+strong.bl { color: var(--blue-d); }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════
+     COVER PAGE
+══════════════════════════════════════════════════ -->
+<div class="cover-page">
+  <div class="cover-inner">
+    <div class="cover-eyebrow">Post-Baccalaureate Traditional Chinese Medicine · Chemistry</div>
+    <div class="cover-rule"></div>
+    <h1>學士後中醫<br><em>化學科知識講義</em></h1>
+    <p class="cover-desc">以歷屆試題為骨幹，系統整合核心觀念、完整推導、考試陷阱辨析與速記口訣——<br>從理解到得分，一本搞定。</p>
+
+    <div class="cover-tags">
+      <span class="ctag">立體化學 Stereochemistry</span>
+      <span class="ctag">反應機制 Reaction Mechanisms</span>
+      <span class="ctag">熱力學 Thermodynamics</span>
+      <span class="ctag">酸鹼平衡 Acid-Base</span>
+      <span class="ctag">電化學 Electrochemistry</span>
+      <span class="ctag">動力學 Kinetics</span>
+      <span class="ctag">光譜分析 Spectroscopy</span>
+      <span class="ctag">人名反應 Named Reactions</span>
+    </div>
+
+    <div class="cover-toc">
+      <div class="toc-cell">
+        <span class="toc-num">CH · 01</span>
+        <div class="toc-title">有機化學<br>立體化學 &amp; 命名</div>
+        <span class="toc-pct">~12%</span>
+      </div>
+      <div class="toc-cell">
+        <span class="toc-num">CH · 02</span>
+        <div class="toc-title">取代 &amp; 消去反應<br>SN1/SN2/E1/E2</div>
+        <span class="toc-pct">~10%</span>
+      </div>
+      <div class="toc-cell">
+        <span class="toc-num">CH · 03</span>
+        <div class="toc-title">加成 &amp; 芳香族<br>EAS &amp; Hückel</div>
+        <span class="toc-pct">~8%</span>
+      </div>
+      <div class="toc-cell">
+        <span class="toc-num">CH · 04</span>
+        <div class="toc-title">羰基 &amp; 人名反應<br>Carbonyl &amp; Named</div>
+        <span class="toc-pct">~15%</span>
+      </div>
+      <div class="toc-cell">
+        <span class="toc-num">CH · 05</span>
+        <div class="toc-title">熱力學 &amp; 平衡<br>ΔG · ΔH · ΔS · Kp/Kc</div>
+        <span class="toc-pct">~18%</span>
+      </div>
+      <div class="toc-cell">
+        <span class="toc-num">CH · 06</span>
+        <div class="toc-title">酸鹼 &amp; 電化學<br>pH · Nernst</div>
+        <span class="toc-pct">~18%</span>
+      </div>
+      <div class="toc-cell">
+        <span class="toc-num">CH · 07</span>
+        <div class="toc-title">動力學 &amp; 原子結構<br>Rate Law · Quantum</div>
+        <span class="toc-pct">~12%</span>
+      </div>
+      <div class="toc-cell">
+        <span class="toc-num">CH · 08</span>
+        <div class="toc-title">光譜分析<br>NMR · IR · MS</div>
+        <span class="toc-pct">~10%</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cover-footer">
+    <span>資料來源：慈濟 · 中國醫 · 中興大學 · 高雄醫 · 義守大學 104–114 學年度歷屆試題</span>
+    <span>Comprehensive Lecture Notes for Examination Preparation</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     MAIN CONTENT WRAPPER
+══════════════════════════════════════════════════ -->
+<div class="page-wrap">
+
+<!-- ████████████  CH 01 立體化學  ████████████ -->
+<div class="unit unit-organic force-break">
+  <div class="unit-header no-break">
+    <div class="uh-num">CH·01</div>
+    <div class="uh-body">
+      <h2>立體化學 Stereochemistry</h2>
+      <span class="uh-sub">R/S Configuration · E/Z Isomerism · Projection Formulas · Special Compounds</span>
+    </div>
+    <div class="uh-pct">~12%</div>
+  </div>
+
+  <h3 class="sh">1.1 CIP 優先序規則與 R/S 標記 <span class="en">CIP PRIORITY RULES</span></h3>
+
+  <div class="concept-box cb-red no-break">
+    <div class="cb-head">📋 R/S 標記四步驟（每年必考）</div>
+    <div class="cb-body">
+      <ol class="steps">
+        <li><strong>原子序排優先序</strong>：直接連接手性碳的原子，原子序大者優先（I &gt; Br &gt; Cl &gt; S &gt; F &gt; O &gt; N &gt; C &gt; H；孤對電子排最低）。</li>
+        <li><strong>同原子序時，比較下一層</strong>：往外展開（多個分支時取原子序最大者），直到分出高低。雙鍵視為兩個虛擬單鍵（如 C=O 視為 C 連兩個 O）。</li>
+        <li><strong>最低優先基移至遠端</strong>：H 或最低優先基需指向遠離觀察者（虛線楔形）。</li>
+        <li><strong>判斷 1→2→3 的旋轉方向</strong>：順時針 → <strong>R</strong>；逆時針 → <strong>S</strong>。</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="warn-box no-break">
+    <div class="wb-title">⚠ 最高頻陷阱：最低優先基在楔形（朝向觀察者）</div>
+    若 H（或最低優先基）在<strong>楔形鍵（面向觀察者）</strong>而非虛線鍵，<br>
+    觀察到的旋轉方向與真實方向<strong>相反</strong>，需要翻轉結果：<br>
+    觀察順時針 → 實際為 <strong>S</strong>；觀察逆時針 → 實際為 <strong>R</strong>。
+  </div>
+
+  <h3 class="sh">1.2 E/Z 幾何異構 <span class="en">E/Z ISOMERISM</span></h3>
+
+  <div class="grid-2 no-break">
+    <div class="concept-box cb-blue">
+      <div class="cb-head">Z — zusammen（在一起）</div>
+      <div class="cb-body">
+        雙鍵兩端，各自的<strong>高優先基在同側</strong><br>
+        記憶：Z = 相 Zusammen（相聚）<br>
+        <em>類似 cis，但以 CIP 規則判斷</em>
+      </div>
+    </div>
+    <div class="concept-box cb-red">
+      <div class="cb-head">E — entgegen（對面）</div>
+      <div class="cb-body">
+        雙鍵兩端，各自的<strong>高優先基在異側</strong><br>
+        記憶：E = 敵 Entgegen（對立）<br>
+        <em>類似 trans，但以 CIP 規則判斷</em>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="sh">1.3 投影式的使用規則 <span class="en">PROJECTION FORMULAS</span></h3>
+
+  <table class="cmp no-break">
+    <thead><tr><th>投影式</th><th>水平鍵方向</th><th>垂直鍵方向</th><th>操作規則</th><th>主要用途</th></tr></thead>
+    <tbody>
+      <tr><td>Fischer 投影</td><td>朝向觀察者（楔形）</td><td>遠離觀察者（虛線）</td><td>旋轉 180° 構型不變；旋轉 90° 構型改變</td><td>胺基酸、糖類</td></tr>
+      <tr><td>Newman 投影</td><td>前碳（圓點中心）</td><td>後碳（圓圈邊緣）</td><td>前碳與後碳的立體關係</td><td>構象分析（交叉/重疊）</td></tr>
+      <tr><td>Wedge-Dash</td><td>楔形（實線）= 朝前</td><td>虛線 = 朝後</td><td>最直觀三維表示</td><td>通用立體化學</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip-box no-break">
+    <div class="tb-title">💡 Fischer 投影快速判斷構型的技巧</div>
+    Fischer 投影中，<strong>任意交換兩個取代基偶數次 → 構型不變；奇數次 → R/S 翻轉</strong>。<br>
+    常用方式：若需判斷，可將 H 換到最下方（垂直）→ 此時水平 3 個基的排列即為真實 R/S 旋轉方向。
+  </div>
+
+  <h3 class="sh">1.4 立體異構體類型辨析 <span class="en">STEREOISOMER CLASSIFICATION</span></h3>
+
+  <table class="cmp no-break">
+    <thead><tr><th>名稱</th><th>定義</th><th>光學活性</th><th>物理性質</th><th>典型例子</th></tr></thead>
+    <tbody>
+      <tr><td>對映體 Enantiomers</td><td>彼此互為不可重疊鏡像</td><td>有（方向相反）</td><td>除旋光方向外完全相同</td><td>(R)- vs (S)-乳酸</td></tr>
+      <tr><td>非對映體 Diastereomers</td><td>立體異構但非鏡像關係</td><td>各自有（不同程度）</td><td>物理性質各異（bp, mp 均不同）</td><td>erythro vs threo 型</td></tr>
+      <tr><td>內消旋物 meso</td><td>有手性中心，但整體有內部對稱面</td><td><strong>無</strong>（光學非活性）</td><td>不同於外消旋混合物（純化合物）</td><td>meso-酒石酸</td></tr>
+      <tr><td>外消旋混合物 Racemate</td><td>等量 (R)+(S) 的混合物</td><td><strong>無</strong>（互相抵消）</td><td>熔點通常與純對映體不同</td><td>SN1 產物（碳陽離子）</td></tr>
+    </tbody>
+  </table>
+
+  <div class="warn-box no-break">
+    <div class="wb-title">⚠ meso 化合物 ≠ 外消旋混合物</div>
+    meso 化合物是<strong>單一純化合物</strong>，具有內部對稱面（手性中心互相抵消），光學非活性但<strong>不可被光學拆分</strong>。<br>
+    外消旋混合物是 R:S = 1:1 的<strong>混合物</strong>，可被手性試劑拆分為兩個對映體。
+  </div>
+
+  <h3 class="sh">1.5 質子的立體化學環境 <span class="en">PROCHIRALITY</span></h3>
+  <div class="grid-3 no-break">
+    <div class="mini-card">
+      <div class="mc-h">Homotopic（等位）</div>
+      <ul>
+        <li>取代任一個 → 得到<strong>同一化合物</strong></li>
+        <li>任何環境中 NMR 均等價（相同 δ）</li>
+        <li>例：CH₄ 的 4 個 H；CH₂Cl₂ 中的兩個 H（⚠ 此為 enantiotopic！）</li>
+      </ul>
+    </div>
+    <div class="mini-card">
+      <div class="mc-h">Enantiotopic（對映位）</div>
+      <ul>
+        <li>取代其中一個 → 得到<strong>對映體</strong></li>
+        <li>非手性環境 NMR 等價；手性環境不等價</li>
+        <li>例：CH₂Cl₂ 的兩個 H（取代後 → R/S）</li>
+      </ul>
+    </div>
+    <div class="mini-card">
+      <div class="mc-h">Diastereotopic（非對映位）</div>
+      <ul>
+        <li>取代任一個 → 得到<strong>非對映體</strong></li>
+        <li><strong>任何環境中 NMR 均不等價</strong>（δ 不同）</li>
+        <li>例：手性碳旁的 CH₂ 兩個 H（最常考！）</li>
+      </ul>
+    </div>
+  </div>
+</div><!-- end CH01 -->
+
+
+<!-- ████████████  CH 02 取代與消去反應  ████████████ -->
+<div class="unit unit-organic force-break">
+  <div class="unit-header no-break">
+    <div class="uh-num">CH·02</div>
+    <div class="uh-body">
+      <h2>取代與消去反應 Substitution &amp; Elimination</h2>
+      <span class="uh-sub">SN1 · SN2 · E1 · E2 · Regioselectivity · Stereochemistry</span>
+    </div>
+    <div class="uh-pct">~10%</div>
+  </div>
+
+  <h3 class="sh">2.1 SN1 vs SN2 完整比較 <span class="en">NUCLEOPHILIC SUBSTITUTION</span></h3>
+
+  <table class="cmp no-break">
+    <thead><tr><th>比較項目</th><th>SN1（單分子）</th><th>SN2（雙分子）</th></tr></thead>
+    <tbody>
+      <tr><td>速率定律</td><td>Rate = k[RX] <em>（一級）</em></td><td>Rate = k[RX][Nu] <em>（二級）</em></td></tr>
+      <tr><td>底物偏好</td><td><strong>3° &gt; 2° ≫ 1°</strong>（碳陽離子穩定性決定）</td><td><strong>1° &gt; 2° ≫ 3°</strong>（空間障礙決定）</td></tr>
+      <tr><td>中間體</td><td>碳陽離子（planar sp²，可重排）</td><td>無中間體（同步協調機制）</td></tr>
+      <tr><td>立體化學</td><td><strong>外消旋化</strong>（Racemization）：碳陽離子兩面均可攻擊</td><td><strong>構型翻轉</strong>（Walden Inversion）：背面攻擊</td></tr>
+      <tr><td>溶劑偏好</td><td>極性質子溶劑（H₂O, ROH, RCOOH）穩定離子</td><td>極性非質子溶劑（DMSO, DMF, CH₃CN）增強親核力</td></tr>
+      <tr><td>親核劑</td><td>弱親核劑亦可（甚至 H₂O）</td><td>需強親核劑（CN⁻, I⁻, N₃⁻, RS⁻）</td></tr>
+      <tr><td>副反應</td><td>消去（E1）競爭；碳陽離子重排</td><td>不重排；可能有 E2 競爭（強鹼性親核劑）</td></tr>
+      <tr><td>溫度效應</td><td>升溫利於 SN1/E1</td><td>升溫利於消去（E2 比 SN2 優勢增大）</td></tr>
+    </tbody>
+  </table>
+
+  <div class="formula-panel no-break">
+    <span class="fc">── 離去基能力（Leaving Group Ability）──</span><br>
+    <span class="fh">TsO⁻ ≫ I⁻ &gt; Br⁻ &gt; Cl⁻ ≫ F⁻</span><br>
+    <span class="fc">── 親核力（在質子溶劑中，極化性 &gt; 電負度）──</span><br>
+    <span class="fh">I⁻ &gt; Br⁻ &gt; Cl⁻ &gt; F⁻</span>  ；  HS⁻ &gt; HO⁻  ；  RS⁻ &gt; RO⁻<br>
+    <span class="fc">── 注意：OH⁻, OR⁻, NH₂⁻ 為不良離去基，需質子化（H⁺）或活化後才能離去 ──</span>
+  </div>
+
+  <h3 class="sh">2.2 反應路徑決策流程 <span class="en">DECISION FLOW</span></h3>
+
+  <div class="flow-box no-break">
+    <p style="font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--muted); margin-bottom:10px;">▶ 判斷底物 RX 的級數，再看試劑性質</p>
+
+    <div><span class="flow-q">底物為 1° RX？</span></div>
+    <div class="flow-indent">
+      <span class="flow-y">強 Nu + 非質子溶劑</span> → <span class="flow-end">SN2</span><br>
+      <span class="flow-y">強鹼（t-BuOK, LDA）</span> → <span class="flow-end">E2（Hofmann 產物）</span>
+    </div>
+    <div style="margin-top:8px;"><span class="flow-q">底物為 2° RX？</span></div>
+    <div class="flow-indent">
+      <span class="flow-y">強 Nu + 非質子溶劑 + 低溫</span> → <span class="flow-end">SN2（主）</span><br>
+      <span class="flow-y">強鹼 + 高溫</span> → <span class="flow-end">E2（主）</span><br>
+      <span class="flow-y">弱 Nu + 質子溶劑</span> → <span class="flow-end">SN1 / E1 競爭</span>
+    </div>
+    <div style="margin-top:8px;"><span class="flow-q">底物為 3° RX？</span></div>
+    <div class="flow-indent">
+      <span class="flow-y">強鹼 + 高溫</span> → <span class="flow-end">E2（Zaitsev 或 Hofmann）</span><br>
+      <span class="flow-y">質子溶劑 + 熱</span> → <span class="flow-end">SN1 / E1</span><br>
+      <span class="flow-n">強 Nu 攻擊 3° 碳：空間阻礙太大 → SN2 不可能</span>
+    </div>
+  </div>
+
+  <h3 class="sh">2.3 E1 vs E2 消去反應 <span class="en">ELIMINATION REACTIONS</span></h3>
+
+  <table class="cmp no-break">
+    <thead><tr><th>比較項目</th><th>E1</th><th>E2</th></tr></thead>
+    <tbody>
+      <tr><td>速率定律</td><td>Rate = k[RX]（一級）</td><td>Rate = k[RX][base]（二級）</td></tr>
+      <tr><td>鹼的要求</td><td>弱鹼或溶劑即可</td><td>需強鹼（NaOEt, t-BuOK, NaH）</td></tr>
+      <tr><td>立體化學要求</td><td>無特定要求（碳陽離子中間體）</td><td><strong>anti-periplanar H 與 LG</strong>（反式共面必需）</td></tr>
+      <tr><td>區域選擇性</td><td>通常 Zaitsev（多取代烯）</td><td>小鹼 → Zaitsev；大位阻鹼 → Hofmann</td></tr>
+      <tr><td>溫度</td><td>適中溫度</td><td>高溫利於 E2（vs SN2）</td></tr>
+    </tbody>
+  </table>
+
+  <div class="concept-box cb-red no-break">
+    <div class="cb-head">🔑 E2 的 anti-periplanar 要求——在環己烷上的關鍵應用</div>
+    <div class="cb-body">
+      <p>E2 消去需要 <strong>H 和離去基（LG）處於 anti-periplanar（反式共面）</strong> 位置，即二面角 ≈ 180°。</p>
+      <div class="grid-2" style="margin-top:10px;">
+        <div>
+          <strong>環己烷構象的影響：</strong>
+          <ul style="padding-left:16px; font-size:12.5px; margin-top:6px;">
+            <li><strong>LG 在 axial（軸向）</strong>：相鄰碳的 axial H 與其 anti-periplanar → E2 快速</li>
+            <li><strong>LG 在 equatorial（赤道）</strong>：找不到 anti-periplanar H → E2 極慢甚至不發生</li>
+            <li>因此：trans-2-溴-1-甲基環己烷的 E2 速率 &gt;&gt; cis 異構體</li>
+          </ul>
+        </div>
+        <div>
+          <strong>Zaitsev vs Hofmann：</strong>
+          <ul style="padding-left:16px; font-size:12.5px; margin-top:6px;">
+            <li><strong>Zaitsev</strong>：小鹼（NaOEt）→ 多取代烯（熱力學穩定）</li>
+            <li><strong>Hofmann</strong>：大位阻鹼（t-BuOK, LDA）→ 少取代烯（動力學）</li>
+            <li>高溫有利於消去；低溫、強親核劑有利於取代</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mnemonic no-break">
+    <span class="mn-label">SN/E 選擇速記</span>
+    強鹼 + 高溫 = E2 ｜ 弱Nu + 質子溶劑 = SN1/E1 ｜ 強Nu + 非質子 + 1°/2° = SN2 ｜ 3°底物強鹼 = E2
+  </div>
+
+  <div class="pq no-break">
+    <div class="pq-head"><span>練習題 — SN/E 路徑判斷</span><span class="badge bd-must">★★★ 超高頻</span></div>
+    <div class="pq-body">
+      <p>下列哪個反應主要進行 <strong>SN2</strong>？</p>
+      <p>A. (CH₃)₃CBr + H₂O（25°C）<br>
+         B. CH₃CH₂CH₂Br + NaCN（DMSO，25°C）<br>
+         C. (CH₃)₂CHBr + t-BuOK（EtOH，80°C）<br>
+         D. (CH₃)₃CBr + NaI（丙酮）</p>
+    </div>
+    <div class="pq-ans">
+      ✅ <strong>答案：B</strong><br>
+      A → 3° 底物 + 水 → SN1 ／ E1<br>
+      B → 1° 底物 + 強 Nu（CN⁻）+ 非質子溶劑 DMSO → <strong>SN2 ✓</strong><br>
+      C → 2° 底物 + 大位阻強鹼 + 高溫 → E2（Hofmann 產物）<br>
+      D → 3° 底物，即使強 Nu，SN2 空間阻礙過大 → E2 或 SN1
+    </div>
+  </div>
+</div><!-- end CH02 -->
+
+
+<!-- ████████████  CH 03 加成與芳香族  ████████████ -->
+<div class="unit unit-organic force-break">
+  <div class="unit-header no-break">
+    <div class="uh-num">CH·03</div>
+    <div class="uh-body">
+      <h2>加成反應與芳香族化學 Addition &amp; Aromaticity</h2>
+      <span class="uh-sub">Alkene Additions · EAS · Hückel Rule · Directing Effects</span>
+    </div>
+    <div class="uh-pct">~8%</div>
+  </div>
+
+  <h3 class="sh">3.1 烯烴加成反應完整總覽 <span class="en">ALKENE ADDITION REACTIONS</span></h3>
+
+  <table class="cmp no-break">
+    <thead><tr><th>試劑</th><th>區域選擇性</th><th>立體選擇性</th><th>主要產物</th><th>機制要點</th></tr></thead>
+    <tbody>
+      <tr><td>HX（HCl, HBr, HI）</td><td><strong>Markovnikov</strong></td><td>無特定（外消旋）</td><td>鹵烷</td><td>碳陽離子中間體，H 加到 H 多端</td></tr>
+      <tr><td>HBr + 過氧化物 (ROOR)</td><td><strong>anti-Markovnikov</strong></td><td>無特定</td><td>鹵烷（反 Mk）</td><td>自由基機制，Br• 加到 H 多端</td></tr>
+      <tr><td>BH₃ → H₂O₂/NaOH<br>（硼氫化-氧化）</td><td><strong>anti-Markovnikov</strong></td><td><strong>syn（順式）</strong></td><td>醇（anti-Mk）</td><td>協同環狀過渡態，B 加在 H 多端</td></tr>
+      <tr><td>Br₂ / Cl₂（CH₂Cl₂）</td><td>—</td><td><strong>anti（反式）</strong></td><td>trans-鹵化物</td><td>溴鎓離子中間體，背面攻擊</td></tr>
+      <tr><td>OsO₄ / NMO<br>（或 KMnO₄ 稀冷）</td><td>—</td><td><strong>syn（順式）</strong></td><td>cis-1,2-二醇</td><td>協同 [3+2] 環加成，同面進攻</td></tr>
+      <tr><td>mCPBA → H₃O⁺ 或 NaOH<br>（環氧化 + 開環）</td><td>親核劑攻擊位阻小端</td><td><strong>anti</strong></td><td>trans-1,2-二醇（開環後）</td><td>環氧化物親核開環，構型翻轉</td></tr>
+      <tr><td>O₃ / Me₂S（還原裂解）</td><td>—</td><td>—</td><td>醛 + 酮（或醛+醛）</td><td>臭氧化裂解，Me₂S 避免過度氧化</td></tr>
+      <tr><td>O₃ / H₂O₂（氧化裂解）</td><td>—</td><td>—</td><td>羧酸 + 酮</td><td>端基烯 → CO₂；內部烯 → 羧酸</td></tr>
+      <tr><td>Diels-Alder<br>（共軛二烯 + 親雙烯體）</td><td>—</td><td><strong>endo 規則（動力學）</strong><br>syn 加成</td><td>環己烯衍生物</td><td>[4+2] 協同環化；二烯需 s-cis</td></tr>
+    </tbody>
+  </table>
+
+  <div class="concept-box cb-blue no-break">
+    <div class="cb-head">🔑 Markovnikov 規則的本質原因（不是死背！）</div>
+    <div class="cb-body">
+      <p><strong>表面定義</strong>：H 加到含 H 較多的碳，X 加到含 H 較少的碳（Markovnikov 1870）</p>
+      <p><strong>本質理由</strong>：H⁺ 加成後形成碳陽離子，穩定性決定優勢路徑：<br>
+      3° 碳陽離子 &gt; 2° &gt; 1° &gt; CH₃⁺（超共軛穩定）<br>
+      因此 H⁺ 加到「少取代端」→ 碳陽離子在「多取代端」→ 更穩定 → 親核劑在此攻擊</p>
+      <div class="warn-box" style="margin-top:8px;">
+        <div class="wb-title">⚠ 特殊情況：烯丙位/苄位碳陽離子</div>
+        若形成的碳陽離子可共振（烯丙位、苄位），穩定性更高，可能改變加成方向或產生重排。
+      </div>
+    </div>
+  </div>
+
+  <h3 class="sh">3.2 芳香族親電取代 (EAS) <span class="en">ELECTROPHILIC AROMATIC SUBSTITUTION</span></h3>
+
+  <table class="cmp no-break">
+    <thead><tr><th>反應名稱</th><th>試劑</th><th>真正的親電試劑</th><th>重要條件</th></tr></thead>
+    <tbody>
+      <tr><td>硝化 Nitration</td><td>HNO₃ + H₂SO₄（混酸）</td><td><strong>NO₂⁺</strong>（硝基陽離子）</td><td>H₂SO₄ 質子化 HNO₃ → NO₂⁺ + H₂O（⚠ 常考！）</td></tr>
+      <tr><td>磺化 Sulfonation</td><td>發煙 H₂SO₄（SO₃/H₂SO₄）</td><td>SO₃ 或 HSO₃⁺</td><td><strong>可逆</strong>反應（高溫 → 脫磺酸）</td></tr>
+      <tr><td>鹵化 Halogenation</td><td>X₂ + Lewis acid（FeBr₃, AlCl₃）</td><td>X⁺（活化的鹵素）</td><td>FeBr₃ + Br₂ → [FeBr₄]⁻ + Br⁺</td></tr>
+      <tr><td>FC 烷基化</td><td>RCl + AlCl₃</td><td>R⁺（或碳陽離子複合物）</td><td>⚠ 可能碳陽離子重排；多烷基化問題</td></tr>
+      <tr><td>FC 醯基化</td><td>RCOCl + AlCl₃</td><td>RCO⁺（醯基陽離子）</td><td><strong>不重排</strong>（共振穩定）；得到酮再 Clemmensen 還原</td></tr>
+    </tbody>
+  </table>
+
+  <div class="warn-box no-break">
+    <div class="wb-title">⚠ 高頻考試陷阱：硝化反應的親電試劑不是 HNO₃！</div>
+    反應機制：HNO₃ + H₂SO₄ → <strong>NO₂⁺</strong> + HSO₄⁻ + H₂O<br>
+    真正攻擊苯環的親電試劑是 <strong>NO₂⁺（硝基陽離子）</strong>，HNO₃ 只是前驅物。<br>
+    <strong>義守 114 Q39</strong> 即考此題，答案為 NO₂⁺。
+  </div>
+
+  <h3 class="sh">3.3 取代基定位效應 <span class="en">DIRECTING EFFECTS</span></h3>
+
+  <div class="grid-2 no-break">
+    <div class="concept-box cb-green">
+      <div class="cb-head">鄰/對位導向基（EDG，活化苯環）</div>
+      <div class="cb-body">
+        <strong>強活化</strong>：-NH₂, -NHR, -NR₂, -OH, -OR<br>
+        <strong>弱活化</strong>：-R（烷基）, -Ph（苯基）<br>
+        <strong>特殊</strong>：鹵素（-F, -Cl, -Br, -I）→ 鄰/對位導向但<strong>鈍化</strong>（誘導 vs 共振）<br>
+        <br>
+        原因：EDG 透過共振在鄰/對位穩定帶正電的碳陽離子中間體（Wheland 中間體）
+      </div>
+    </div>
+    <div class="concept-box cb-red">
+      <div class="cb-head">間位導向基（EWG，鈍化苯環）</div>
+      <div class="cb-body">
+        <strong>強鈍化</strong>：-NO₂, -NR₃⁺, -CF₃<br>
+        <strong>中等鈍化</strong>：-CN, -CHO, -COR, -COOH, -COOR<br>
+        <strong>弱鈍化</strong>：-SO₃H<br>
+        <br>
+        原因：EWG 在鄰/對位去穩定碳陽離子中間體，間位受影響較小
+      </div>
+    </div>
+  </div>
+
+  <h3 class="sh">3.4 Hückel 規則與芳香性 <span class="en">HÜCKEL RULE</span></h3>
+
+  <div class="concept-box cb-blue no-break">
+    <div class="cb-head">芳香性判斷四條件（全部符合才算芳香）</div>
+    <div class="cb-body">
+      <div class="grid-2">
+        <div>
+          <ol class="steps">
+            <li>環狀（cyclic）</li>
+            <li>平面（planar，sp² 或 sp）</li>
+            <li>完全共軛（fully conjugated）</li>
+            <li><strong>π 電子數 = 4n+2</strong>（n=0,1,2…；即 2, 6, 10, 14…個）</li>
+          </ol>
+        </div>
+        <div>
+          <strong>重要例子：</strong>
+          <ul style="padding-left:16px; font-size:12.5px; margin-top:6px;">
+            <li>苯（6π, n=1）✅</li>
+            <li>吡啶 Pyridine（6π, N孤對在sp²）✅</li>
+            <li>吡咯 Pyrrole（6π, N孤對進入共軛）✅</li>
+            <li>環戊二烯陰離子 C₅H₅⁻（6π）✅</li>
+            <li>環辛四烯（8π, 4n 反芳香）❌</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- end CH03 -->
+
+
+<!-- ████████████  CH 04 羰基與人名反應  ████████████ -->
+<div class="unit unit-organic force-break">
+  <div class="unit-header no-break">
+    <div class="uh-num">CH·04</div>
+    <div class="uh-body">
+      <h2>羰基化學與人名反應 Carbonyl &amp; Named Reactions</h2>
+      <span class="uh-sub">Grignard · Aldol · Claisen · Wittig · Oxidation/Reduction · Diels-Alder</span>
+    </div>
+    <div class="uh-pct">~15%</div>
+  </div>
+
+  <h3 class="sh">4.1 氧化還原試劑選擇總表 <span class="en">OXIDATION &amp; REDUCTION</span></h3>
+
+  <table class="cmp no-break">
+    <thead><tr><th>試劑</th><th>可作用對象</th><th>主要產物</th><th>不作用於</th><th>記憶重點</th></tr></thead>
+    <tbody>
+      <tr><td><strong>LiAlH₄</strong></td><td>醛、酮、酸、酯、醯氯、醯胺、環氧化物</td><td>醇（1°/2°）</td><td>C=C</td><td>最強還原劑；遇水劇烈反應</td></tr>
+      <tr><td><strong>NaBH₄</strong></td><td>醛、酮（C=O）</td><td>醇（1°/2°）</td><td>酯、酸、C=C</td><td>溫和；水溶液可用</td></tr>
+      <tr><td><strong>DIBAL-H</strong><br>（低溫 −78°C）</td><td>酯（1當量，低溫控制）</td><td><strong>醛</strong>（不過度還原）</td><td>—</td><td>酯→醛的唯一可靠路徑</td></tr>
+      <tr><td><strong>PCC</strong></td><td>1° 醇；2° 醇</td><td>醛（不繼續→酸）；酮</td><td>—</td><td>1°醇 → 醛（不過度氧化）</td></tr>
+      <tr><td><strong>Swern 氧化</strong></td><td>1°/2° 醇</td><td>醛/酮</td><td>—</td><td>低溫（−78°C）；溫和</td></tr>
+      <tr><td><strong>Jones 氧化</strong></td><td>1°/2° 醇</td><td>羧酸/酮</td><td>—</td><td>酸性條件；1°→酸（過度氧化）</td></tr>
+      <tr><td><strong>KMnO₄（熱濃）</strong></td><td>烯烴（裂解）；1° 醇</td><td>羧酸/CO₂；羧酸</td><td>—</td><td>端基烯→CO₂</td></tr>
+      <tr><td><strong>OsO₄</strong></td><td>烯烴</td><td>cis-1,2-二醇</td><td>—</td><td>syn 雙羥化</td></tr>
+    </tbody>
+  </table>
+
+  <div class="mnemonic no-break">
+    <span class="mn-label">還原劑記憶口訣</span>
+    LiAlH₄ = 萬能還原 ｜ NaBH₄ = 只管 C=O（不碰酯/酸）｜ DIBAL-H 低溫 = 酯停在醛 ｜ PCC = 醇停在醛
+  </div>
+
+  <h3 class="sh">4.2 Grignard 試劑詳解 <span class="en">GRIGNARD REAGENT</span></h3>
+
+  <div class="grid-2 no-break">
+    <div class="concept-box cb-red">
+      <div class="cb-head">RMgBr 與各類底物的反應</div>
+      <div class="cb-body">
+        <table style="width:100%; font-size:12px; border-collapse:collapse;">
+          <tr style="background:rgba(192,57,43,.12);"><td style="padding:4px 8px; font-weight:700;">底物</td><td style="padding:4px 8px; font-weight:700;">水解後產物</td></tr>
+          <tr><td style="padding:3px 8px; border-bottom:1px solid var(--red-bdr);">甲醛 HCHO</td><td style="padding:3px 8px; border-bottom:1px solid var(--red-bdr);">1° 醇（多 1 個碳）</td></tr>
+          <tr><td style="padding:3px 8px; border-bottom:1px solid var(--red-bdr);">醛 RCHO</td><td style="padding:3px 8px; border-bottom:1px solid var(--red-bdr);">2° 醇</td></tr>
+          <tr><td style="padding:3px 8px; border-bottom:1px solid var(--red-bdr);">酮 RCOR'</td><td style="padding:3px 8px; border-bottom:1px solid var(--red-bdr);">3° 醇</td></tr>
+          <tr><td style="padding:3px 8px; border-bottom:1px solid var(--red-bdr);">酯 RCOOR'</td><td style="padding:3px 8px; border-bottom:1px solid var(--red-bdr);">3° 醇（需 <strong>2 eq</strong>）</td></tr>
+          <tr><td style="padding:3px 8px; border-bottom:1px solid var(--red-bdr);">CO₂</td><td style="padding:3px 8px; border-bottom:1px solid var(--red-bdr);">羧酸 RCOOH</td></tr>
+          <tr><td style="padding:3px 8px;">環氧化物</td><td style="padding:3px 8px;">醇（位阻小端開環）</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="warn-box" style="margin:0; align-self:start;">
+      <div class="wb-title">⚠ Grignard 禁忌官能基（必考）</div>
+      RMgBr 會與<strong>含活性氫</strong>的官能基反應而分解：<br>
+      <strong>-OH、-COOH、-NH₂、-NHR、-SH、末端炔 ≡C-H</strong><br>
+      <br>
+      <strong>策略</strong>：若同一分子含 -OH 及需要 Grignard 合成的部分：<br>
+      → 先保護 -OH（如以 TMS 或縮醛保護），再做 Grignard<br>
+      <br>
+      若分子含兩個 C-Br 且需 Grignard：<br>
+      → 先用 SN2（MeONa 等）選擇性取代其中一個，再做 Grignard
+    </div>
+  </div>
+
+  <h3 class="sh">4.3 縮合反應詳析 <span class="en">CONDENSATION REACTIONS</span></h3>
+
+  <table class="cmp no-break">
+    <thead><tr><th>反應名稱</th><th>反應物</th><th>條件</th><th>產物</th><th>關鍵判斷</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Aldol 縮合</strong></td><td>含 α-H 的醛/酮 + 另一 C=O</td><td>NaOH 或 HCl</td><td>β-羥基醛/酮（可脫水 → α,β-不飽和）</td><td>α-H 的存在是必要條件</td></tr>
+      <tr><td><strong>Claisen 縮合</strong></td><td>酯 + 酯（或酯 + 酮）</td><td>NaOEt（強鹼）</td><td>β-keto ester（乙醯乙酸乙酯類）</td><td>需強鹼奪酯的 α-H；產物 pKa 低，使平衡右移</td></tr>
+      <tr><td><strong>Michael 加成</strong></td><td>軟親核體 + α,β-不飽和羰基</td><td>鹼催化</td><td>1,4-加成產物（共軛加成）</td><td>硬親核體 → 1,2-加成；軟 → 1,4-加成</td></tr>
+      <tr><td><strong>Robinson 環化</strong></td><td>Michael + Aldol 序列</td><td>鹼</td><td>六員環烯酮</td><td>Michael 後分子內 Aldol</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="sh">4.4 必背人名反應速查 <span class="en">NAMED REACTIONS</span></h3>
+
+  <table class="cmp no-break">
+    <thead><tr><th>反應名稱</th><th>反應物 / 試劑</th><th>產物特徵</th><th>最重要考點</th><th>頻率</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Diels-Alder</strong></td><td>共軛二烯（s-cis）+ 親雙烯體</td><td>六員碳環（環己烯）</td><td>endo 規則（動力學主產物）；syn 加成</td><td><span class="bd-star">★★★</span></td></tr>
+      <tr><td><strong>Friedel-Crafts 醯基化</strong></td><td>RCOCl + AlCl₃</td><td>芳香酮</td><td><strong>不重排</strong>；配合 Clemmensen 還原得烷基苯</td><td><span class="bd-star">★★★</span></td></tr>
+      <tr><td><strong>Aldol</strong></td><td>含α-H 醛/酮</td><td>β-羥基醛/酮</td><td>α-碳位置判斷；分子內 Aldol 成環</td><td><span class="bd-star">★★★</span></td></tr>
+      <tr><td><strong>Wittig</strong></td><td>Ph₃P=CHR (ylide) + C=O</td><td>烯烴（雙鍵位置固定）</td><td>穩定 ylide→E 烯；不穩定→Z 烯</td><td><span class="bd-star">★★</span></td></tr>
+      <tr><td><strong>Claisen</strong></td><td>酯 + NaOEt</td><td>β-keto ester</td><td>與 Aldol 區別：底物是酯不是醛/酮</td><td><span class="bd-star">★★</span></td></tr>
+      <tr><td><strong>Wolff-Kishner</strong></td><td>C=O + NH₂NH₂/KOH/熱</td><td>CH₂（鹼性條件）</td><td>vs Clemmensen（酸性 Zn-Hg/HCl）</td><td><span class="bd-star">★★</span></td></tr>
+      <tr><td><strong>Birch 還原</strong></td><td>ArH + Na/液氨/ROH</td><td>1,4-環己二烯</td><td>EDG 環：雙鍵保留在 EDG 旁；EWG 環：雙鍵遠離 EWG</td><td><span class="bd-star">★★</span></td></tr>
+      <tr><td><strong>Suzuki 偶聯</strong></td><td>Ar-X + ArB(OH)₂（Pd(0)催化）</td><td>聯苯（Biaryl）</td><td>氧化加成→金屬轉移→還原消去機制</td><td><span class="bd-star">★★</span></td></tr>
+      <tr><td><strong>Michael</strong></td><td>親核體 + α,β-不飽和羰基</td><td>1,4-加成</td><td>1,2 vs 1,4 加成選擇</td><td><span class="bd-star">★★</span></td></tr>
+      <tr><td><strong>Hofmann 重排</strong></td><td>RCONH₂ + Br₂/NaOH</td><td>RNH₂（少一個碳）</td><td>碳骨架縮短一個 C 的機制</td><td><span class="bd-star">★</span></td></tr>
+    </tbody>
+  </table>
+</div><!-- end CH04 -->
+
+
+<!-- ████████████  CH 05 熱力學與平衡  ████████████ -->
+<div class="unit unit-thermo force-break">
+  <div class="unit-header no-break">
+    <div class="uh-num">CH·05</div>
+    <div class="uh-body">
+      <h2>熱力學與化學平衡 Thermodynamics &amp; Equilibrium</h2>
+      <span class="uh-sub">ΔG · ΔH · ΔS · Hess Law · Kc/Kp · Le Chatelier's Principle</span>
+    </div>
+    <div class="uh-pct">~18%</div>
+  </div>
+
+  <h3 class="sh">5.1 Gibbs 自由能與自發性 <span class="en">GIBBS FREE ENERGY</span></h3>
+
+  <div class="formula-panel no-break">
+    <span class="fc">── 核心三角關係（三式任知其一可推算其餘）──</span><br>
+    <span class="fh">ΔG° = −RT ln Keq</span>   <span class="fc">（熱力學 ↔ 平衡）</span><br>
+    <span class="fh">ΔG° = −nFE°cell</span>  <span class="fc">（熱力學 ↔ 電化學）</span><br>
+    <span class="fh">ΔG  = ΔH − TΔS</span>   <span class="fc">（標準或非標準）</span><br>
+    <span class="key-eqn">ΔG  = ΔG° + RT ln Q</span>   <span class="fc">（非標準條件；Q = 當前反應商）</span><br>
+    <br>
+    <span class="fc">── 自發性判斷 ──</span><br>
+    ΔG &lt; 0 → 正向自發    ΔG = 0 → 平衡    ΔG &gt; 0 → 非自發（逆向自發）
+  </div>
+
+  <table class="cmp no-break">
+    <thead><tr><th>ΔH</th><th>ΔS</th><th>ΔG = ΔH − TΔS</th><th>自發性條件</th></tr></thead>
+    <tbody>
+      <tr><td>−（放熱）</td><td>+（熵增）</td><td><strong>永遠 &lt; 0</strong></td><td>任何溫度均自發 ✅</td></tr>
+      <tr><td>+（吸熱）</td><td>−（熵減）</td><td><strong>永遠 &gt; 0</strong></td><td>任何溫度均非自發 ❌</td></tr>
+      <tr><td>−（放熱）</td><td>−（熵減）</td><td>低溫 &lt; 0 / 高溫 &gt; 0</td><td><strong>低溫</strong>自發（|ΔH| &gt; T|ΔS|）</td></tr>
+      <tr><td>+（吸熱）</td><td>+（熵增）</td><td>低溫 &gt; 0 / 高溫 &lt; 0</td><td><strong>高溫</strong>自發（T|ΔS| &gt; |ΔH|）</td></tr>
+    </tbody>
+  </table>
+
+  <div class="warn-box no-break">
+    <div class="wb-title">⚠ ΔG 與 ΔG° 的區別（高頻易錯）</div>
+    <strong>ΔG°</strong>（標準自由能）：標準狀態（25°C, 1 atm, 1 M），<strong>與 Keq 連結</strong>：ΔG° = −RT ln Keq<br>
+    <strong>ΔG</strong>（任意狀態）：ΔG = ΔG° + RT ln Q，當 ΔG = 0 時系統達平衡（非 ΔG° = 0）<br>
+    題目問「與平衡常數的關係」→ 討論的是 <strong>ΔG°</strong>，不是 ΔG
+  </div>
+
+  <h3 class="sh">5.2 Hess 定律焓計算 <span class="en">HESS'S LAW</span></h3>
+
+  <div class="concept-box cb-green no-break">
+    <div class="cb-head">三種計算方式</div>
+    <div class="cb-body">
+      <div class="grid-3">
+        <div>
+          <strong>方程式加減法</strong><br>
+          將已知反應倒轉（ΔH 變號）或乘以係數（ΔH 等比例），相加得目標方程式
+        </div>
+        <div>
+          <strong>標準生成焓法（★★★）</strong><br>
+          $\Delta H_{rxn} = \sum \Delta H_f°(\text{products}) - \sum \Delta H_f°(\text{reactants})$<br>
+          元素穩定態的 ΔHf° = 0
+        </div>
+        <div>
+          <strong>鍵能估算法（★★）</strong><br>
+          $\Delta H \approx \Sigma BE(\text{斷鍵, +}) - \Sigma BE(\text{成鍵, -})$<br>
+          斷鍵吸熱（+）；成鍵放熱（−）
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="sh">5.3 Kc 與 Kp 的換算 <span class="en">Kc vs Kp</span></h3>
+
+  <div class="formula-panel no-break">
+    <span class="fh">Kp = Kc (RT)^Δn</span><br>
+    Δn = 氣態產物莫耳數 − 氣態反應物莫耳數  <span class="fc">（固態、液態不計入！）</span><br>
+    <br>
+    <span class="fc">例1：N₂(g) + 3H₂(g) ⇌ 2NH₃(g)  →  Δn = 2 − (1+3) = −2</span><br>
+    <span class="key-eqn">Kp = Kc(RT)⁻² = Kc / (RT)²</span><br>
+    <br>
+    <span class="fc">例2：CO(g) + ½O₂(g) ⇌ CO₂(g)  →  Δn = 1 − (1+0.5) = −0.5</span><br>
+    <span class="key-eqn">Kp = Kc(RT)^(−0.5)</span><br>
+    <br>
+    <span class="fc">當 Δn = 0 時，Kp = Kc（如 H₂ + I₂ ⇌ 2HI）</span>
+  </div>
+
+  <h3 class="sh">5.4 Le Chatelier 原則完整整理 <span class="en">LE CHATELIER'S PRINCIPLE</span></h3>
+
+  <table class="cmp no-break">
+    <thead><tr><th>操作</th><th>平衡移動方向</th><th>Keq 是否改變</th><th>補充說明</th></tr></thead>
+    <tbody>
+      <tr><td>增加反應物濃度</td><td>向正反應（右）</td><td>❌ 不變</td><td>—</td></tr>
+      <tr><td>移除產物</td><td>向正反應（右）</td><td>❌ 不變</td><td>—</td></tr>
+      <tr><td>增加壓力（減少體積）</td><td>向氣態 mol 數較少的一端</td><td>❌ 不變</td><td>Δn=0 時無影響</td></tr>
+      <tr><td>加入惰性氣體（恆容）</td><td><strong>無影響</strong></td><td>❌ 不變</td><td>各組分分壓不變</td></tr>
+      <tr><td>加入惰性氣體（恆壓）</td><td>向氣態 mol 數較多的一端</td><td>❌ 不變</td><td>相當於減壓</td></tr>
+      <tr><td><strong>升高溫度</strong></td><td>向吸熱方向（ΔH &gt; 0 那端）</td><td>✅ <strong>改變！</strong>（吸熱 → K 增大）</td><td>唯一可改變 Keq 的操作</td></tr>
+      <tr><td>加入催化劑</td><td><strong>無影響</strong></td><td>❌ 不變</td><td>只加快達到平衡的速率</td></tr>
+      <tr><td>移除固態（如 CaCO₃）</td><td><strong>無影響</strong></td><td>❌ 不變</td><td>固態不計入 Keq</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip-box no-break">
+    <div class="tb-title">💡 熱力學與動力學產物的區別</div>
+    <strong>動力學產物</strong>（Kinetic product）：活化能低，<strong>反應速率快</strong>，低溫時優勢，可能是少取代烯/烯醇<br>
+    <strong>熱力學產物</strong>（Thermodynamic product）：熵/焓上更穩定，<strong>高溫或長時間</strong>反應優勢，通常是多取代烯/更穩定結構<br>
+    例：E2 低溫→動力學（Hofmann）；高溫平衡→熱力學（Zaitsev）
+  </div>
+</div><!-- end CH05 -->
+
+
+<!-- ████████████  CH 06 酸鹼與電化學  ████████████ -->
+<div class="unit unit-acidbase force-break">
+  <div class="unit-header no-break">
+    <div class="uh-num">CH·06</div>
+    <div class="uh-body">
+      <h2>酸鹼平衡與電化學 Acid-Base &amp; Electrochemistry</h2>
+      <span class="uh-sub">pH · Buffer · Titration · Electrode Potential · Nernst Equation</span>
+    </div>
+    <div class="uh-pct">~18%</div>
+  </div>
+
+  <h3 class="sh">6.1 酸鹼計算系統 <span class="en">ACID-BASE CALCULATIONS</span></h3>
+
+  <div class="formula-panel no-break">
+    <span class="fc">── 基本關係 ──</span><br>
+    <span class="fh">pH = −log[H⁺]</span>；pOH = −log[OH⁻]；pH + pOH = 14（25°C）<br>
+    Kw = [H⁺][OH⁻] = 1.0×10⁻¹⁴（25°C）<br>
+    Ka × Kb = Kw（共軛酸鹼對）；pKa + pKb = 14<br>
+    <br>
+    <span class="fc">── Henderson-Hasselbalch（緩衝必用）──</span><br>
+    <span class="fh">pH = pKa + log([A⁻]/[HA])</span><br>
+    半當量點：[A⁻] = [HA] → pH = pKa（滴定曲線中間）<br>
+    有效緩衝範圍：pH = pKa ± 1（即比例介於 0.1 ~ 10）
+  </div>
+
+  <table class="cmp no-break">
+    <thead><tr><th>溶液類型</th><th>計算公式</th><th>注意事項</th></tr></thead>
+    <tbody>
+      <tr><td>強酸（如 HCl）</td><td>pH = −log C（完全解離）</td><td>C &lt; 10⁻⁶ M 時需考慮水的自電離</td></tr>
+      <tr><td>弱酸 HA</td><td>$[H^+] \approx \sqrt{K_a \cdot C}$<br>（x ≪ C 時近似）</td><td>驗證：x/C &lt; 5% 才可用近似法</td></tr>
+      <tr><td>弱酸鹽（如 CH₃COONa）</td><td>$[OH^-] = \sqrt{K_b \cdot C} = \sqrt{\frac{K_w}{K_a} \cdot C}$</td><td>水解，pH &gt; 7</td></tr>
+      <tr><td>緩衝溶液</td><td>Henderson-Hasselbalch</td><td>加入少量強酸/強鹼，pH 變化小</td></tr>
+      <tr><td>多質子酸（H₂A）</td><td>第一步 Ka₁ ≫ Ka₂ → 只計第一步</td><td>等電點 pI = (pKa₁ + pKa₂)/2</td></tr>
+    </tbody>
+  </table>
+
+  <div class="warn-box no-break">
+    <div class="wb-title">⚠ 極稀強酸 pH 計算陷阱（考試常考！）</div>
+    <strong>題目</strong>：5×10⁻⁸ M HCl 的 pH = ?<br>
+    <strong>錯誤解法</strong>：pH = −log(5×10⁻⁸) ≈ 7.3 → 錯！（酸溶液 pH 不能 &gt; 7）<br>
+    <strong>正確解法</strong>：需聯立水的自電離：[H⁺] = [Cl⁻] + [OH⁻]<br>
+    解方程：[H⁺]² − 5×10⁻⁸[H⁺] − Kw = 0 → [H⁺] ≈ 1.03×10⁻⁷ M → <strong>pH ≈ 6.97</strong>（仍為酸性）
+  </div>
+
+  <h3 class="sh">6.2 有機化合物酸鹼強度 <span class="en">ORGANIC ACID-BASE STRENGTH</span></h3>
+
+  <div class="grid-2 no-break">
+    <div class="concept-box cb-teal">
+      <div class="cb-head">有機酸強度順序（pKa 由小到大，即酸性由強到弱）</div>
+      <div class="cb-body">
+        <p><strong>強酸性</strong>（pKa ~1–5）：磺酸 RSO₃H；羧酸 RCOOH（4–5）</p>
+        <p><strong>中酸性</strong>（pKa ~10）：酚 ArOH</p>
+        <p><strong>弱酸性</strong>（pKa ~15–16）：水（15.7）；醇 ROH（~16）</p>
+        <p><strong>極弱酸</strong>（pKa ~25）：末端炔 ≡C-H；酮的 α-H（~20）</p>
+        <p><strong>影響因素</strong>：共振穩定負離子（↑酸性）；吸電子基（↑酸性）；雜化（sp &gt; sp² &gt; sp³ 酸性）</p>
+      </div>
+    </div>
+    <div class="concept-box cb-teal">
+      <div class="cb-head">有機胺鹼性（水溶液）— 常考陷阱</div>
+      <div class="cb-body">
+        <p><strong>水溶液鹼性順序</strong>：脂肪 2° 胺 &gt; 脂肪 1° 胺 &gt; 脂肪 3° 胺 &gt; NH₃ &gt; 芳香胺 &gt; 醯胺</p>
+        <div class="warn-box" style="margin-top:8px;">
+          <div class="wb-title">⚠ 三甲胺的鹼性反而比二甲胺弱！</div>
+          氣相：(CH₃)₃N &gt; (CH₃)₂NH（電子效應）<br>
+          水溶液：(CH₃)₂NH &gt; (CH₃)₃N（三甲胺空間阻礙大，N 難被溶劑化，pKb 較大）<br>
+          考試通常問水溶液鹼性，切勿混淆氣相和水溶液結果！
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="sh">6.3 電化學 <span class="en">ELECTROCHEMISTRY</span></h3>
+
+  <div class="formula-panel no-break">
+    <span class="fc">── 電池電位計算 ──</span><br>
+    <span class="fh">E°cell = E°(cathode, 還原電位) − E°(anode, 還原電位)</span><br>
+    ΔG° = −nFE°cell    <span class="fc">（F = 96485 C/mol；n = 轉移電子數）</span><br>
+    E°cell &gt; 0 → ΔG° &lt; 0 → 反應自發<br>
+    <br>
+    <span class="fc">── Nernst 方程（非標準條件）──</span><br>
+    <span class="fh">E = E° − (RT/nF) ln Q = E° − (0.0592/n) log Q</span>  <span class="fc">（25°C）</span><br>
+    平衡時 E = 0：E° = (0.0592/n) log K<br>
+    <br>
+    <span class="fc">── Faraday 定律 ──</span><br>
+    mol e⁻ = Q/F = It/F  ；  mol substance = mol e⁻ / n
+  </div>
+
+  <table class="cmp no-break">
+    <thead><tr><th>電極</th><th>原電池（Galvanic cell）</th><th>電解槽（Electrolytic cell）</th></tr></thead>
+    <tbody>
+      <tr><td><strong>陽極 Anode</strong></td><td>氧化（Oxidation）；<strong>負極</strong>（電子流出）</td><td>氧化（Oxidation）；接外部電源<strong>正極</strong></td></tr>
+      <tr><td><strong>陰極 Cathode</strong></td><td>還原（Reduction）；<strong>正極</strong>（電子流入）</td><td>還原（Reduction）；接外部電源<strong>負極</strong></td></tr>
+      <tr><td><strong>ΔG</strong></td><td>ΔG &lt; 0（自發），E° &gt; 0</td><td>ΔG &gt; 0（非自發），需外加電能</td></tr>
+      <tr><td><strong>代表例</strong></td><td>Zn-Cu Daniell cell；鋰電池（放電）</td><td>電解食鹽水；電鍍</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip-box no-break">
+    <div class="tb-title">💡 AN OX RED CAT — 永遠記住！</div>
+    <strong>AN</strong>ode = <strong>OX</strong>idation（陽極發生氧化）<br>
+    <strong>RED</strong>uction at <strong>CAT</strong>hode（陰極發生還原）<br>
+    原電池與電解槽均適用此記憶法，差別只在陽極接負還是正電源。
+  </div>
+</div><!-- end CH06 -->
+
+
+<!-- ████████████  CH 07 動力學與原子結構  ████████████ -->
+<div class="unit unit-kinetics force-break">
+  <div class="unit-header no-break">
+    <div class="uh-num">CH·07</div>
+    <div class="uh-body">
+      <h2>反應動力學與原子結構 Kinetics &amp; Atomic Structure</h2>
+      <span class="uh-sub">Rate Law · Half-life · Arrhenius · Quantum Numbers · Periodic Trends</span>
+    </div>
+    <div class="uh-pct">~12%</div>
+  </div>
+
+  <h3 class="sh">7.1 速率定律與反應級數 <span class="en">RATE LAW &amp; REACTION ORDER</span></h3>
+
+  <div class="warn-box no-break">
+    <div class="wb-title">⚠ 最重要原則：速率定律必須由實驗決定！</div>
+    對於反應 aA + bB → C：速率 = k[A]ˣ[B]ʸ 中的 x, y <strong>不一定等於</strong> a, b。<br>
+    只能透過實驗（不同初始濃度測速率）確定 x 和 y，絕不能從化學計量係數直接推導。
+  </div>
+
+  <table class="cmp no-break">
+    <thead><tr><th>級數</th><th>速率定律</th><th>積分式</th><th>半衰期 t₁/₂</th><th>線性圖</th></tr></thead>
+    <tbody>
+      <tr><td><strong>零級</strong></td><td>rate = k</td><td>[A] = [A]₀ − kt</td><td>t₁/₂ = [A]₀/(2k)（與濃度有關）</td><td>[A] vs t（斜率 = −k）</td></tr>
+      <tr><td><strong>一級</strong></td><td>rate = k[A]</td><td>ln[A] = ln[A]₀ − kt</td><td><strong>t₁/₂ = ln2/k（與濃度無關！）</strong></td><td>ln[A] vs t（斜率 = −k）</td></tr>
+      <tr><td><strong>二級</strong></td><td>rate = k[A]²</td><td>1/[A] = 1/[A]₀ + kt</td><td>t₁/₂ = 1/(k[A]₀)（與濃度成反比）</td><td>1/[A] vs t（斜率 = k）</td></tr>
+    </tbody>
+  </table>
+
+  <div class="concept-box cb-amber no-break">
+    <div class="cb-head">Arrhenius 方程與催化劑的本質</div>
+    <div class="cb-body">
+      <div class="formula-panel" style="margin:0 0 10px;">
+        <span class="fh">k = A · e^(−Ea/RT)</span>   <span class="fc">（A = 指前因子；Ea = 活化能）</span><br>
+        ln(k₂/k₁) = (Ea/R)(1/T₁ − 1/T₂)   <span class="fc">（比較兩溫度的 k）</span>
+      </div>
+      <div class="grid-2">
+        <div>
+          <strong>催化劑的作用</strong>：降低活化能（Ea），使反應速率增大<br>
+          催化劑<strong>不改變</strong>：ΔH、ΔG°、Keq、反應物/產物結構<br>
+          正反應與逆反應速率同比例增加 → 平衡位置不變
+        </div>
+        <div>
+          <div class="tip-box" style="margin:0;">
+            <div class="tb-title">💡 一級反應的實際應用</div>
+            放射性衰變（I-131 t₁/₂ = 8天；C-14 定年法）<br>
+            某些藥物代謝（零級/一級切換）<br>
+            SN1 反應速率（一級：Rate = k[RX]）<br>
+            n 個半衰期後剩餘量 = (1/2)ⁿ × 初始量
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="sh">7.2 量子數與電子組態 <span class="en">QUANTUM NUMBERS &amp; ELECTRON CONFIGURATION</span></h3>
+
+  <table class="cmp no-break">
+    <thead><tr><th>量子數</th><th>符號</th><th>代表意義</th><th>允許值</th><th>考試重點</th></tr></thead>
+    <tbody>
+      <tr><td>主量子數</td><td><strong>n</strong></td><td>電子殼層（大小/能量）</td><td>1, 2, 3, 4…</td><td>n 越大，能量越高</td></tr>
+      <tr><td>角量子數</td><td><strong>l</strong></td><td>軌域形狀（亞層）</td><td>0(s), 1(p), 2(d), 3(f)；最大 n−1</td><td>各亞層軌域數 = 2l+1</td></tr>
+      <tr><td>磁量子數</td><td><strong>m<sub>l</sub></strong></td><td>軌域在空間的方向</td><td>−l, …, 0, …, +l</td><td>p 有 3 個；d 有 5 個</td></tr>
+      <tr><td>自旋量子數</td><td><strong>m<sub>s</sub></strong></td><td>電子自旋</td><td>+½ 或 −½</td><td>Pauli：每軌域最多 2 個（自旋相反）</td></tr>
+    </tbody>
+  </table>
+
+  <div class="grid-2 no-break">
+    <div class="mini-card">
+      <div class="mc-h">填充規則（三大定律）</div>
+      <ul>
+        <li><strong>Aufbau 原理</strong>：能量低的軌域優先填（1s→2s→2p→3s→3p→4s→3d→4p…）</li>
+        <li><strong>Pauli 不相容</strong>：每個軌域最多 2 個電子，且自旋相反</li>
+        <li><strong>Hund 規則</strong>：同能量軌域先各填一個電子（自旋同向），再配對</li>
+      </ul>
+    </div>
+    <div class="mini-card">
+      <div class="mc-h">過渡金屬特殊電子組態</div>
+      <ul>
+        <li><strong>Cr：[Ar]3d⁵4s¹</strong>（非 3d⁴4s²）→ 3d 半充滿更穩定</li>
+        <li><strong>Cu：[Ar]3d¹⁰4s¹</strong>（非 3d⁹4s²）→ 3d 全充滿更穩定</li>
+        <li>Mo（d⁵）、Ag（d¹⁰）同樣例外</li>
+        <li>MO 理論鍵級 = (成鍵e⁻ − 反鍵e⁻)/2</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="sh">7.3 週期律趨勢 <span class="en">PERIODIC TRENDS</span></h3>
+
+  <table class="cmp no-break">
+    <thead><tr><th>性質</th><th>同週期（左→右）</th><th>同族（上→下）</th><th>重要例外</th></tr></thead>
+    <tbody>
+      <tr><td>原子半徑</td><td>↓ 減小（有效核電荷增加）</td><td>↑ 增大（電子殼層增加）</td><td>過渡金屬變化緩慢</td></tr>
+      <tr><td>游離能</td><td>↑ 增大（一般趨勢）</td><td>↓ 減小</td><td><strong>Be &gt; B；N &gt; O</strong>（詳見下框）</td></tr>
+      <tr><td>電子親和力</td><td>↑ 增大（傾向）</td><td>↓ 減小</td><td>F &lt; Cl（F 原子小，電子排斥）</td></tr>
+      <tr><td>電負度</td><td>↑ 增大</td><td>↓ 減小</td><td>F 最大（3.98）</td></tr>
+    </tbody>
+  </table>
+
+  <div class="warn-box no-break">
+    <div class="wb-title">⚠ 游離能例外——每年必考！</div>
+    <strong>Be &gt; B</strong>：Be 的 2s 軌域電子比 B 的 2p 電子難移除（2s 能量較低，穿透性強）<br>
+    <strong>N &gt; O</strong>：N 的 2p 三個軌域各有一個電子（半充滿），特別穩定；<br>
+    O 的一個 2p 軌域有兩個電子（配對），排斥↑，反而更易移除一個電子<br>
+    <br>
+    同理第三週期：<strong>Mg &gt; Al</strong>（3s vs 3p）；<strong>P &gt; S</strong>（3p 半充滿）<br>
+    <br>
+    <strong>第二游離能跳升</strong>：若第一游離能移走了成對電子，第二游離能會突然大幅增加（例：Na 的第二游離能遠大於第一）
+  </div>
+</div><!-- end CH07 -->
+
+
+<!-- ████████████  CH 08 光譜分析  ████████████ -->
+<div class="unit unit-spectro force-break">
+  <div class="unit-header no-break">
+    <div class="uh-num">CH·08</div>
+    <div class="uh-body">
+      <h2>光譜分析 Spectroscopic Analysis</h2>
+      <span class="uh-sub">¹H NMR · IR · MS · UV-Vis · Structure Determination</span>
+    </div>
+    <div class="uh-pct">~10%</div>
+  </div>
+
+  <h3 class="sh">8.1 ¹H NMR 系統解析法 <span class="en">¹H NMR ANALYSIS</span></h3>
+
+  <div class="concept-box cb-amber no-break">
+    <div class="cb-head">NMR 四步驟解題法（按此順序，不跳步）</div>
+    <div class="cb-body">
+      <ol class="steps">
+        <li><strong>積分（Integration）</strong>：各訊號面積比 → 各類質子的相對數量。若已知分子式，可換算絕對數量。</li>
+        <li><strong>化學位移（δ, ppm）</strong>：確認每組質子所處化學環境（判斷官能基）。</li>
+        <li><strong>裂分模式（Splitting Pattern）</strong>：n+1 規則 → 推算相鄰碳上的 H 數目 → 推測相鄰碳結構。</li>
+        <li><strong>偶合常數（J value）</strong>：trans-烯 J ≈ 12–18 Hz；cis-烯 J ≈ 6–12 Hz → 判斷幾何。</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="chart-wrap no-break">
+    <h5>¹H NMR 化學位移範圍 (δ, ppm) — 可視化速查</h5>
+    <canvas id="nmrChart" height="130"></canvas>
+  </div>
+
+  <div class="warn-box no-break">
+    <div class="wb-title">⚠ n+1 裂分規則的常見錯誤</div>
+    <strong>正確</strong>：相鄰 n 個<strong>不等價</strong> H → 裂分為 n+1 重峰（singlet, doublet, triplet, quartet…）<br>
+    <strong>錯誤思維</strong>：「相鄰幾個 H 就裂分幾峰」（忘記 +1）<br>
+    <br>
+    例：-CH₂-CH₃ 的 CH₃：相鄰 CH₂ 有 2 個 H → 裂分為 <strong>3 重峰（triplet）</strong><br>
+    例：-CH₂-CH₃ 的 CH₂：相鄰 CH₃ 有 3 個 H → 裂分為 <strong>4 重峰（quartet）</strong><br>
+    <br>
+    <strong>等價質子不互相裂分！</strong>如 CH₃CH₃（乙烷）的所有 H 等價 → 只有 singlet
+  </div>
+
+  <h3 class="sh">8.2 IR 紅外光譜完整速查 <span class="en">INFRARED SPECTROSCOPY</span></h3>
+
+  <div class="chart-wrap no-break">
+    <h5>IR 主要官能基吸收位置（cm⁻¹）— 數值越大在圖譜中越靠左</h5>
+    <canvas id="irChart" height="150"></canvas>
+  </div>
+
+  <table class="cmp no-break">
+    <thead><tr><th>波數 (cm⁻¹)</th><th>官能基</th><th>峰形特徵</th><th>辨識要點</th></tr></thead>
+    <tbody>
+      <tr><td>3200–3550（寬）</td><td>O-H（醇）</td><td>寬峰，強</td><td>氫鍵造成寬化，最具代表性</td></tr>
+      <tr><td>2500–3300（極寬）</td><td>O-H（羧酸）</td><td>非常寬，跨越大範圍</td><td>比醇更寬，常蓋過 C-H 峰</td></tr>
+      <tr><td>3300–3500</td><td>N-H（胺/醯胺）</td><td>1°胺：雙峰；2°胺：單峰</td><td>比 O-H 窄且尖</td></tr>
+      <tr><td>~2720, 2820</td><td>C-H（醛 CHO）</td><td><strong>特徵雙峰</strong>（Fermi 共振）</td><td>醛的診斷性吸收</td></tr>
+      <tr><td>2100–2260</td><td>C≡C 或 C≡N</td><td>尖峰（炔/腈）</td><td>對稱炔可能很弱或消失</td></tr>
+      <tr><td>~1800</td><td>C=O（酸氯 RCOCl）</td><td>強峰</td><td>C=O 最高頻</td></tr>
+      <tr><td>~1760</td><td>C=O（酸酐）</td><td>通常有兩個 C=O 峰</td><td>—</td></tr>
+      <tr><td>~1735</td><td>C=O（酯）</td><td>強峰</td><td>搭配 C-O-C 1000–1200</td></tr>
+      <tr><td>~1715</td><td>C=O（酮/醛）</td><td>強峰</td><td>基準值</td></tr>
+      <tr><td>~1710</td><td>C=O（羧酸）</td><td>強峰</td><td>搭配極寬 O-H 確認</td></tr>
+      <tr><td>~1690</td><td>C=O（α,β-不飽和酮）</td><td>比酮低頻</td><td>共振去活化 C=O</td></tr>
+      <tr><td>~1670</td><td>C=O（醯胺）</td><td>強峰（amide I band）</td><td>C=O 最低頻</td></tr>
+      <tr><td>1000–1200</td><td>C-O-C（醚）</td><td>中等峰</td><td>⚠ 難以單獨確認（多官能基重疊）</td></tr>
+    </tbody>
+  </table>
+
+  <div class="mnemonic no-break">
+    <span class="mn-label">IR C=O 頻率順序記憶（由高到低）</span>
+    酸氯(~1800) ＞ 酸酐(~1760) ＞ 酯(~1735) ＞ 酮/醛(~1715) ＞ 羧酸(~1710) ＞ α,β-不飽和酮(~1690) ＞ 醯胺(~1670)
+  </div>
+
+  <div class="warn-box no-break">
+    <div class="wb-title">⚠ 醚類 IR 難以確認——義守 110 年考題</div>
+    醚（C-O-C）在 1000–1200 cm⁻¹ 確實有吸收，但此區域<strong>幾乎所有含氧官能基都有吸收</strong>，嚴重重疊，<br>
+    因此<strong>無法單憑此峰確認是醚</strong>。反而：若此區域<strong>完全沒有</strong>吸收，才能排除含醚。<br>
+    義守 110 年考：「哪個官能基在 IR 中最難確認？」→ 答案：<strong>醚類</strong>
+  </div>
+
+  <h3 class="sh">8.3 質譜 (MS) 與 UV-Vis 概念 <span class="en">MS &amp; UV-Vis</span></h3>
+
+  <div class="grid-2 no-break">
+    <div class="mini-card">
+      <div class="mc-h">質譜 Mass Spectrometry</div>
+      <ul>
+        <li>分子離子峰 M⁺ → 分子量（整數）</li>
+        <li>M+1 峰 → ¹³C（M的1.1%×碳數）；¹⁵N, ²H</li>
+        <li>M+2 峰（~1:1）→ 含溴（⁷⁹Br/⁸¹Br）</li>
+        <li>M+2 峰（~3:1）→ 含氯（³⁵Cl/³⁷Cl）</li>
+        <li>碎片峰 → 分子特定鍵斷裂，推測結構</li>
+        <li>Base peak（基礎峰）= 最強峰（100%）</li>
+      </ul>
+    </div>
+    <div class="mini-card">
+      <div class="mc-h">UV-Vis 紫外可見光譜</div>
+      <ul>
+        <li>π→π* 躍遷（共軛系統，200–400 nm）</li>
+        <li>n→π* 躍遷（羰基孤對 e⁻，~270 nm，弱）</li>
+        <li>共軛延長 → λmax 紅移（bathochromic shift）</li>
+        <li>Beer-Lambert：A = εlc（ε=莫耳消光係數）</li>
+        <li>極性溶劑：n→π* 藍移；π→π* 紅移</li>
+        <li>λmax 可推估共軛程度</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="pq no-break">
+    <div class="pq-head"><span>練習題 — 綜合光譜推結構</span><span class="badge bd-must">★★★ 常考型</span></div>
+    <div class="pq-body">
+      <p>分子式 C₄H₈O，光譜數據如下：</p>
+      <ul style="padding-left:16px; font-size:12.5px; margin:6px 0;">
+        <li>IR：~1715 cm⁻¹ 強吸收；無 O-H 寬峰；無醛基特徵雙峰（~2720, 2820）</li>
+        <li>¹H NMR：δ 2.4（s, 3H）、δ 2.6（q, 2H）、δ 1.1（t, 3H）</li>
+        <li>分子式不飽和度 = 1</li>
+      </ul>
+      <p>此化合物最可能為何？</p>
+    </div>
+    <div class="pq-ans">
+      ✅ <strong>答案：methyl ethyl ketone（MEK，2-丁酮，CH₃COCH₂CH₃）</strong><br>
+      解析：<br>
+      • IR 1715 cm⁻¹ → 酮 C=O；無 O-H → 非醇；無醛特徵 → 非醛<br>
+      • δ 2.4 (s, 3H) → CH₃CO-（甲酮甲基，無鄰 H，故為 singlet）<br>
+      • δ 2.6 (q, 2H) → -CH₂-（被相鄰 CH₃ 3個H 裂分 → quartet）<br>
+      • δ 1.1 (t, 3H) → -CH₃（被相鄰 CH₂ 2個H 裂分 → triplet）<br>
+      結構：CH₃-CO-CH₂-CH₃ ✓（分子式 C₄H₈O，不飽和度 1 ✓）
+    </div>
+  </div>
+</div><!-- end CH08 -->
+
+
+<!-- ████████████  APPENDIX 附錄：速查 & 易錯  ████████████ -->
+<div class="unit unit-appendix force-break">
+  <div class="unit-header no-break">
+    <div class="uh-num">APP</div>
+    <div class="uh-body">
+      <h2>考場速查附錄 Examination Quick Reference</h2>
+      <span class="uh-sub">Core Formulae · Common Traps · Named Reactions Index</span>
+    </div>
+    <div class="uh-pct">速查</div>
+  </div>
+
+  <div class="strip strip-navy">A-1 · 必背公式速查表</div>
+
+  <div class="grid-2 no-break">
+    <div class="formula-panel">
+      <span class="fc">── 熱力學 Thermodynamics ──</span><br>
+      <span class="fh">ΔG = ΔH − TΔS</span><br>
+      <span class="fh">ΔG° = −RT ln Keq</span><br>
+      ΔG° = −nFE°<br>
+      ΔG = ΔG° + RT ln Q<br>
+      <span class="fc">Hess: ΔH = Σ ΔHf(P) − Σ ΔHf(R)</span><br>
+      <span class="key-eqn">Kp = Kc(RT)^Δn</span>
+    </div>
+    <div class="formula-panel">
+      <span class="fc">── 電化學 Electrochemistry ──</span><br>
+      <span class="fh">E°cell = E°(cathode) − E°(anode)</span><br>
+      E = E° − (0.0592/n)logQ (25°C)<br>
+      ΔG° = −nFE°cell<br>
+      <span class="fc">mol e⁻ = It/F ;  F ≈ 96500 C/mol</span><br>
+      ΔG° = −RT ln K
+    </div>
+    <div class="formula-panel">
+      <span class="fc">── 動力學 Kinetics ──</span><br>
+      <span class="fh">一級：ln[A] = ln[A]₀ − kt</span><br>
+      <span class="fh">一級 t₁/₂ = ln2/k = 0.693/k（與濃度無關）</span><br>
+      k = Ae^(−Ea/RT)（Arrhenius）<br>
+      <span class="fc">ln(k₂/k₁) = (Ea/R)(1/T₁ − 1/T₂)</span><br>
+      MO 鍵級 = (成鍵e⁻ − 反鍵e⁻)/2
+    </div>
+    <div class="formula-panel">
+      <span class="fc">── 酸鹼 / 溶液 Acid-Base ──</span><br>
+      <span class="fh">pH = pKa + log([A⁻]/[HA])</span><br>
+      Kw = Ka × Kb = 10⁻¹⁴ (25°C)<br>
+      pI = (pKa₁ + pKa₂)/2（多質子酸等電點）<br>
+      ΔTb = iKbm；ΔTf = iKfm<br>
+      π = iMRT（滲透壓）
+    </div>
+  </div>
+
+  <div class="strip strip-red">A-2 · 高頻易錯知識點總整理</div>
+
+  <table class="cmp no-break">
+    <thead><tr><th style="width:13%">考點領域</th><th style="width:28%">常見錯誤</th><th style="width:32%">正確觀念</th><th style="width:27%">考試出處</th></tr></thead>
+    <tbody>
+      <tr><td>立體化學 R/S</td><td>H 朝向觀察者時，旋轉方向判斷不翻轉</td><td>H 在楔形（朝前）→ 判斷後需 R↔S 翻轉</td><td>各校均有，每年必考</td></tr>
+      <tr><td>立體化學 SN1</td><td>SN1 產物誤認保留構型</td><td>SN1 → 碳陽離子 → <strong>外消旋</strong>（兩面攻擊）</td><td>SN2 → 構型翻轉（Walden）</td></tr>
+      <tr><td>E2 反應</td><td>忽略 anti-periplanar 幾何要求</td><td>LG 需在軸向（ax），才有 anti-H 可反應</td><td>環己烷底物 E2 選擇性</td></tr>
+      <tr><td>速率定律</td><td>從方程式係數直接寫速率定律</td><td>速率定律<strong>只能由實驗決定</strong>！</td><td>各校動力學計算題</td></tr>
+      <tr><td>NMR 裂分</td><td>相鄰幾個 H 就裂幾峰</td><td>n+1 規則：相鄰 n 個不等價 H → <strong>n+1</strong> 重峰</td><td>慈濟、中興 NMR 題</td></tr>
+      <tr><td>IR 醚類</td><td>1000–1200 cm⁻¹ 可確認醚</td><td>此區域重疊嚴重，<strong>無法單獨確認</strong>醚</td><td>義守 110 Q（最難確認）</td></tr>
+      <tr><td>一級反應 t₁/₂</td><td>半衰期隨初始濃度改變</td><td>t₁/₂ = ln2/k，<strong>與初始濃度無關</strong></td><td>義守 113 Q23：k×t₁/₂ = ln2</td></tr>
+      <tr><td>催化劑</td><td>催化劑改變 ΔH 或 Keq</td><td>只降低 Ea；ΔH、ΔG°、Keq <strong>均不變</strong></td><td>各校平衡/動力學題</td></tr>
+      <tr><td>極稀強酸 pH</td><td>pH = −log C（得到 pH &gt; 7）</td><td>需考慮水的自電離，聯立方程解</td><td>中國醫、中興計算題</td></tr>
+      <tr><td>三甲胺鹼性</td><td>烷基越多，鹼性越強</td><td>水溶液：2° &gt; 1° &gt; 3°（溶劑化效應）</td><td>酸鹼概念判斷題</td></tr>
+      <tr><td>ΔG vs ΔG°</td><td>ΔG 與 ΔG° 混用</td><td>ΔG° = −RTlnK（標準）；ΔG 含 RTlnQ 項</td><td>電化學/熱力學計算</td></tr>
+      <tr><td>Kp vs Kc</td><td>直接令 Kp = Kc</td><td>Kp = Kc(RT)^Δn；Δn=0 才相等</td><td>各校平衡計算</td></tr>
+      <tr><td>硝化反應</td><td>親電試劑 = HNO₃</td><td>真正親電試劑 = <strong>NO₂⁺</strong></td><td>義守 114 Q39</td></tr>
+      <tr><td>游離能例外</td><td>同週期游離能一律增大</td><td><strong>Be &gt; B；N &gt; O</strong>（2s/半充滿穩定）</td><td>各校原子結構題</td></tr>
+      <tr><td>FC 重排</td><td>FC 烷基化直接得預期烷基苯</td><td>1°、2° 碳陽離子可能重排；改用醯基化+Clemmensen</td><td>KMU、義守合成題</td></tr>
+      <tr><td>Grignard 禁忌</td><td>在有 -OH 的分子中直接用 Grignard</td><td>活性 H（-OH, -COOH, -NH₂, -SH）→ 先保護</td><td>KMU 合成設計題</td></tr>
+    </tbody>
+  </table>
+
+  <div class="strip strip-amber">A-3 · 考前衝刺複習順序建議</div>
+
+  <div class="grid-3 no-break" style="margin:10px 0 20px;">
+    <div class="concept-box cb-red">
+      <div class="cb-head">P1 最優先（30% 考試占比）</div>
+      <div class="cb-body">
+        <ul style="padding-left:14px; font-size:12.5px;">
+          <li>立體化學 R/S、E/Z 標記</li>
+          <li>SN1/SN2/E1/E2 判斷 + 立體化學</li>
+          <li>IR C=O 頻率順序口訣</li>
+          <li>¹H NMR 裂分規則 n+1</li>
+          <li>HH：Henderson-Hasselbalch</li>
+        </ul>
+      </div>
+    </div>
+    <div class="concept-box cb-green">
+      <div class="cb-head">P2 高優先（35% 考試占比）</div>
+      <div class="cb-body">
+        <ul style="padding-left:14px; font-size:12.5px;">
+          <li>Grignard 反應 + 禁忌官能基</li>
+          <li>Aldol/Claisen/Diels-Alder</li>
+          <li>ΔG = ΔH − TΔS 自發性判斷</li>
+          <li>Hess 定律計算</li>
+          <li>Kp = Kc(RT)^Δn 換算</li>
+          <li>E°cell、Nernst 方程</li>
+        </ul>
+      </div>
+    </div>
+    <div class="concept-box cb-blue">
+      <div class="cb-head">P3 中等優先（20% 考試占比）</div>
+      <div class="cb-body">
+        <ul style="padding-left:14px; font-size:12.5px;">
+          <li>一級/二級/零級動力學圖形</li>
+          <li>Arrhenius 方程</li>
+          <li>量子數 + 游離能例外</li>
+          <li>EAS 定位規則</li>
+          <li>Le Chatelier 完整整理</li>
+          <li>Hückel 規則判斷芳香性</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end APPENDIX -->
+
+</div><!-- end .page-wrap -->
+
+<!-- ================================================================
+     CHART.JS SCRIPTS
+================================================================ -->
+<script>
+Chart.defaults.font.family = "'Noto Sans TC', sans-serif";
+Chart.defaults.font.size = 10;
+
+// 1. NMR Chemical Shift horizontal bar chart
+const nmrCtx = document.getElementById('nmrChart').getContext('2d');
+new Chart(nmrCtx, {
+  type: 'bar',
+  data: {
+    labels: ['TMS/烷基CH₃','–CH₂–/–CH–','α-H(羰基旁)','–CH₂X','–OCH₂–(醚/酯)','烯烴=CH₂','芳環ArH','醛CHO','羧酸COOH'],
+    datasets: [{
+      label: 'δ 典型值 (ppm)',
+      data: [0.7, 1.5, 2.5, 3.0, 3.8, 5.2, 7.2, 9.8, 11.5],
+      backgroundColor: [
+        'rgba(30,64,175,.7)','rgba(30,64,175,.65)','rgba(180,83,9,.75)',
+        'rgba(180,83,9,.7)','rgba(15,118,110,.75)','rgba(109,40,217,.75)',
+        'rgba(192,57,43,.8)','rgba(192,57,43,.75)','rgba(139,26,26,.85)'
+      ],
+      borderWidth: 0,
+      borderRadius: 3,
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => ` δ ≈ ${ctx.parsed.x} ppm` } }
+    },
+    scales: {
+      x: {
+        max: 14,
+        title: { display: true, text: 'δ (ppm)  →  數值越大，去遮蔽越強', font: { size: 9 } },
+        ticks: { font: { size: 9 } }
+      },
+      y: { ticks: { font: { size: 9.5 } } }
+    }
+  }
+});
+
+// 2. IR absorption bar chart (inverted x for convention)
+const irCtx = document.getElementById('irChart').getContext('2d');
+new Chart(irCtx, {
+  type: 'bar',
+  data: {
+    labels: ['O-H(醇)','O-H(羧酸)','N-H','C-H(醛雙峰)','C≡C/C≡N','C=O(酸氯)','C=O(酯)','C=O(酮)','C=O(羧酸)','C=O(α,β-不飽和)','C=O(醯胺)','C-O-C(醚)'],
+    datasets: [{
+      label: '波數 (cm⁻¹)',
+      data: [3400, 2900, 3400, 2770, 2200, 1800, 1735, 1715, 1710, 1690, 1670, 1100],
+      backgroundColor: ctx => {
+        const v = ctx.dataset.data[ctx.dataIndex];
+        if (v >= 2500) return 'rgba(30,64,175,.75)';
+        if (v >= 1700) return 'rgba(192,57,43,.8)';
+        return 'rgba(180,83,9,.75)';
+      },
+      borderWidth: 0,
+      borderRadius: 3,
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: {
+        min: 400, max: 4200,
+        reverse: true,
+        title: { display: true, text: '← 波數 cm⁻¹（圖譜慣例：由高到低，左為高頻）', font: { size: 9 } },
+        ticks: { font: { size: 9 } }
+      },
+      y: { ticks: { font: { size: 9.5 } } }
+    }
+  }
+});
+</script>
+
+</body>
+</html>
