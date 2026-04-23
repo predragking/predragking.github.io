@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>黃于珊 — 中國醫藥大學學士後中醫面試準備</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --parchment: #f7f3ee;
+    --accent: #8b4513;
+    --accent-light: #c9956b;
+    --jade: #2d6a4f;
+    --jade-light: #52b788;
+    --mist: #e8e0d4;
+    --cloud: #faf8f5;
+    --vermillion: #c1440e;
+    --gold: #b8860b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--parchment);
+    color: var(--ink);
+    line-height: 1.8;
+    font-size: 15px;
+  }
+
+  .font-serif-tc { font-family: 'Noto Serif TC', serif; }
+  .font-serif-en { font-family: 'Crimson Pro', 'Source Serif 4', serif; }
+  .font-sans-tc { font-family: 'Noto Sans TC', sans-serif; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #2d3a4a 40%, #3d5a4a 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 30% 20%, rgba(184,134,11,0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 80%, rgba(45,106,79,0.1) 0%, transparent 50%);
+  }
+  .hero::after {
+    content: '醫';
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 280px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.03);
+    pointer-events: none;
+  }
+
+  /* Section styling */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 48px 0 32px;
+  }
+  .section-divider::before,
+  .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-light), transparent);
+  }
+
+  /* Nav */
+  .nav-pill {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid var(--mist);
+    background: var(--cloud);
+    color: var(--ink);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .nav-pill:hover, .nav-pill.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+
+  /* Cards */
+  .card {
+    background: white;
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .card-jade {
+    border-left: 4px solid var(--jade);
+  }
+  .card-accent {
+    border-left: 4px solid var(--accent);
+  }
+  .card-gold {
+    border-left: 4px solid var(--gold);
+  }
+  .card-vermillion {
+    border-left: 4px solid var(--vermillion);
+  }
+
+  /* Tags */
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+  .tag-jade { background: #d8f3dc; color: #1b4332; }
+  .tag-accent { background: #fde8d0; color: #7c3a10; }
+  .tag-gold { background: #fff3cd; color: #664d03; }
+  .tag-vermillion { background: #fde2d2; color: #7c2d12; }
+  .tag-ink { background: #e2e0dd; color: #1a1a2e; }
+
+  /* Collapsible */
+  details summary {
+    cursor: pointer;
+    list-style: none;
+    position: relative;
+    padding-right: 28px;
+  }
+  details summary::-webkit-details-marker { display: none; }
+  details summary::after {
+    content: '+';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: var(--accent);
+    font-weight: 300;
+    transition: transform 0.2s;
+  }
+  details[open] summary::after {
+    content: '−';
+  }
+
+  /* Scroll */
+  .sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(247,243,238,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--mist);
+  }
+
+  /* Print */
+  @media print {
+    .sticky-nav, .nav-pill, .hero { display: none; }
+    .card { box-shadow: none; border: 1px solid #ccc; break-inside: avoid; }
+    body { background: white; }
+  }
+
+  /* QA pair */
+  .qa-q {
+    position: relative;
+    padding-left: 32px;
+  }
+  .qa-q::before {
+    content: 'Q';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Crimson Pro', serif;
+  }
+  .qa-a {
+    position: relative;
+    padding-left: 32px;
+  }
+  .qa-a::before {
+    content: 'A';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--jade);
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Crimson Pro', serif;
+  }
+
+  /* Subtle animation */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-in {
+    animation: fadeInUp 0.6s ease-out both;
+  }
+
+  /* Tab system */
+  .tab-btn {
+    padding: 8px 20px;
+    border: none;
+    background: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    color: #666;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s;
+  }
+  .tab-btn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+    font-weight: 500;
+  }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* Autobiography specific */
+  .auto-upper, .auto-lower {
+    position: relative;
+    padding: 28px;
+    background: white;
+    border: 1px solid #e0dbd4;
+  }
+  .auto-upper {
+    border-radius: 12px 12px 0 0;
+    border-bottom: 2px dashed var(--accent-light);
+  }
+  .auto-lower {
+    border-radius: 0 0 12px 12px;
+    border-top: none;
+  }
+  .char-count {
+    position: absolute;
+    bottom: 8px;
+    right: 12px;
+    font-size: 11px;
+    color: #999;
+  }
+
+  h2 { scroll-margin-top: 70px; }
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<div class="hero py-16 px-6 text-center">
+  <div class="relative z-10 max-w-3xl mx-auto">
+    <p class="text-yellow-200 text-sm tracking-widest mb-3 font-serif-en" style="letter-spacing:4px;">INTERVIEW PREPARATION GUIDE</p>
+    <h1 class="font-serif-tc text-white text-4xl md:text-5xl font-bold mb-4" style="line-height:1.3;">黃于珊<span class="text-yellow-300 mx-2">·</span>面試全攻略</h1>
+    <p class="text-gray-300 text-base mb-2">中國醫藥大學 114 學年度學士後中醫學系</p>
+    <p class="text-gray-400 text-sm">自傳撰寫 ｜ 自我介紹 ｜ 面試問答 ｜ 英文準備</p>
+  </div>
+</div>
+
+<!-- ===== STICKY NAV ===== -->
+<div class="sticky-nav py-3 px-4">
+  <div class="max-w-5xl mx-auto flex gap-2 overflow-x-auto" style="scrollbar-width:none;">
+    <a href="#analysis" class="nav-pill">📋 素材分析</a>
+    <a href="#autobiography" class="nav-pill">📝 自傳</a>
+    <a href="#self-intro" class="nav-pill">🎤 自我介紹</a>
+    <a href="#qa-core" class="nav-pill">💬 核心問答</a>
+    <a href="#qa-medical" class="nav-pill">🏥 醫療倫理</a>
+    <a href="#qa-tcm" class="nav-pill">🌿 中醫專題</a>
+    <a href="#qa-scenario" class="nav-pill">🎯 情境題</a>
+    <a href="#tips" class="nav-pill">⚡ 面試技巧</a>
+  </div>
+</div>
+
+<div class="max-w-5xl mx-auto px-4 py-10">
+
+<!-- ╔════════════════════════════════════════╗ -->
+<!-- ║  PART 1: 素材分析                       ║ -->
+<!-- ╚════════════════════════════════════════╝ -->
+
+<h2 id="analysis" class="font-serif-tc text-2xl font-bold mb-2" style="color:var(--accent);">一、素材分析與策略定位</h2>
+<p class="text-gray-500 text-sm mb-8">Analysis & Strategic Positioning</p>
+
+<!-- 1A: 個人資料彙整 -->
+<div class="card card-jade mb-6 fade-in">
+  <h3 class="font-serif-tc text-lg font-bold mb-4 flex items-center gap-2">
+    <span class="tag tag-jade">基本資料</span> 個人背景彙整
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+    <div>
+      <p><strong>姓名：</strong>黃于珊（Huang Yu-Shan）</p>
+      <p><strong>出生年：</strong>1984年（42歲）</p>
+      <p><strong>戶籍：</strong>金門縣（金門出生長大）</p>
+      <p><strong>婚姻：</strong>已婚，無子女</p>
+      <p><strong>現況：</strong>已回台灣準備面試</p>
+    </div>
+    <div>
+      <p><strong>大學：</strong>北京中醫藥大學 中醫系（2002-2007）</p>
+      <p><strong>碩士：</strong>英國帝國理工學院 國際健康管理（2008-2009）</p>
+      <p><strong>台灣學歷認證：</strong>尚未申請</p>
+      <p><strong>先生：</strong>在大陸，就讀後安排尚未確定</p>
+    </div>
+  </div>
+</div>
+
+<!-- 1B: SWOT 分析 -->
+<div class="card card-accent mb-6 fade-in">
+  <h3 class="font-serif-tc text-lg font-bold mb-4 flex items-center gap-2">
+    <span class="tag tag-accent">SWOT</span> 面試策略分析
+  </h3>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <!-- Strengths -->
+    <div class="p-4 rounded-lg" style="background:#f0fdf4;">
+      <h4 class="font-bold text-green-800 mb-2">✦ 優勢 Strengths</h4>
+      <ul class="text-sm space-y-1 text-green-900">
+        <li>• 中醫本科畢業 + 帝國理工碩士 = 學術底蘊深厚</li>
+        <li>• 持有中、美、澳三國中醫執照 = 國際視野佐證</li>
+        <li>• 15年+臨床與職場經驗 = 人生閱歷豐富</li>
+        <li>• 美容中醫專科進修 = 差異化專長</li>
+        <li>• 金門離島背景 = 深刻理解醫療可近性議題</li>
+        <li>• 兩岸中醫實務經驗 = 能比較兩岸體系優劣</li>
+        <li>• NCCAOM考試講師經歷 = 教學與溝通能力</li>
+      </ul>
+    </div>
+    <!-- Weaknesses -->
+    <div class="p-4 rounded-lg" style="background:#fef2f2;">
+      <h4 class="font-bold text-red-800 mb-2">✦ 劣勢 Weaknesses</h4>
+      <ul class="text-sm space-y-1 text-red-900">
+        <li>• 年齡42歲 → 需轉化為「閱歷資產」</li>
+        <li>• 大陸學歷未在台認證 → 避免主動提及，被問時坦承正在辦理</li>
+        <li>• 離開學術環境多年 → 強調「帶著問題重新學習」</li>
+        <li>• 先生在大陸，家庭安排不確定 → 需提前備好說法</li>
+        <li>• 骨傷科經驗較少 → 承認不足，展現學習企圖</li>
+      </ul>
+    </div>
+    <!-- Opportunities -->
+    <div class="p-4 rounded-lg" style="background:#eff6ff;">
+      <h4 class="font-bold text-blue-800 mb-2">✦ 機會 Opportunities</h4>
+      <ul class="text-sm space-y-1 text-blue-900">
+        <li>• 台灣2026年正式進入超高齡社會 → 中醫在長照的角色</li>
+        <li>• 中醫美容市場持續成長 → 差異化定位</li>
+        <li>• 兩岸中醫交流需求 → 獨特橋樑角色</li>
+        <li>• 預防醫學與整合醫學趨勢 → 中醫強項</li>
+      </ul>
+    </div>
+    <!-- Threats -->
+    <div class="p-4 rounded-lg" style="background:#fefce8;">
+      <h4 class="font-bold text-yellow-800 mb-2">✦ 威脅 Threats</h4>
+      <ul class="text-sm space-y-1 text-yellow-900">
+        <li>• 面試官對「大齡考生」的刻板印象</li>
+        <li>• 「為什麼不留在大陸執業」的質疑</li>
+        <li>• 對大陸學歷背景的潛在偏見</li>
+        <li>• 競爭者多為年輕本科生，精力記憶力被比較</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 1C: 核心敘事策略 -->
+<div class="card card-gold mb-6 fade-in">
+  <h3 class="font-serif-tc text-lg font-bold mb-4 flex items-center gap-2">
+    <span class="tag tag-gold">策略</span> 核心敘事主軸
+  </h3>
+  <div class="p-5 rounded-lg text-center" style="background:linear-gradient(135deg,#faf8f5,#f0ebe3);">
+    <p class="font-serif-tc text-xl font-bold mb-3" style="color:var(--accent);">「從金門到世界，再從世界回到台灣」</p>
+    <p class="text-sm text-gray-600 mb-4 font-serif-en italic">"From Kinmen to the World, and Back to Serve"</p>
+    <p class="text-sm text-gray-700 max-w-2xl mx-auto">金門離島的成長經歷讓我深刻理解醫療資源的珍貴 → 赴北京學中醫、赴倫敦學健康管理 → 在大陸臨床十餘年累積實戰經驗 → 四十不惑，帶著國際視野與臨床積累，回到台灣這片土地，立志成為結合兩岸中醫優勢、服務台灣鄉親的良醫。</p>
+  </div>
+  <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+    <div class="p-3 rounded-lg bg-gray-50 text-center">
+      <p class="font-bold" style="color:var(--jade);">起點：金門</p>
+      <p class="text-gray-600">離島醫療不足的原體驗<br>→ 埋下學醫種子</p>
+    </div>
+    <div class="p-3 rounded-lg bg-gray-50 text-center">
+      <p class="font-bold" style="color:var(--accent);">歷練：北京·倫敦·大陸</p>
+      <p class="text-gray-600">中醫本科 + 國際管理碩士<br>+ 臨床實務 + 三國執照</p>
+    </div>
+    <div class="p-3 rounded-lg bg-gray-50 text-center">
+      <p class="font-bold" style="color:var(--vermillion);">歸來：台灣</p>
+      <p class="text-gray-600">四十不惑，帶著閱歷回歸<br>→ 服務台灣、回饋家鄉</p>
+    </div>
+  </div>
+</div>
+
+<!-- ╔════════════════════════════════════════╗ -->
+<!-- ║  PART 2: 自傳                          ║ -->
+<!-- ╚════════════════════════════════════════╝ -->
+
+<div class="section-divider">
+  <span class="font-serif-tc text-sm tracking-widest" style="color:var(--accent);">自 傳</span>
+</div>
+
+<h2 id="autobiography" class="font-serif-tc text-2xl font-bold mb-2" style="color:var(--accent);">二、自傳（個人資料表）</h2>
+<p class="text-gray-500 text-sm mb-3">Autobiography for Application Form — 格式依簡正老師建議：上欄感性敘述 ≈440字，下欄條列強項 ≈440字</p>
+
+<!-- Tab: 中文 / 英文 -->
+<div class="flex border-b mb-0" style="border-color:var(--mist);">
+  <button class="tab-btn active" onclick="switchTab('auto','zh')">中文版</button>
+  <button class="tab-btn" onclick="switchTab('auto','en')">English Version</button>
+</div>
+
+<!-- 中文自傳 -->
+<div id="auto-zh" class="tab-content active mt-0">
+  <!-- 上欄 -->
+  <div class="auto-upper">
+    <h4 class="text-xs text-gray-400 tracking-widest mb-3">簡單自我描述</h4>
+    <div class="font-sans-tc text-sm leading-relaxed" style="text-indent:2em;">
+      <p>我是黃于珊，來自金門。成長於離島的經歷，讓我從小深刻體會醫療資源的珍貴——每當家中長輩需要就醫，往往需要搭機到台灣本島，那份不便與焦急至今記憶猶新。這份體驗在我心中種下了學醫的種子，也讓我格外珍惜每一次能幫助他人減輕病痛的機會。</p>
+      <p>十八歲那年，我懷抱著對中醫的嚮往赴北京中醫藥大學就讀，五年的中醫本科訓練，奠定了我對傳統醫學的深厚根基。畢業後前往英國帝國理工學院攻讀國際健康管理碩士，拓展了我對全球衛生體系與醫療管理的視野。婚後隨先生赴大陸，在廈門、深圳等地從事中醫臨床工作逾十年，主攻女性健康調理與中醫美容，取得了中國、美國NCCAOM及澳大利亞AHPRA三國中醫師執照，並完成南方醫科大學美容中醫科主診醫師培訓。</p>
+      <p>四十不惑。歷經多年海外臨床與人生歷練後，我清楚知道自己真正想要的是什麼——回到台灣，在這片滋養我成長的土地上行醫。中醫「簡便廉驗」的精神，能夠幫助人們擁有健康的餘命，在長壽的同時保有生命的尊嚴與品質。我希望將兩岸臨床所學，結合台灣完善的醫療體系，為鄉親提供更細緻溫暖的中醫服務。就讀學士後中醫，是我補足台灣中醫師執照、精進經典與骨傷科知識的關鍵一步，也是我對自己最重要的承諾。</p>
+    </div>
+    <div class="char-count" id="upper-count"></div>
+  </div>
+  <!-- 下欄 -->
+  <div class="auto-lower">
+    <h4 class="text-xs text-gray-400 tracking-widest mb-3">個人強項、榮譽、得獎事蹟…等</h4>
+    <div class="font-sans-tc text-sm leading-relaxed space-y-2">
+      <p><strong>◆ 國際多國中醫師執照：</strong>持有中國執業中醫師資格證、美國NCCAOM東方醫學醫師證書（Certificate No. 11970）、澳大利亞AHPRA註冊中醫師資格，具備國際化執業視野與能力。</p>
+      <p><strong>◆ 中醫美容專科進修：</strong>南方醫科大學皮膚病醫院美容中醫科主診醫師培訓合格；廣東省整形美容協會中醫美容分會第二屆委員會委員；世界中醫藥學會聯合會中醫膏方專業委員會理事。</p>
+      <p><strong>◆ 臨床專長與技術：</strong>擅長針灸美容、中藥調理、火龍罐灸、穴位埋線、火針、滾針、小針刀、面部刮痧等中醫特色外治技術，主攻女性健康調理、駐顏抗衰及亞健康調理。</p>
+      <p><strong>◆ 兩岸中醫臨床經驗：</strong>於廈門、深圳等地執業逾十年，歷任中醫門診部中醫師、三甲醫院進修醫師，累積豐富的臨床實戰經驗。</p>
+      <p><strong>◆ 醫學教育經驗：</strong>曾任線上教育平台NCCAOM中藥學考試講師（2022-2023），具備醫學知識傳授與跨文化溝通能力。</p>
+      <p><strong>◆ 國際學術背景：</strong>英國帝國理工學院國際健康管理碩士（Merit），研修衛生政策、健康經濟學、醫療機構管理等課程，具備醫療體系宏觀視角。</p>
+      <p><strong>◆ 多元職場歷練：</strong>曾任金門縣政府僑務秘書、企業董事長特助、健康產業產品經理及研究助理等職，培養了行政溝通、專案管理與跨領域整合能力。</p>
+    </div>
+    <div class="char-count" id="lower-count"></div>
+  </div>
+</div>
+
+<!-- English Autobiography -->
+<div id="auto-en" class="tab-content mt-0">
+  <div class="auto-upper">
+    <h4 class="text-xs text-gray-400 tracking-widest mb-3">Self-Description</h4>
+    <div class="font-serif-en text-sm leading-relaxed" style="text-indent:2em;">
+      <p>My name is Yu-Shan Huang, and I grew up on Kinmen, a small island off the coast of Fujian. Living on a remote island taught me early on how precious access to healthcare truly is — whenever my elderly relatives needed medical attention, they often had to fly to mainland Taiwan, a reality that left a lasting impression on me and planted the seed for my pursuit of medicine.</p>
+      <p>At eighteen, I left for Beijing University of Chinese Medicine, where five years of rigorous training laid a solid foundation in traditional Chinese medicine. I then earned my MSc in International Health Management with Merit from Imperial College London, broadening my perspective on global health systems and healthcare delivery. After marrying and relocating to mainland China, I practiced TCM in Xiamen and Shenzhen for over a decade, specializing in women's health and cosmetic Chinese medicine. Along the way, I obtained practitioner licenses in China, the United States (NCCAOM), and Australia (AHPRA), and completed advanced training in Cosmetic TCM at the Dermatology Hospital of Southern Medical University.</p>
+      <p>At forty, as Confucius said, one is free from doubt. After years of clinical practice and life experience abroad, I know clearly what I want — to return to Taiwan and serve the land that raised me. I aspire to integrate the clinical strengths I have accumulated across both sides of the Strait with Taiwan's excellent medical system, and bring compassionate, refined TCM care to my community. Enrolling in the post-baccalaureate program is the critical step toward obtaining my Taiwan practitioner license, deepening my mastery of the classics and orthopedics, and fulfilling the most important promise I have made to myself.</p>
+    </div>
+  </div>
+  <div class="auto-lower">
+    <h4 class="text-xs text-gray-400 tracking-widest mb-3">Qualifications, Achievements & Distinctions</h4>
+    <div class="font-serif-en text-sm leading-relaxed space-y-2">
+      <p><strong>◆ Multi-National TCM Licenses:</strong> Chinese Medicine Practitioner (China); Diplomate of Oriental Medicine, NCCAOM (USA, Cert. No. 11970); Registered Chinese Medicine Practitioner, AHPRA (Australia).</p>
+      <p><strong>◆ Cosmetic TCM Specialization:</strong> Certified Cosmetic TCM Attending Physician, Dermatology Hospital of Southern Medical University; Council Member, Cosmetic TCM Branch, Guangdong Association of Plastics & Aesthetics; Council Member, World Federation of Chinese Medicine Societies — Professional Committee of TCM Paste Formulations.</p>
+      <p><strong>◆ Clinical Expertise:</strong> Proficient in facial rejuvenation acupuncture, herbal therapy, fire dragon cupping moxibustion, acupoint thread embedding, fire needling, microneedling, acupotomy, and facial gua sha. Focused on women's health, anti-aging, and sub-health conditioning.</p>
+      <p><strong>◆ Cross-Strait Clinical Experience:</strong> Over 10 years of practice in Xiamen and Shenzhen, including residency training at a Class-A tertiary hospital.</p>
+      <p><strong>◆ Medical Education:</strong> NCCAOM Chinese Herbology Exam Preparation Instructor for WePro Excellence Education (2022–2023), demonstrating teaching ability and cross-cultural communication skills.</p>
+      <p><strong>◆ International Academic Background:</strong> MSc International Health Management with Merit, Imperial College London. Coursework in health policy, health economics, strategic management, and healthcare organization leadership.</p>
+      <p><strong>◆ Diverse Professional Experience:</strong> Former Secretary of Overseas Affairs, Kinmen County Government; Executive Assistant to CEO; Product Manager in health industry; Research Assistant — cultivating strong administrative, project management, and interdisciplinary skills.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ╔════════════════════════════════════════╗ -->
+<!-- ║  PART 3: 自我介紹                       ║ -->
+<!-- ╚════════════════════════════════════════╝ -->
+
+<div class="section-divider">
+  <span class="font-serif-tc text-sm tracking-widest" style="color:var(--accent);">自我介紹</span>
+</div>
+
+<h2 id="self-intro" class="font-serif-tc text-2xl font-bold mb-2" style="color:var(--accent);">三、自我介紹（1分鐘 / 3分鐘版）</h2>
+<p class="text-gray-500 text-sm mb-6">Self-Introduction Scripts</p>
+
+<div class="flex border-b mb-0" style="border-color:var(--mist);">
+  <button class="tab-btn active" onclick="switchTab('intro','zh')">中文版</button>
+  <button class="tab-btn" onclick="switchTab('intro','en')">English Version</button>
+</div>
+
+<!-- 中文自我介紹 -->
+<div id="intro-zh" class="tab-content active">
+  <!-- 1 分鐘版 -->
+  <div class="card card-jade mb-4 mt-4">
+    <h4 class="font-bold mb-3 flex items-center gap-2"><span class="tag tag-jade">1 分鐘版</span> 約 280 字</h4>
+    <div class="text-sm leading-relaxed p-4 rounded-lg" style="background:#f9f7f4;">
+      <p>各位教授好，我是黃于珊，來自金門。</p>
+      <p class="mt-2">在離島長大的經歷，讓我從小就深刻感受到醫療資源的珍貴，也因此走上了學醫這條路。我畢業於北京中醫藥大學中醫學系，之後在英國帝國理工學院取得國際健康管理碩士學位。過去十餘年，我在大陸從事中醫臨床工作，專注於女性健康調理與中醫美容領域，並取得了中國、美國NCCAOM及澳大利亞AHPRA三國中醫師執照。</p>
+      <p class="mt-2">四十歲之後，我更加清楚自己想要的是什麼。中醫講「簡便廉驗」，我相信中醫能夠幫助人們在長壽的同時，保有生命的尊嚴與品質。我希望回到台灣，結合兩岸臨床經驗與台灣完善的醫療制度，為鄉親提供更細緻、更溫暖的中醫服務。就讀學士後中醫是我取得台灣執照、精進專業的關鍵一步，我已經準備好全力以赴。謝謝。</p>
+    </div>
+  </div>
+
+  <!-- 3 分鐘版 -->
+  <div class="card card-accent mb-4">
+    <h4 class="font-bold mb-3 flex items-center gap-2"><span class="tag tag-accent">3 分鐘版</span> 約 650 字</h4>
+    <div class="text-sm leading-relaxed p-4 rounded-lg" style="background:#f9f7f4;">
+      <p>各位教授好，我是黃于珊，來自金門。</p>
+      <p class="mt-2">我在金門長大，離島的成長環境讓我從小就深刻體會到醫療資源的可貴。記得小時候家中長輩生病，經常要搭飛機到台灣本島看診，那種不便和焦急一直烙印在我的記憶裡。也正是這樣的經歷，讓我立志要學醫，希望有一天能讓身邊的人更容易獲得醫療照護。</p>
+      <p class="mt-2">十八歲那年，我到北京中醫藥大學就讀中醫學系，五年的本科訓練讓我打下了扎實的中醫基礎。畢業後，我前往英國帝國理工學院攻讀國際健康管理碩士，這段經歷讓我學會了從制度面、政策面去思考醫療問題，也培養了我的國際視野。婚後隨先生來到大陸，在廈門、深圳從事中醫臨床工作超過十年，主要專注於女性健康調理與中醫美容領域。在這段期間，我完成了南方醫科大學美容中醫科主診醫師培訓，取得了中國、美國NCCAOM以及澳大利亞AHPRA三國的中醫師執照，也擔任過NCCAOM中藥學考試的線上講師。</p>
+      <p class="mt-2">這些年的臨床工作中，我發現最讓我有成就感的，不是治好了什麼疑難雜症，而是患者感受到被真心關懷的那一刻——有些患者一開始對中醫抱持懷疑態度，但透過耐心的溝通和持續的治療，最終成為長期的忠實患者，還主動介紹親友來就診。這讓我更加確信，醫術固然重要，但醫者的「心」才是核心。</p>
+      <p class="mt-2">古人說「四十而不惑」，經歷了這些年的歷練，我清楚知道自己真正想要的生活。中醫講「簡便廉驗」，它可以融入生活的方方面面，幫助人們擁有健康的餘命，在長壽的同時保有生命的尊嚴和品質。我希望回到台灣，把在兩岸學到的臨床經驗，結合台灣完善的醫療體系，為鄉親帶來更細緻、更溫暖的中醫服務。</p>
+      <p class="mt-2">就讀學士後中醫，對我而言不只是取得台灣執照，更是一次帶著問題重新學習的機會。過去年輕時念書多半是應付考試，現在重新接觸經典、補足骨傷科等不足之處，每一次學習都有全然不同的感受和啟發。我已經做好準備，全力以赴。謝謝各位教授。</p>
+    </div>
+  </div>
+</div>
+
+<!-- English Self-Intro -->
+<div id="intro-en" class="tab-content">
+  <div class="card card-jade mb-4 mt-4">
+    <h4 class="font-bold mb-3 flex items-center gap-2"><span class="tag tag-jade">1-Minute</span> ~200 words</h4>
+    <div class="font-serif-en text-sm leading-relaxed p-4 rounded-lg" style="background:#f9f7f4;">
+      <p>Good morning, esteemed professors. My name is Yu-Shan Huang, and I come from Kinmen.</p>
+      <p class="mt-2">Growing up on a remote island, I witnessed firsthand how limited medical access can affect a community, which inspired me to pursue medicine. I graduated from Beijing University of Chinese Medicine and earned my MSc in International Health Management from Imperial College London. Over the past decade, I have practiced TCM across mainland China, specializing in women's health and cosmetic Chinese medicine, and obtained practitioner licenses in China, the U.S. (NCCAOM), and Australia (AHPRA).</p>
+      <p class="mt-2">At forty, I know with clarity what truly matters. I want to return to Taiwan, integrate my cross-strait clinical experience with Taiwan's robust healthcare system, and bring compassionate, refined TCM care to my community. This program is my essential next step to obtaining a Taiwan license and deepening my expertise. I am fully committed. Thank you.</p>
+    </div>
+  </div>
+
+  <div class="card card-accent mb-4">
+    <h4 class="font-bold mb-3 flex items-center gap-2"><span class="tag tag-accent">3-Minute</span> ~400 words</h4>
+    <div class="font-serif-en text-sm leading-relaxed p-4 rounded-lg" style="background:#f9f7f4;">
+      <p>Good morning, esteemed professors. My name is Yu-Shan Huang. I was born and raised on Kinmen Island.</p>
+      <p class="mt-2">As a child, whenever elderly relatives fell ill, they often had to take a flight to mainland Taiwan for treatment. That experience of anxiety and inconvenience left a deep impression on me and planted the seed for my journey into medicine.</p>
+      <p class="mt-2">At eighteen, I traveled to Beijing University of Chinese Medicine, where five years of rigorous study built a solid foundation in traditional Chinese medicine. I then pursued an MSc in International Health Management at Imperial College London, which taught me to think about healthcare from a systemic and policy perspective. After marriage, I relocated to mainland China and practiced TCM in Xiamen and Shenzhen for over a decade, focusing on women's health and cosmetic Chinese medicine. During this time, I completed advanced training in Cosmetic TCM at the Dermatology Hospital of Southern Medical University and obtained practitioner licenses in three countries — China, the United States through NCCAOM, and Australia through AHPRA. I also served as an online instructor preparing candidates for the NCCAOM Chinese Herbology examination.</p>
+      <p class="mt-2">Throughout my clinical career, the most rewarding moments were not about treating rare or complex conditions, but about the moment a patient felt genuinely cared for. I once had a patient who was quite skeptical of TCM and constantly questioned my treatment plan. Through patience and sincerity, she eventually became one of my most loyal patients and referred her friends. This reinforced my belief that while medical skill matters, the heart of the practitioner is what truly heals.</p>
+      <p class="mt-2">Confucius said that at forty, one becomes free from doubt. After years of practice and life experience, I am certain of what I want — to return to Taiwan, to bring together the best of what I have learned from both sides of the Strait, and to serve my community with compassionate, integrated TCM care. Enrolling in this post-baccalaureate program is not just about obtaining a Taiwan license; it is an opportunity to revisit the classics with fresh eyes and fill the gaps in areas like orthopedics and traumatology. Every time I study now, I find new insights I never grasped as a younger student. I am fully prepared and deeply committed. Thank you.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ╔════════════════════════════════════════╗ -->
+<!-- ║  PART 4: 核心問答                       ║ -->
+<!-- ╚════════════════════════════════════════╝ -->
+
+<div class="section-divider">
+  <span class="font-serif-tc text-sm tracking-widest" style="color:var(--accent);">核心問答</span>
+</div>
+
+<h2 id="qa-core" class="font-serif-tc text-2xl font-bold mb-2" style="color:var(--accent);">四、核心面試問答</h2>
+<p class="text-gray-500 text-sm mb-6">Core Interview Q&A — 個人特質類（必考題）</p>
+
+<!-- Q1: 為什麼選擇中醫 / 為什麼考後中 -->
+<div class="card mb-4">
+  <details open>
+    <summary class="font-bold">為什麼選擇就讀學士後中醫？你已經有中醫學歷，為什麼還要再念？</summary>
+    <div class="mt-4 space-y-3">
+      <div class="qa-a">
+        <p class="text-sm font-bold mb-1" style="color:var(--jade);">中文回答：</p>
+        <p class="text-sm leading-relaxed">我在大陸雖然已經取得中醫師執照並執業多年，但在台灣，我需要通過學士後中醫的完整訓練才能取得台灣中醫師資格。更重要的是，這不只是一張執照的問題。過去年輕時念書，很多是為了應付考試，對經典的理解並不深刻。現在帶著十多年的臨床經驗重新回到學校，我相信會有完全不同的收穫。就像我常說的，同樣的課，每一次聽都有不一樣的感受——年輕時只是記住知識，現在是帶著臨床的問題去找答案。此外，我在大陸的臨床經驗以內科和美容中醫為主，骨傷科接觸相對較少，這也是我希望透過系統性學習來補足的部分。</p>
+      </div>
+      <div class="qa-a mt-3">
+        <p class="text-sm font-bold mb-1" style="color:var(--jade);">English：</p>
+        <p class="text-sm leading-relaxed font-serif-en">Although I have been a licensed TCM practitioner in mainland China for years, Taiwan requires completion of this program to qualify for a local license. More importantly, this is about growth, not just credentials. When I studied as a young student, much of it was exam-driven. Now, with over a decade of clinical experience, I return to the classroom with real questions — and I know the learning will be profoundly different. I also want to strengthen areas I had less exposure to, particularly orthopedics and traumatology.</p>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- Q2: 為什麼選中國醫 -->
+<div class="card mb-4">
+  <details>
+    <summary class="font-bold">為什麼選擇中國醫藥大學？</summary>
+    <div class="mt-4">
+      <div class="qa-a">
+        <p class="text-sm leading-relaxed">中國醫藥大學是台灣中醫教育的標竿學府，在中醫教學、研究和附設醫院的臨床資源方面都有深厚的積累。選擇中國醫，一方面是看重其完整的中西醫整合訓練體系，另一方面，中國醫在中醫實證研究方面的成果，也是我非常嚮往的。我希望未來不只是做一個臨床醫師，也能結合我在帝國理工學院所學的健康管理與研究方法，參與中醫臨床研究，為中醫的科學化發展盡一份心力。</p>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- Q3: 年齡 -->
+<div class="card card-vermillion mb-4">
+  <details>
+    <summary class="font-bold">你年紀不小了（42歲），為什麼現在才要念？體力和記憶力跟得上嗎？ <span class="tag tag-vermillion ml-2">高頻考題</span></summary>
+    <div class="mt-4 space-y-3">
+      <div class="qa-a">
+        <p class="text-sm font-bold mb-1" style="color:var(--jade);">中文回答：</p>
+        <p class="text-sm leading-relaxed">感謝教授的提問。關於年齡，我想分享一個觀點：最好的時機是二十年前，另一個最好的時機就是現在。年輕的時候，我選擇走出去看世界，在北京學中醫、在倫敦學管理、在大陸累積臨床經驗，這些都不是繞遠路，而是在為今天做準備。</p>
+        <p class="text-sm leading-relaxed mt-2">關於體力和記憶力，我認為四十歲的學習優勢在於目標明確、理解力更強。年輕時讀經典，很多內容只能死記硬背；現在重新讀，結合臨床經驗，反而能觸類旁通、舉一反三。更重要的是，一個經歷過人生風雨的醫師，能給病患的不只是醫術，還有更多的同理心和安定感。我相信這正是學士後中醫設立的初衷——讓有社會歷練的人帶著不同的生命厚度進入醫學。</p>
+      </div>
+      <div class="qa-a mt-3">
+        <p class="text-sm font-bold mb-1" style="color:var(--jade);">English：</p>
+        <p class="text-sm leading-relaxed font-serif-en">Thank you for this question. I believe the best time to plant a tree was twenty years ago; the second best time is now. My years abroad were not detours — they were preparation. At forty, I learn with sharper purpose and deeper comprehension. When I revisit the classics now, with clinical experience behind me, concepts that were once abstract become vivid and practical. And a physician who has weathered life's storms can offer patients not only skill, but genuine empathy and calm assurance. I believe this is precisely the value that post-baccalaureate programs are designed to bring to medicine.</p>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- Q4: 優缺點 -->
+<div class="card mb-4">
+  <details>
+    <summary class="font-bold">你的優點和缺點是什麼？</summary>
+    <div class="mt-4 space-y-3">
+      <div class="qa-a">
+        <p class="text-sm leading-relaxed"><strong>優點：</strong>對未知事物充滿好奇心，樂於持續學習。我是一個負責任的人，在過去的工作中，同事和患者在我離開時都表達了不捨，這讓我相信自己在待人處事上是被認可的。此外，十多年兩岸跨文化的工作經驗，讓我在溝通和適應新環境方面有較強的能力。</p>
+        <p class="text-sm leading-relaxed mt-2"><strong>缺點：</strong>我有時候會過度糾結，對自己的要求較高，容易給自己太大壓力。不過我也在學習調整——中醫講「恬淡虛無，真氣從之」，我透過靜心和調整認知來化解這個傾向。另外，我過去涉獵較廣但深度不夠均衡，現在更加清楚要聚焦在中醫的核心領域深耕。</p>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- Q5: 跨領域優勢 -->
+<div class="card card-gold mb-4">
+  <details>
+    <summary class="font-bold">你過去的背景對未來當醫師有什麼幫助？（跨領域優勢） <span class="tag tag-gold ml-2">專為你準備</span></summary>
+    <div class="mt-4">
+      <div class="qa-a">
+        <p class="text-sm leading-relaxed">我的背景有三個面向能為行醫帶來獨特價值。第一，帝國理工學院的健康管理碩士訓練，讓我習慣從制度面和經濟面思考醫療問題，不只關注個別患者，也能思考如何讓醫療服務更有效率地觸及更多人。第二，在金門縣政府擔任僑務秘書、在企業擔任董事長特助的經歷，培養了我的行政溝通和專案管理能力，這在未來的醫療團隊合作和醫務行政工作中都非常實用。第三，也是最重要的，十多年在不同文化環境中工作和生活的經歷，讓我對不同背景的患者有更深的同理心，能夠更敏感地理解患者的需求和顧慮。</p>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- Q6: 沒考上 -->
+<div class="card mb-4">
+  <details>
+    <summary class="font-bold">如果今年沒考上，你的計畫是什麼？</summary>
+    <div class="mt-4">
+      <div class="qa-a">
+        <p class="text-sm leading-relaxed">如果今年沒有錄取，我會繼續準備明年再考。在這段時間，我會持續精進中醫專業知識，特別加強我比較薄弱的骨傷科和經典研讀。同時，我也會積極處理台灣的學歷認證事宜，並尋找在台灣中醫相關領域的學習或實習機會，讓自己保持在臨床的手感。決定走這條路，我就不會輕易放棄。</p>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- Q7: 家庭安排 -->
+<div class="card card-vermillion mb-4">
+  <details>
+    <summary class="font-bold">你先生在大陸，就讀期間怎麼安排？ <span class="tag tag-vermillion ml-2">必須準備</span></summary>
+    <div class="mt-4">
+      <div class="qa-a">
+        <p class="text-sm leading-relaxed">感謝教授的關心。我先生非常支持我回台灣進修的決定，這是我們共同討論後的選擇。就讀期間，我會全心投入學業。現在交通和通訊都很便利，兩岸之間的往來也不像過去那麼困難。我相信家庭的支持是我最大的後盾，也正因為有先生的理解和支持，我才能更無後顧之憂地專注學習。</p>
+        <p class="text-sm text-gray-500 mt-2 italic">💡 策略提示：不需主動提及分居細節，強調「已討論、有共識、被支持」即可。若追問，可補充「我們會利用假期時間相聚，也在規劃未來他來台灣發展的可能性。」</p>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- Q8: 挫折 -->
+<div class="card mb-4">
+  <details>
+    <summary class="font-bold">分享一個你處理極大壓力或挫折的經驗</summary>
+    <div class="mt-4">
+      <div class="qa-a">
+        <p class="text-sm leading-relaxed">在大陸執業初期，我需要適應一個與台灣截然不同的醫療環境和文化。有一段時間，我遇到藥房要求我開大方、加大劑量的壓力，這與我「辨證論治、精準用藥」的理念相悖。面對這種行業亂象，我曾經非常糾結，甚至一度懷疑自己是否適合繼續待在那個環境。但最後我選擇堅持自己的原則——寧可開小方精準治療，也不為了迎合商業利益而違背初心。事實證明，患者最終認可的是療效和真誠，而不是藥量的多寡。這段經歷讓我學會，面對壓力時要回到初心，不被外在環境動搖。</p>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- Q9: 考後中是為了賺錢？ -->
+<div class="card mb-4">
+  <details>
+    <summary class="font-bold">你考後中醫是不是為了賺錢？</summary>
+    <div class="mt-4">
+      <div class="qa-a">
+        <p class="text-sm leading-relaxed">如果只是為了賺錢，以我目前的執照和經驗，留在大陸從事中醫美容會是更快、更直接的選擇。選擇回到台灣重新念書，其實是更辛苦的一條路。但我認為，醫師合理的收入是對專業價值的肯定，也是讓醫師能安心行醫、持續進修的基礎。真正驅動我的，是希望在台灣行醫的這份心願——讓我在金門長大時深切感受到的「需要好醫師」的心情，轉化為實際的行動。</p>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- ╔════════════════════════════════════════╗ -->
+<!-- ║  PART 5: 醫療倫理                       ║ -->
+<!-- ╚════════════════════════════════════════╝ -->
+
+<div class="section-divider">
+  <span class="font-serif-tc text-sm tracking-widest" style="color:var(--accent);">醫療倫理</span>
+</div>
+
+<h2 id="qa-medical" class="font-serif-tc text-2xl font-bold mb-2" style="color:var(--accent);">五、醫療倫理問答</h2>
+<p class="text-gray-500 text-sm mb-3">Medical Ethics Q&A</p>
+
+<div class="p-4 rounded-lg mb-6" style="background:#f0ebe3;">
+  <p class="text-sm font-bold mb-2">📌 醫療倫理萬用框架（CARE Framework）：</p>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+    <div class="p-2 bg-white rounded text-center"><strong style="color:var(--vermillion);">C</strong>larify<br>釐清事實與情境</div>
+    <div class="p-2 bg-white rounded text-center"><strong style="color:var(--vermillion);">A</strong>nalyze<br>分析倫理原則衝突</div>
+    <div class="p-2 bg-white rounded text-center"><strong style="color:var(--vermillion);">R</strong>esolve<br>提出解決方案</div>
+    <div class="p-2 bg-white rounded text-center"><strong style="color:var(--vermillion);">E</strong>mpathize<br>展現同理心收尾</div>
+  </div>
+  <p class="text-xs text-gray-500 mt-2">四大原則：自主(Autonomy)、不傷害(Non-maleficence)、行善(Beneficence)、正義(Justice)</p>
+</div>
+
+<!-- Ethics Q1 -->
+<div class="card mb-4">
+  <details>
+    <summary class="font-bold">家屬與病人意見衝突——病人想放棄治療，家屬不同意</summary>
+    <div class="mt-4">
+      <div class="qa-a">
+        <p class="text-sm leading-relaxed">首先，我會確認病人是否具有完整的意思表示能力。如果病人意識清楚、能夠理解自身病情，根據病人自主權利法的精神，應以病人本人的意願為優先。但我不會立刻做出二選一的判斷，而是先分別了解雙方的顧慮：病人為什麼想放棄？是因為對治療效果失望、害怕痛苦、還是經濟考量？家屬為什麼不同意？是出於愛、不捨、還是缺乏對病情的了解？</p>
+        <p class="text-sm leading-relaxed mt-2">釐清之後，我會安排家庭會議，由醫療團隊完整說明病情、治療選項及預後，讓雙方在充分資訊的基礎上溝通。有時候衝突的根源是資訊不對等，而不是價值觀的對立。作為醫師，我的角色是促進溝通、提供專業建議，同時尊重病人的自主決定，而不是替任何一方做選擇。</p>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- Ethics Q2 -->
+<div class="card mb-4">
+  <details>
+    <summary class="font-bold">學長手術出錯請你保密，你怎麼做？</summary>
+    <div class="mt-4">
+      <div class="qa-a">
+        <p class="text-sm leading-relaxed">這是一個同儕情誼與病人安全之間的倫理衝突。我會先確認事實——確實發生了可能影響患者後續健康的錯誤嗎？如果是，病人安全永遠是第一優先。我會先私下跟學長談，表達我的關心，同時鼓勵他主動通報。我會說：「我理解你的壓力，但如果現在不處理，一旦後續出了問題，後果會更嚴重。主動通報反而是保護自己、也保護病人的做法。」</p>
+        <p class="text-sm leading-relaxed mt-2">如果學長仍不願意通報，我會依照醫療機構的通報程序，如實反映情況。這不是背叛，而是對病人負責、對專業負責。醫療錯誤通報制度的核心精神不是懲罰，而是改善流程、避免再次發生。</p>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- Ethics Q3 -->
+<div class="card mb-4">
+  <details>
+    <summary class="font-bold">未成年少女懷孕要求不告訴父母</summary>
+    <div class="mt-4">
+      <div class="qa-a">
+        <p class="text-sm leading-relaxed">這涉及保密義務與未成年保護之間的張力。首先，我會以安全、非批判的態度與這位少女溝通，了解她的身心狀態和擔憂。同時，我必須評估是否有性侵害或家暴的疑慮——如果有，依法必須通報。</p>
+        <p class="text-sm leading-relaxed mt-2">如果排除上述情形，我會溫和地引導她理解，面對這個情況，父母的支持對她是最重要的保護。我不會直接違反她的意願去通知家長，但會協助她思考如何與父母溝通，必要時也可以由社工或輔導人員陪同。我的出發點始終是保護這位未成年人的身心健康和最大利益。</p>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- Ethics Q4 -->
+<div class="card mb-4">
+  <details>
+    <summary class="font-bold">面對「奧客」（難纏的）病人</summary>
+    <div class="mt-4">
+      <div class="qa-a">
+        <p class="text-sm leading-relaxed">在我的臨床經驗中，我確實遇到過這樣的情況。有一位患者在就診前自己學了一些中醫知識，每次都質疑我的處方和治療建議。一開始確實有些挫折感，但我提醒自己——患者會質疑，很多時候是因為焦慮、害怕、或者過去有不好的就醫經驗。我選擇用耐心和真誠來回應她的每一個問題，不迴避、不敷衍。最後，她不僅成為我的長期患者，還主動介紹朋友來就診。</p>
+        <p class="text-sm leading-relaxed mt-2">我認為沒有真正的「奧客」，只有需要被理解的患者。當然，如果出現嚴重的言語暴力或危害安全的行為，那就需要醫療機構的制度來處理，但大多數時候，多一份同理心和耐心，就能化解很多對立。</p>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- ╔════════════════════════════════════════╗ -->
+<!-- ║  PART 6: 中醫專題                       ║ -->
+<!-- ╚════════════════════════════════════════╝ -->
+
+<div class="section-divider">
+  <span class="font-serif-tc text-sm tracking-widest" style="color:var(--accent);">中醫專題</span>
+</div>
+
+<h2 id="qa-tcm" class="font-serif-tc text-2xl font-bold mb-2" style="color:var(--accent);">六、中醫專題問答</h2>
+<p class="text-gray-500 text-sm mb-6">TCM-Specific Q&A</p>
+
+<!-- TCM Q1 -->
+<div class="card card-jade mb-4">
+  <details>
+    <summary class="font-bold">中醫和西醫如何互補？中醫最大的優勢是什麼？</summary>
+    <div class="mt-4 space-y-3">
+      <div class="qa-a">
+        <p class="text-sm leading-relaxed">中醫和西醫各有擅長的領域。西醫在急症處理、手術、影像診斷等方面具有明確的優勢；中醫的強項則在於整體調理、慢性病管理、功能性疾病、以及西醫所謂「亞健康」狀態的干預。</p>
+        <p class="text-sm leading-relaxed mt-2">中醫最大的優勢，我認為是它的整體觀和個體化治療。同一種疾病，中醫會根據每個人不同的體質、生活習慣、情志狀態來辨證論治，這就是「同病異治」的精神。此外，中醫「簡便廉驗」的特質——不需要昂貴的設備，一根針、一帖藥就能幫助病人——在醫療資源不足的地區特別有價值。中醫還強調「治未病」的預防觀念，這與現代預防醫學的趨勢不謀而合。</p>
+        <p class="text-sm leading-relaxed mt-2">我在大陸的臨床經驗中，常常看到中西醫結合能達到更好的效果。未來在台灣，我也希望能以中西醫整合的思維來服務患者。</p>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- TCM Q2 -->
+<div class="card mb-4">
+  <details>
+    <summary class="font-bold">網路上常有人批評中醫是偽科學，你如何回應？</summary>
+    <div class="mt-4">
+      <div class="qa-a">
+        <p class="text-sm leading-relaxed">我理解這種質疑。中醫的理論體系——陰陽五行、經絡臟腑——的確與現代實證醫學的語言不同，這容易造成溝通上的隔閡。但「體系不同」不等於「偽科學」。</p>
+        <p class="text-sm leading-relaxed mt-2">事實上，中醫的許多療效已經有了現代研究的支持。例如針灸在疼痛管理方面已被世界衛生組織認可，許多中藥方劑的藥理機制也逐步被現代研究所揭示。中醫需要做的，不是否定自己的理論體系，而是積極地用現代科學的方法去驗證和解釋它的療效。同時，我認為中醫從業者也要有自我反省的能力——對於確實缺乏證據的說法，不要誇大宣傳；對於有效的治療，要積極地用數據說話。這樣才能贏得社會的信任。</p>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- TCM Q3 -->
+<div class="card mb-4">
+  <details>
+    <summary class="font-bold">中醫在超高齡社會 / 長照中可以扮演什麼角色？</summary>
+    <div class="mt-4">
+      <div class="qa-a">
+        <p class="text-sm leading-relaxed">台灣在2026年正式邁入超高齡社會，這個議題非常重要。中醫在長照中可以扮演幾個關鍵角色：</p>
+        <p class="text-sm leading-relaxed mt-2">第一，中醫「治未病」的預防觀念，可以透過體質調理、四季養生指導，幫助長者在進入失能之前維持健康，延長健康餘命。第二，中醫的非侵入性治療——如針灸、推拿、灸法——對於長者常見的慢性疼痛、失眠、消化問題等，可以提供安全有效的輔助。第三，中醫的食療和藥膳文化，可以自然地融入長照機構的日常照護中。第四，中醫的「調身養心」理念，不只關注身體，也關注情志，對於老年憂鬱和認知退化的預防有其獨特價值。</p>
+        <p class="text-sm leading-relaxed mt-2">這也是我說中醫可以幫助現代人擁有「健康餘命」的具體實踐——不只是活得長，更要活得有品質、有尊嚴。</p>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- TCM Q4 -->
+<div class="card mb-4">
+  <details>
+    <summary class="font-bold">AI 在醫療的應用 / AI 會取代醫師嗎？</summary>
+    <div class="mt-4">
+      <div class="qa-a">
+        <p class="text-sm leading-relaxed">AI在醫療領域的應用確實越來越廣泛，特別是在影像判讀、藥物交互作用檢查、輔助診斷等方面已經展現了很大的價值。但我認為AI無法取代醫師，特別是中醫師。</p>
+        <p class="text-sm leading-relaxed mt-2">中醫的「望聞問切」強調的是醫師與患者之間直接的互動——觀察面色、體態，聆聽聲音，感受脈象，這些都需要醫師長期訓練累積的經驗和直覺。更重要的是，中醫講「醫者，意也」，治療的過程中，醫師的關懷、信心和態度本身就是治療的一部分。AI可以成為優秀的輔助工具，幫助醫師更快速地檢索文獻、分析數據，但人與人之間的溫度和信任，是機器無法取代的。</p>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- TCM Q5: 病人堅持吃偏方 -->
+<div class="card mb-4">
+  <details>
+    <summary class="font-bold">癌症病患堅持要回山上吃草藥（偏方），不願接受手術，你怎麼處理？</summary>
+    <div class="mt-4">
+      <div class="qa-a">
+        <p class="text-sm leading-relaxed">首先，我不會一味否定病人的選擇，這樣只會讓他更加抗拒。我會先了解他為什麼抗拒手術——是恐懼手術風險？是對西醫不信任？還是有宗教或文化因素？同時也了解他對草藥的認識來自哪裡。</p>
+        <p class="text-sm leading-relaxed mt-2">接著，我會以他能理解的方式，客觀說明病情的嚴重性和各種治療方案的利弊。重要的是，我不會把中醫和西醫對立起來。我會告訴他：中醫在癌症治療中確實有其輔助角色——術後調理體質、緩解化療副作用等——但對於特定癌症，手術可能是目前最有效的治療手段。中藥調理和手術不是二選一，而是可以配合的。</p>
+        <p class="text-sm leading-relaxed mt-2">最終，如果病人在充分了解的情況下仍然選擇拒絕手術，我必須尊重他的自主權。但我會確保他了解所有風險，並保持追蹤，隨時為他提供專業建議。</p>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- ╔════════════════════════════════════════╗ -->
+<!-- ║  PART 7: 情境題                         ║ -->
+<!-- ╚════════════════════════════════════════╝ -->
+
+<div class="section-divider">
+  <span class="font-serif-tc text-sm tracking-widest" style="color:var(--accent);">情境題</span>
+</div>
+
+<h2 id="qa-scenario" class="font-serif-tc text-2xl font-bold mb-2" style="color:var(--accent);">七、情境與時事問答</h2>
+<p class="text-gray-500 text-sm mb-6">Scenario & Current Events Q&A</p>
+
+<!-- Scenario Q1 -->
+<div class="card mb-4">
+  <details>
+    <summary class="font-bold">急診檢傷分類較不緊急的人大聲咆哮，干擾重症者，你如何應對？</summary>
+    <div class="mt-4">
+      <div class="qa-a">
+        <p class="text-sm leading-relaxed">我理解他的焦急——沒有人是想來急診的，每個人都覺得自己的狀況很嚴重。我會先安撫他的情緒，用平和但堅定的語氣說明檢傷分類的制度和原因：「我能理解您很著急，但目前有病情更危急的患者需要優先處理，這是為了確保每個人都能在最需要的時候得到救治。」</p>
+        <p class="text-sm leading-relaxed mt-2">同時，我會讓他知道大概的等候時間，並告訴他如果在等待過程中症狀有變化，隨時可以通知護理人員重新評估。關鍵是讓他感受到被重視、被關心，而不是被忽視。如果他的行為已經嚴重影響到其他病患或醫護人員的安全，則需要通知院方保全協助處理。</p>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- Scenario Q2 -->
+<div class="card mb-4">
+  <details>
+    <summary class="font-bold">如果你選上班代，你會怎麼做？</summary>
+    <div class="mt-4">
+      <div class="qa-a">
+        <p class="text-sm leading-relaxed">作為班上可能年紀最大的同學，如果被選為班代，我會善用我的社會經歷來服務大家。首先，我會建立暢通的溝通管道，了解同學們在課業和生活上的需求。後中醫的同學來自不同背景、不同年齡層，這是一個很珍貴的多元環境，我會致力於營造互助學習的氛圍。我在企業和政府部門的行政經驗，可以幫助我有效率地處理班務事宜。同時，我也會注意不要擺出「前輩」的姿態，而是以服務的心態和謙虛的態度，與每位同學平等相處。</p>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- Scenario Q3 -->
+<div class="card mb-4">
+  <details>
+    <summary class="font-bold">大考在即，同班同學跟你說「我分手了」，你如何安慰？</summary>
+    <div class="mt-4">
+      <div class="qa-a">
+        <p class="text-sm leading-relaxed">我會先放下手邊的事，認真地聽他說。人在脆弱的時候，最需要的往往不是建議，而是被聆聽。我不會急著說「沒關係」「你會找到更好的」這種話，因為在那個當下，他的痛苦是真實的。我會陪伴他，讓他把情緒釋放出來。</p>
+        <p class="text-sm leading-relaxed mt-2">等他情緒稍微穩定後，我會溫和地提醒他大考的時間，但不是施壓，而是幫他一起想辦法安排接下來幾天的複習節奏。如果他的狀態實在很差，我也會建議他找學校的輔導資源聊聊。作為同學，我能做的就是讓他知道——不管怎樣，有人在身邊。</p>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- Scenario Q4: 座右銘 -->
+<div class="card card-gold mb-4">
+  <details>
+    <summary class="font-bold">你最喜歡的一句話 / 座右銘？ <span class="tag tag-gold ml-2">收尾好題</span></summary>
+    <div class="mt-4 space-y-3">
+      <div class="qa-a">
+        <p class="text-sm leading-relaxed">「最好的時機是二十年前，另一個最好的時機就是現在。」</p>
+        <p class="text-sm leading-relaxed mt-2">這句話對我有特別深的意義。二十年前，十八歲的我離開金門去北京學中醫，那是我人生第一次重大的選擇。二十年後的今天，我選擇回到台灣，重新出發。這中間不是白走，而是累積。人生沒有標準答案，重要的是在每一個「現在」，都能鼓起勇氣做出忠於自己的選擇。</p>
+      </div>
+      <div class="qa-a">
+        <p class="text-sm font-bold mb-1" style="color:var(--jade);">English：</p>
+        <p class="text-sm leading-relaxed font-serif-en">"The best time to plant a tree was twenty years ago. The second best time is now." Twenty years ago, I left Kinmen for Beijing. Today, I return to Taiwan to begin again. The years in between were not wasted — they were preparation. What matters is having the courage to act in the present.</p>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- ╔════════════════════════════════════════╗ -->
+<!-- ║  PART 8: 面試技巧                       ║ -->
+<!-- ╚════════════════════════════════════════╝ -->
+
+<div class="section-divider">
+  <span class="font-serif-tc text-sm tracking-widest" style="color:var(--accent);">面試技巧</span>
+</div>
+
+<h2 id="tips" class="font-serif-tc text-2xl font-bold mb-2" style="color:var(--accent);">八、面試實戰技巧</h2>
+<p class="text-gray-500 text-sm mb-6">Interview Tips & Strategy</p>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+  <!-- Tip 1 -->
+  <div class="card card-jade">
+    <h4 class="font-bold mb-3" style="color:var(--jade);">✦ 回答結構：STAR 法</h4>
+    <div class="text-sm space-y-1">
+      <p><strong>S</strong>ituation — 簡述背景情境</p>
+      <p><strong>T</strong>ask — 你面臨的任務/挑戰</p>
+      <p><strong>A</strong>ction — 你採取的具體行動</p>
+      <p><strong>R</strong>esult — 結果與反思</p>
+      <p class="text-gray-500 mt-2 text-xs">適用於：挫折經驗、成就案例、團隊合作等題目</p>
+    </div>
+  </div>
+
+  <!-- Tip 2 -->
+  <div class="card card-accent">
+    <h4 class="font-bold mb-3" style="color:var(--accent);">✦ 倫理題結構：CARE 法</h4>
+    <div class="text-sm space-y-1">
+      <p><strong>C</strong>larify — 釐清事實與情境</p>
+      <p><strong>A</strong>nalyze — 分析倫理原則衝突</p>
+      <p><strong>R</strong>esolve — 提出解決方案</p>
+      <p><strong>E</strong>mpathize — 展現同理心收尾</p>
+      <p class="text-gray-500 mt-2 text-xs">適用於：所有醫療倫理、衝突處理類題目</p>
+    </div>
+  </div>
+
+  <!-- Tip 3 -->
+  <div class="card card-gold">
+    <h4 class="font-bold mb-3" style="color:var(--gold);">✦ 你的「殺手鐧」素材</h4>
+    <div class="text-sm space-y-1">
+      <p>🏝️ 金門離島成長 → 醫療可近性</p>
+      <p>🌏 三國執照 → 國際視野與專業認可</p>
+      <p>🔬 帝國理工碩士 → 研究與管理能力</p>
+      <p>💊 兩岸臨床經驗 → 實務深度</p>
+      <p>🌸 美容中醫專科 → 差異化競爭力</p>
+      <p>👩‍🏫 NCCAOM講師 → 教學與溝通</p>
+      <p class="text-gray-500 mt-2 text-xs">每個回答盡量自然帶入1-2個素材</p>
+    </div>
+  </div>
+
+  <!-- Tip 4 -->
+  <div class="card card-vermillion">
+    <h4 class="font-bold mb-3" style="color:var(--vermillion);">✦ 地雷與注意事項</h4>
+    <div class="text-sm space-y-1">
+      <p>🚫 不要主動提「學歷認證」問題，被問再坦承處理中</p>
+      <p>🚫 不要批評大陸醫療環境（可說「不同體系各有特點」）</p>
+      <p>🚫 不要表現出「在大陸混不下去才回來」的印象</p>
+      <p>🚫 不要過度強調中醫美容的商業價值</p>
+      <p>🚫 避免政治敏感話題，被問到兩岸關係保持中立客觀</p>
+      <p>✅ 保持謙遜但自信的態度</p>
+      <p>✅ 每個回答都要回扣「為什麼要念後中醫」</p>
+    </div>
+  </div>
+</div>
+
+<!-- 英文準備 -->
+<div class="card mb-6">
+  <h4 class="font-bold mb-3">✦ 英文面試準備要點</h4>
+  <div class="text-sm space-y-2">
+    <p>中國醫面試可能包含英文環節，建議準備以下內容的英文版本：</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
+      <div class="p-3 rounded-lg bg-gray-50">
+        <p class="font-bold text-xs mb-1" style="color:var(--jade);">必備英文準備</p>
+        <p class="text-xs">1. Self-introduction (1 min & 3 min)</p>
+        <p class="text-xs">2. Why TCM / Why this program</p>
+        <p class="text-xs">3. Strengths & weaknesses</p>
+        <p class="text-xs">4. Greatest challenge overcome</p>
+        <p class="text-xs">5. Your motto / favorite quote</p>
+      </div>
+      <div class="p-3 rounded-lg bg-gray-50">
+        <p class="font-bold text-xs mb-1" style="color:var(--accent);">常見英文追問</p>
+        <p class="text-xs">1. How can TCM and Western medicine complement each other?</p>
+        <p class="text-xs">2. What role can TCM play in an aging society?</p>
+        <p class="text-xs">3. How do you handle a disagreement with a colleague?</p>
+        <p class="text-xs">4. Describe a case that left a deep impression on you.</p>
+        <p class="text-xs">5. Where do you see yourself in 10 years?</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 結語 -->
+<div class="p-6 rounded-xl text-center mb-8" style="background:linear-gradient(135deg,#1a1a2e,#2d3a4a);color:white;">
+  <p class="font-serif-tc text-lg font-bold mb-2">「最好的時機是二十年前，另一個最好的時機就是現在。」</p>
+  <p class="text-sm text-gray-300 font-serif-en italic mb-4">"The best time was twenty years ago. The second best time is now."</p>
+  <p class="text-xs text-gray-400">黃于珊 · 中國醫藥大學學士後中醫學系面試準備 · 2026</p>
+</div>
+
+</div><!-- max-w-5xl -->
+
+<script>
+function switchTab(group, lang) {
+  document.querySelectorAll(`[id^="${group}-"]`).forEach(el => el.classList.remove('active'));
+  document.getElementById(`${group}-${lang}`).classList.add('active');
+  
+  const container = document.getElementById(`${group}-${lang}`).closest('.max-w-5xl') || document.body;
+  const buttons = document.querySelectorAll('.tab-btn');
+  // Find the right set of buttons near this tab
+  const tabEl = document.getElementById(`${group}-${lang}`);
+  const btnContainer = tabEl.previousElementSibling || tabEl.parentElement;
+  let siblingBtns = tabEl.parentElement.querySelectorAll(`.tab-btn`);
+  
+  // Simple approach: toggle active on clicked buttons
+  const allSections = document.querySelectorAll(`[id^="${group}-"]`);
+  allSections.forEach(s => {
+    const prevDiv = s.previousElementSibling;
+  });
+  
+  // Reset buttons in the same group
+  let current = document.getElementById(`${group}-zh`);
+  if (current) {
+    let btnRow = current.previousElementSibling;
+    if (btnRow && btnRow.classList.contains('flex')) {
+      btnRow.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      // Activate the correct button
+      const idx = lang === 'zh' ? 0 : 1;
+      btnRow.querySelectorAll('.tab-btn')[idx]?.classList.add('active');
+    }
+  }
+}
+
+// Character count for autobiography
+function countChars() {
+  const upper = document.querySelector('#auto-zh .auto-upper .font-sans-tc');
+  const lower = document.querySelector('#auto-zh .auto-lower .font-sans-tc');
+  if (upper) {
+    const text = upper.textContent.replace(/\s/g, '');
+    const counter = document.getElementById('upper-count');
+    if (counter) counter.textContent = `約 ${text.length} 字`;
+  }
+  if (lower) {
+    const text = lower.textContent.replace(/\s/g, '');
+    const counter = document.getElementById('lower-count');
+    if (counter) counter.textContent = `約 ${text.length} 字`;
+  }
+}
+countChars();
+
+// Smooth scroll for nav
+document.querySelectorAll('.nav-pill').forEach(pill => {
+  pill.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      e.preventDefault();
+      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
