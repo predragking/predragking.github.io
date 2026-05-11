@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>深度投資分析報告：仁新醫藥 (6696.TWO)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        .nav-link.active {
+            color: #2563eb;
+            border-bottom: 2px solid #2563eb;
+            font-weight: 700;
+        }
+        .smooth-scroll {
+            scroll-behavior: smooth;
+        }
+        @media print {
+            .no-print { display: none !important; }
+            .print-break { page-break-before: always; }
+            body { background-color: #ffffff; }
+            .shadow-sm, .shadow-md, .shadow-lg { box-shadow: none !important; border: 1px solid #e2e8f0; }
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #2563eb;
+            cursor: pointer;
+            margin-top: -8px;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #cbd5e1;
+            border-radius: 2px;
+        }
+    </style>
+
+    <!-- Chosen Palette: Slate and Warm Neutrals with Sapphire Blue Accents -->
+    <!-- Application Structure Plan: The SPA is designed as a dynamic, interactive dashboard structured logically for equity research consumption. It begins with an Executive Summary (investment thesis & rating) to provide immediate context. A sticky navigation bar allows quick jumps to specific analytical sections: Business Model (visualized pipeline), Financials (interactive charts showing the critical cash runway), Valuation (an interactive Sum-of-the-Parts calculator vital for biotech holding companies), and Risks (interactive matrix). This structure prioritizes user agency, allowing analysts or investors to interact with variables (like subsidiary stock price) to instantly see the impact on fair value, shifting from passive reading to active modeling. -->
+    <!-- Visualization & Content Choices: 1. Executive Summary: Grid cards for quick stats. 2. Business Pipeline: Styled HTML grid (Goal: Organize; Library: Tailwind) to cleanly show clinical phases without SVG. 3. Financials: Bar/Line Combo Chart (Goal: Compare Cash vs Burn Rate; Library: Chart.js) to visually assess financing risks. 4. Valuation: Interactive Range Slider & dynamic text (Goal: Change/Model; Library: Vanilla JS) to calculate SOTP value based on Belite Bio's market cap, replacing static P/E tables which are useless for pre-revenue biotech. 5. Risks: Clickable toggle cards (Goal: Inform/Organize; Library: Vanilla JS + Tailwind) to progressively reveal downside scenarios without overwhelming the initial view. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+</head>
+<body class="smooth-scroll relative">
+
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm no-print">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center gap-2 font-bold text-xl tracking-tight text-slate-800">
+                        <span class="bg-blue-600 text-white px-2 py-1 rounded text-sm">6696.TWO</span>
+                        仁新醫藥
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-500">
+                    <a href="#summary" class="nav-link hover:text-blue-600 transition-colors">投資摘要</a>
+                    <a href="#business" class="nav-link hover:text-blue-600 transition-colors">商業與產品線</a>
+                    <a href="#financials" class="nav-link hover:text-blue-600 transition-colors">財務分析</a>
+                    <a href="#valuation" class="nav-link hover:text-blue-600 transition-colors">SOTP 估值模型</a>
+                    <a href="#risks" class="nav-link hover:text-blue-600 transition-colors">風險情境</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
+
+        <header class="text-center space-y-4">
+            <h1 class="text-3xl md:text-4xl font-bold text-slate-900">仁新醫藥 (6696.TWO) 深度投資分析報告</h1>
+            <p class="text-lg text-slate-600">聚焦未滿足醫療需求，以控股架構驅動隱含價值</p>
+            <div class="flex justify-center items-center gap-4 text-sm mt-4">
+                <span class="px-3 py-1 bg-amber-100 text-amber-800 rounded-full font-semibold">評等：投機性買進 (SPECULATIVE BUY)</span>
+                <span class="text-slate-500">分析師：華爾街全球股票研究部</span>
+                <span class="text-slate-500">日期：2026年5月</span>
+            </div>
+        </header>
+
+        <section id="summary" class="scroll-mt-24">
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-slate-800 mb-4 border-l-4 border-blue-600 pl-3">1. 執行摘要與投資論點</h2>
+                <p class="text-slate-600 mb-6 leading-relaxed">
+                    本報告深入分析處於臨床階段的新藥研發公司——仁新醫藥 (Lin BioScience)。作為一家無近期經常性營收的生技公司，傳統本益比估值並不適用。其核心投資邏輯在於其子公司 <strong>Belite Bio (Nasdaq: BLTE)</strong> 的推進進度及其持股價值。仁新透過旗下 LBS-008 (針對斯特格病變與乾性黃斑部病變) 掌握全球首見新藥 (First-in-Class) 潛力。我們認為市場目前對仁新的定價存在控股折價(Holding Discount)過大的現象，若臨床三期數據呈現正面結果，將有顯著的價值重估 (Re-rating) 空間。
+                </p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 text-center">
+                        <div class="text-sm text-slate-500 mb-1">所屬產業</div>
+                        <div class="font-bold text-slate-800">生物製藥 (新藥研發)</div>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 text-center">
+                        <div class="text-sm text-slate-500 mb-1">主要催化劑 (Catalyst)</div>
+                        <div class="font-bold text-slate-800 text-blue-600">LBS-008 三期臨床解盲</div>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 text-center">
+                        <div class="text-sm text-slate-500 mb-1">近期營收表現</div>
+                        <div class="font-bold text-slate-800">無 (符合臨床階段特徵)</div>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 text-center">
+                        <div class="text-sm text-slate-500 mb-1">風險屬性</div>
+                        <div class="font-bold text-slate-800 text-red-500">高風險 / 雙元結果 (Binary)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="business" class="scroll-mt-24 print-break">
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-slate-800 mb-4 border-l-4 border-blue-600 pl-3">2. 商業模式與競爭地位</h2>
+                <p class="text-slate-600 mb-6 leading-relaxed">
+                    仁新醫藥採取「一源多用」與「海外控股」策略。核心商業模式並非直接生產銷售，而是將研發推進至臨床中後期，尋求國際大廠授權 (Out-licensing) 或透過子公司在美國那斯達克上市來募集資金。此模式能有效降低母公司直接籌資的股本膨脹風險。競爭地位上，其 LBS-008 已取得 FDA 與 EMA 的孤兒藥認證 (ODD) 及快速審查資格 (Fast Track)，在斯特格病變 (STGD1) 領域具備先行者優勢 (First-mover advantage)。
+                </p>
+                
+                <h3 class="text-lg font-semibold text-slate-700 mb-3 mt-8">核心產品線進度 (Pipeline)</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-600 text-sm">
+                                <th class="p-3 border-b border-slate-200 font-medium rounded-tl-lg">候選藥物</th>
+                                <th class="p-3 border-b border-slate-200 font-medium">適應症</th>
+                                <th class="p-3 border-b border-slate-200 font-medium">臨床一期</th>
+                                <th class="p-3 border-b border-slate-200 font-medium">臨床二期</th>
+                                <th class="p-3 border-b border-slate-200 font-medium">臨床三期</th>
+                                <th class="p-3 border-b border-slate-200 font-medium rounded-tr-lg">狀態/預期</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm">
+                            <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+                                <td class="p-3 font-semibold text-blue-700">LBS-008 (Tinlarebant)</td>
+                                <td class="p-3 text-slate-600">斯特格病變 (STGD1)</td>
+                                <td class="p-3"><div class="h-2 w-full bg-blue-500 rounded"></div></td>
+                                <td class="p-3"><div class="h-2 w-full bg-blue-500 rounded"></div></td>
+                                <td class="p-3"><div class="h-2 w-3/4 bg-blue-500 rounded relative"><span class="absolute -right-2 -top-1 w-3 h-3 bg-blue-600 rounded-full animate-pulse"></span></div></td>
+                                <td class="p-3 text-slate-600">進行中 (DRAGON 試驗)，具孤兒藥資格</td>
+                            </tr>
+                            <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+                                <td class="p-3 font-semibold text-blue-700">LBS-008 (Tinlarebant)</td>
+                                <td class="p-3 text-slate-600">晚期乾性黃斑部病變 (GA)</td>
+                                <td class="p-3"><div class="h-2 w-full bg-emerald-500 rounded"></div></td>
+                                <td class="p-3"><div class="h-2 w-full bg-emerald-500 rounded"></div></td>
+                                <td class="p-3"><div class="h-2 w-1/4 bg-emerald-500 rounded relative"><span class="absolute -right-2 -top-1 w-3 h-3 bg-emerald-600 rounded-full animate-pulse"></span></div></td>
+                                <td class="p-3 text-slate-600">PHOENIX 試驗進行中</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="p-3 font-semibold text-amber-600">LBS-007</td>
+                                <td class="p-3 text-slate-600">急性白血病 / 實體腫瘤</td>
+                                <td class="p-3"><div class="h-2 w-1/2 bg-amber-500 rounded relative"><span class="absolute -right-2 -top-1 w-3 h-3 bg-amber-600 rounded-full animate-pulse"></span></div></td>
+                                <td class="p-3"><div class="h-2 w-full bg-slate-200 rounded"></div></td>
+                                <td class="p-3"><div class="h-2 w-full bg-slate-200 rounded"></div></td>
+                                <td class="p-3 text-slate-600">澳洲一期臨床啟動</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-4 text-xs text-slate-400 text-right">註：進度條為視覺化示意，詳細階段請參照公司公開法說會資料。</div>
+            </div>
+        </section>
+
+        <section id="financials" class="scroll-mt-24 print-break">
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-slate-800 mb-4 border-l-4 border-blue-600 pl-3">3. 財報深度分析與現金產生能力</h2>
+                <p class="text-slate-600 mb-6 leading-relaxed">
+                    分析臨床階段生技公司的損益表(無營收，高度研發費用)意義有限，核心在於<strong>資產負債表與現金流量表</strong>。關鍵指標為「現金儲備 (Cash Runway)」與「現金消耗率 (Cash Burn Rate)」。由於三期臨床試驗(DRAGON & PHOENIX)全面展開，近期研發費用顯著攀升。然而，透過子公司 Belite Bio 在美股的籌資，集團整體現金池得以補充。我們需密切關注母公司與子公司的資金運用效率，以防範過度稀釋股權的財務紅旗 (Red Flag)。
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="p-5 border border-slate-100 rounded-xl bg-slate-50 shadow-sm">
+                        <div class="text-slate-500 text-sm mb-2 font-medium">營收與利潤率趨勢</div>
+                        <div class="text-slate-800 font-semibold mb-2">不適用 (N/A)</div>
+                        <p class="text-xs text-slate-500">目前無產品上市，營收主要為零星授權或補助，營業利益率呈現負值，此為產業常態，非屬財務紅旗。</p>
+                    </div>
+                    <div class="p-5 border border-slate-100 rounded-xl bg-slate-50 shadow-sm">
+                        <div class="text-slate-500 text-sm mb-2 font-medium">負債水準 (Leverage)</div>
+                        <div class="text-emerald-600 font-semibold mb-2">健康 / 低負債</div>
+                        <p class="text-xs text-slate-500">生技研發高度依賴股權融資(Equity Financing)而非債務。公司長短期金融負債佔比低，避免了高利息帶來的現金流壓力。</p>
+                    </div>
+                    <div class="p-5 border border-slate-100 rounded-xl bg-slate-50 shadow-sm border-l-4 border-l-amber-500">
+                        <div class="text-slate-500 text-sm mb-2 font-medium">現金產生與消耗</div>
+                        <div class="text-amber-600 font-semibold mb-2">需持續監控 (Burn Rate)</div>
+                        <p class="text-xs text-slate-500">自由現金流為負。營運主要仰賴帳上現金與約當現金。子公司 BLTE 的後續募資能力是支撐三期臨床完成的關鍵命脈。</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-xl border border-slate-100">
+                    <h3 class="text-center text-sm font-bold text-slate-700 mb-4">集團合併研發費用 vs. 帳上現金趨勢評估 (模擬示意)</h3>
+                    <div class="chart-container">
+                        <canvas id="financialChart"></canvas>
+                    </div>
+                    <p class="text-center text-xs text-slate-400 mt-4">圖表交互：將游標懸停在數據點上可查看詳細模擬金額。研發費用上升反映臨床進度推進。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="valuation" class="scroll-mt-24 print-break">
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-slate-800 mb-4 border-l-4 border-blue-600 pl-3">4. 估值評估：分類加總估值法 (SOTP)</h2>
+                <p class="text-slate-600 mb-6 leading-relaxed">
+                    基於盈餘或成長率的傳統模型無法評估仁新。華爾街採用<strong>分類加總法 (Sum-of-the-Parts, SOTP)</strong>。仁新最主要的資產是持有那斯達克上市公司 Belite Bio (BLTE) 的大量股權 (假設持股比例約為 50%，具體依最新財報為準)。我們以 BLTE 的市值為基準，推算仁新應有的合理市值。如果仁新的市值大幅低於其持有的 BLTE 股權價值，則表示被<strong>低估 (Undervalued)</strong>；反之則有高估風險。
+                </p>
+
+                <div class="bg-blue-50 border border-blue-100 rounded-xl p-6 mb-6">
+                    <h3 class="text-lg font-bold text-blue-900 mb-4">互動式 SOTP 估值推演模型</h3>
+                    <p class="text-sm text-blue-700 mb-6">請拖動滑桿模擬 Belite Bio (BLTE) 的預估市值，觀察其對仁新 (6696) 合理股價的影響。</p>
+                    
+                    <div class="mb-8">
+                        <label for="blteMarketCap" class="block text-sm font-medium text-slate-700 mb-2">
+                            假設 Belite Bio (BLTE) 市值 (億美元): <span id="blteMarketCapVal" class="font-bold text-blue-600 text-lg">10</span> 億美元
+                        </label>
+                        <input type="range" id="blteMarketCap" min="3" max="30" step="1" value="10" class="w-full">
+                        <div class="flex justify-between text-xs text-slate-500 mt-1">
+                            <span>悲觀 ($3億)</span>
+                            <span>合理 ($15億)</span>
+                            <span>樂觀 ($30億)</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-5 rounded-lg border border-blue-100 shadow-sm">
+                        <div>
+                            <div class="text-sm text-slate-500 mb-1">仁新持有 BLTE 價值 (假設持股50% + 匯率32)</div>
+                            <div class="text-2xl font-bold text-slate-800"><span id="calcHoldingValue">160</span> <span class="text-sm font-normal text-slate-500">億新台幣</span></div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-slate-500 mb-1">扣除控股折價 (假設30%流動性/控股折價)</div>
+                            <div class="text-2xl font-bold text-slate-800"><span id="calcDiscountedValue">112</span> <span class="text-sm font-normal text-slate-500">億新台幣</span></div>
+                        </div>
+                        <div class="md:col-span-2 pt-4 border-t border-slate-100 mt-2">
+                            <div class="text-sm text-slate-500 mb-1">推算仁新 (6696) 合理股價 (假設股本7.5億/7.5萬張)</div>
+                            <div class="flex items-end gap-3">
+                                <div class="text-4xl font-black text-blue-600">NT$ <span id="calcTargetPrice">149</span></div>
+                                <div class="text-sm text-slate-500 pb-1">/ 股</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-400">推論依據：此為簡化版 SOTP 模型。實際估值需考量即時匯率、確切持股比例變化(因 BLTE 增資而稀釋)、仁新母公司其他藥物(LBS-007)的 NPV 價值，以及母公司獨立帳上現金與負債。本模型證明：若 BLTE 臨床數據達標帶動其美股市值噴發，仁新具備強烈的連動上漲潛力。</p>
+            </div>
+        </section>
+
+        <section id="risks" class="scroll-mt-24 print-break mb-16">
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-slate-800 mb-4 border-l-4 border-blue-600 pl-3">5. 風險情境推演 (Downside Risk Matrix)</h2>
+                <p class="text-slate-600 mb-6 leading-relaxed">
+                    生技股屬於高風險資產。任何投資決策均需將最差情況(下檔風險)納入考量。點擊下方各項風險因子，檢視可能對公司營運與股價造成的具體衝擊。
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    
+                    <div class="risk-card cursor-pointer border border-slate-200 rounded-lg p-5 hover:bg-slate-50 transition-all" onclick="toggleRisk('risk-clinical')">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-bold text-slate-800 flex items-center gap-2">
+                                <span class="text-red-500 text-xl">⚠</span> 臨床與破壞性風險 (最大下檔風險)
+                            </h3>
+                            <span class="text-slate-400 text-lg font-bold" id="icon-risk-clinical">+</span>
+                        </div>
+                        <div id="risk-clinical" class="hidden mt-4 text-sm text-slate-600 border-t border-slate-100 pt-3">
+                            <strong>情境推演：</strong> 若 LBS-008 臨床三期 (DRAGON 或 PHOENIX) 未達主要療效終點 (Primary Endpoint)，或出現嚴重副作用。
+                            <br><br>
+                            <strong>影響評估：</strong> 這是生技股的「二元風險 (Binary Risk)」。BLTE 市值恐面臨 70%-90% 的毀滅性崩跌，仁新的 SOTP 價值將瞬間歸零附近，股價將反映母公司剩餘現金與極具不確定性的早期產品 (LBS-007) 價值，產生極端嚴重的財務損失。此外，若市場出現基因療法成功治癒 STGD1，亦構成產業破壞性風險。
+                        </div>
+                    </div>
+
+                    <div class="risk-card cursor-pointer border border-slate-200 rounded-lg p-5 hover:bg-slate-50 transition-all" onclick="toggleRisk('risk-financial')">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-bold text-slate-800 flex items-center gap-2">
+                                <span class="text-amber-500 text-xl">⚖</span> 財務與籌資風險
+                            </h3>
+                            <span class="text-slate-400 text-lg font-bold" id="icon-risk-financial">+</span>
+                        </div>
+                        <div id="risk-financial" class="hidden mt-4 text-sm text-slate-600 border-t border-slate-100 pt-3">
+                            <strong>情境推演：</strong> 資本市場進入寒冬，利率維持高檔，導致生技板塊估值承壓。BLTE 資金耗盡前無法順利在美股完成增資 (Follow-on offering)，或增資價格極差。
+                            <br><br>
+                            <strong>影響評估：</strong> 母公司仁新持股比例將被迫大幅稀釋，或需自行發行新股注資子公司。這將導致現有股東權益受損 (Dilution)，引發股價中長期緩跌。財務紅旗：持續觀察現金流量表，若現金儲備不足 12 個月即為高風險警示。
+                        </div>
+                    </div>
+
+                    <div class="risk-card cursor-pointer border border-slate-200 rounded-lg p-5 hover:bg-slate-50 transition-all" onclick="toggleRisk('risk-management')">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-bold text-slate-800 flex items-center gap-2">
+                                <span class="text-blue-500 text-xl">👥</span> 管理層與監管風險
+                            </h3>
+                            <span class="text-slate-400 text-lg font-bold" id="icon-risk-management">+</span>
+                        </div>
+                        <div id="risk-management" class="hidden mt-4 text-sm text-slate-600 border-t border-slate-100 pt-3">
+                            <strong>情境推演：</strong> 臨床試驗設計瑕疵被 FDA/EMA 糾正需重做，或核心研發團隊流失。
+                            <br><br>
+                            <strong>影響評估：</strong> 審查延宕將消耗大量額外現金，延後潛在上市與授權時間表。時間成本是生技公司的天敵，將直接下修 NPV 估值模型中的折現率假設，導致合理股價下調 20%-40%。
+                        </div>
+                    </div>
+
+                    <div class="risk-card cursor-pointer border border-slate-200 rounded-lg p-5 hover:bg-slate-50 transition-all" onclick="toggleRisk('risk-macro')">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-bold text-slate-800 flex items-center gap-2">
+                                <span class="text-slate-500 text-xl">🌐</span> 總體經濟與匯率風險
+                            </h3>
+                            <span class="text-slate-400 text-lg font-bold" id="icon-risk-macro">+</span>
+                        </div>
+                        <div id="risk-macro" class="hidden mt-4 text-sm text-slate-600 border-t border-slate-100 pt-3">
+                            <strong>情境推演：</strong> 新台幣兌美元大幅升值，或全球爆發流動性危機。
+                            <br><br>
+                            <strong>影響評估：</strong> 由於仁新的主要價值來自美元計價的 BLTE，新台幣大幅升值將導致換算回台股的每股淨值與 SOTP 估值縮水 (匯損)。此為非營運面的系統性風險，影響幅度約在 5%-15% 的估值波動。
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-8 text-center text-sm no-print">
+        <div class="max-w-6xl mx-auto px-4">
+            <p>免責聲明：本報告為模擬生成之分析框架，所有數據與股價推演均為示範性質，不構成任何真實投資建議或買賣邀約。投資人應自行評估風險。</p>
+            <p class="mt-2">© 2026 Wall Street Global Equity Research. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (scrollY >= (sectionTop - 150)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+            const ctx = document.getElementById('financialChart').getContext('2d');
+            const financialChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Q1 預估', 'Q2 預估', 'Q3 預估', 'Q4 預估', '次年 Q1 預估'],
+                    datasets: [
+                        {
+                            type: 'line',
+                            label: '合併帳上現金儲備 (百萬新台幣)',
+                            data: [3500, 3100, 2600, 4200, 3700], 
+                            borderColor: '#2563eb',
+                            backgroundColor: '#2563eb',
+                            borderWidth: 3,
+                            tension: 0.3,
+                            yAxisID: 'y'
+                        },
+                        {
+                            type: 'bar',
+                            label: '季度研發費用 (百萬新台幣)',
+                            data: [380, 420, 450, 480, 460], 
+                            backgroundColor: 'rgba(245, 158, 11, 0.7)',
+                            borderColor: 'rgb(245, 158, 11)',
+                            borderWidth: 1,
+                            borderRadius: 4,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                            titleFont: { size: 13, family: "'Noto Sans TC', sans-serif" },
+                            bodyFont: { size: 13, family: "'Noto Sans TC', sans-serif" },
+                            padding: 10,
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) label += ': ';
+                                    if (context.parsed.y !== null) label += context.parsed.y + ' 百萬';
+                                    return label;
+                                }
+                            }
+                        },
+                        legend: {
+                            position: 'bottom',
+                            labels: { font: { family: "'Noto Sans TC', sans-serif" } }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: { display: true, text: '現金儲備', color: '#64748b' },
+                            grid: { color: '#f1f5f9' }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: { display: true, text: '研發費用', color: '#64748b' },
+                            grid: { drawOnChartArea: false }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+
+            const blteSlider = document.getElementById('blteMarketCap');
+            const blteValDisplay = document.getElementById('blteMarketCapVal');
+            const holdValDisplay = document.getElementById('calcHoldingValue');
+            const discValDisplay = document.getElementById('calcDiscountedValue');
+            const targetPriceDisplay = document.getElementById('calcTargetPrice');
+
+            const exchangeRate = 32; 
+            const holdingRatio = 0.5; 
+            const discountRate = 0.3; 
+            const totalShares = 0.75; 
+
+            function updateValuation() {
+                const blteMarketCapUSD = parseFloat(blteSlider.value); 
+                blteValDisplay.innerText = blteMarketCapUSD;
+
+                const holdingValueNTD = blteMarketCapUSD * 100000000 * holdingRatio * exchangeRate;
+                const holdingValueBillionNTD = (holdingValueNTD / 100000000).toFixed(0);
+                holdValDisplay.innerText = holdingValueBillionNTD;
+
+                const discountedValueNTD = holdingValueNTD * (1 - discountRate);
+                const discountedValueBillionNTD = (discountedValueNTD / 100000000).toFixed(0);
+                discValDisplay.innerText = discountedValueBillionNTD;
+
+                const pricePerShare = (discountedValueNTD / (totalShares * 100000000)).toFixed(0);
+                targetPriceDisplay.innerText = pricePerShare;
+            }
+
+            blteSlider.addEventListener('input', updateValuation);
+            updateValuation(); 
+        });
+
+        function toggleRisk(id) {
+            const content = document.getElementById(id);
+            const icon = document.getElementById('icon-' + id);
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.innerText = '-';
+            } else {
+                content.classList.add('hidden');
+                icon.innerText = '+';
+            }
+        }
+    </script>
+</body>
+</html>
