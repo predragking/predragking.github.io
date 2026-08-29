@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>優式資本（UC Capital）華爾街深度研究報告與互動分析台</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                            accent: '#d97706',
+                            gold: '#b45309',
+                            teal: '#0d9488',
+                            indigo: '#4f46e5'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 360px;
+            }
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased leading-relaxed custom-scrollbar">
+
+    <!-- Mandatory Comment 1: Chosen Palette -->
+    <!-- Chosen Palette: Warm Institutional Analyst (Slate background, Gold/Amber primary accents, Dark Slate containers, Teal/Indigo chart indicators) -->
+
+    <!-- Mandatory Comment 2: Application Structure Plan -->
+    <!-- Application Structure Plan:
+        1. Sticky Header & Navigation: High-level branding, title, tab navigation for seamless single-page filtering.
+        2. Hero & Executive KPI Cards: Highlighting Key Metrics (Assets 150B NTD, Monthly Vol 2500B NTD, IRR 51%, Sharpe 2.8, Drawdown 6.1%).
+        3. Section 1: Executive Overview & Wall Street Thesis (Strategic market positioning, retail alpha logic).
+        4. Section 2: Core Alpha Strategies Matrix (Interactive strategy selector: ETF Arbitrage, CBAS Delta Neutral, Sentiment NLP).
+        5. Section 3: Tech Moat & Microstructure Exploits (Interactive breakdown of TWSE rules, Co-Location, and Eastern Earthquake Detector physics).
+        6. Section 4: Risk Control & Financial Performance (Comparative Risk-Adjusted Return Chart, Max Drawdown resilience).
+        7. Section 5: Talent Density & The Ohtani Ball Asymmetric Arbitrage (Interactive ROI / Option Pricing Model for the $4.39M ball purchase).
+        8. Section 6: Competitor Matrix & Macro Risks (UC Capital vs Vici vs Quantrend vs Citadel, 2027 Day Trading Tax Sunset).
+        9. Section 7: Interactive Quant Strategy Simulator (User-driven leverage, volatility & retail ratio slider simulating projected IRR & Drawdown).
+    -->
+
+    <!-- Mandatory Comment 3: Visualization & Content Choices -->
+    <!-- Visualization & Content Choices:
+        - Risk-Adjusted Return Comparison: Chart.js Bar Chart (UC Capital vs TWSE 0050 vs Wall St Funds). Clarifies Sharpe Ratio disparity.
+        - Strategy Revenue Allocation: Chart.js Doughnut Chart (ETF, CBAS, NLP, Microstructure). Interactive dynamic details on click.
+        - Strategic Decision Tree / Ohtani Ball ROI: Custom HTML/Tailwind Option-Pricing Matrix simulating Asymmetric Risk Arbitrage.
+        - Competitor Comparison: Structured HTML Filterable Matrix comparing latency, strategy, and asset focus.
+        - Quantitative Strategy Simulator: Dynamic JS-driven Chart.js Line Chart predicting expected returns under different leverage and market volatility inputs.
+        - CONFIRMATION: NO SVG tags used. NO Mermaid JS used. All visual components rely on Canvas (Chart.js) and Tailwind CSS structure.
+    -->
+
+    <!-- Mandatory Comment 4: Confirmation -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-50 bg-slate-900 text-white shadow-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-3">
+                    <span class="text-2xl">🏛️</span>
+                    <div>
+                        <h1 class="text-lg font-bold tracking-tight text-amber-400">UC Capital 優式資本</h1>
+                        <p class="text-xs text-slate-400">華爾街量化分析師深度研究與互動分析台</p>
+                    </div>
+                </div>
+                <nav class="hidden md:flex space-x-1 text-sm font-medium">
+                    <button onclick="scrollToSection('sec-overview')" class="px-3 py-2 rounded-md hover:bg-slate-800 hover:text-amber-400 transition">全景概覽</button>
+                    <button onclick="scrollToSection('sec-strategies')" class="px-3 py-2 rounded-md hover:bg-slate-800 hover:text-amber-400 transition">Alpha 策略</button>
+                    <button onclick="scrollToSection('sec-tech')" class="px-3 py-2 rounded-md hover:bg-slate-800 hover:text-amber-400 transition">微觀技術</button>
+                    <button onclick="scrollToSection('sec-risk')" class="px-3 py-2 rounded-md hover:bg-slate-800 hover:text-amber-400 transition">風險與財務</button>
+                    <button onclick="scrollToSection('sec-talent')" class="px-3 py-2 rounded-md hover:bg-slate-800 hover:text-amber-400 transition">人才與品牌</button>
+                    <button onclick="scrollToSection('sec-competitors')" class="px-3 py-2 rounded-md hover:bg-slate-800 hover:text-amber-400 transition">同業與挑戰</button>
+                    <button onclick="scrollToSection('sec-simulator')" class="px-3 py-2 rounded-md bg-amber-600 hover:bg-amber-500 text-white font-semibold transition">策略模擬器</button>
+                </nav>
+            </div>
+        </div>
+        <!-- Mobile Navigation Bar -->
+        <div class="md:hidden flex overflow-x-auto space-x-2 px-4 py-2 bg-slate-950 text-xs text-slate-300 border-t border-slate-800 custom-scrollbar">
+            <button onclick="scrollToSection('sec-overview')" class="whitespace-nowrap px-2 py-1 bg-slate-800 rounded">概覽</button>
+            <button onclick="scrollToSection('sec-strategies')" class="whitespace-nowrap px-2 py-1 bg-slate-800 rounded">Alpha策略</button>
+            <button onclick="scrollToSection('sec-tech')" class="whitespace-nowrap px-2 py-1 bg-slate-800 rounded">微觀技術</button>
+            <button onclick="scrollToSection('sec-risk')" class="whitespace-nowrap px-2 py-1 bg-slate-800 rounded">風險財務</button>
+            <button onclick="scrollToSection('sec-talent')" class="whitespace-nowrap px-2 py-1 bg-slate-800 rounded">人才品牌</button>
+            <button onclick="scrollToSection('sec-competitors')" class="whitespace-nowrap px-2 py-1 bg-slate-800 rounded">同業與挑戰</button>
+            <button onclick="scrollToSection('sec-simulator')" class="whitespace-nowrap px-2 py-1 bg-amber-600 text-white rounded">策略模擬</button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- Executive Summary Banner -->
+        <section class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 rounded-2xl p-6 sm:p-8 text-white shadow-xl border border-slate-700">
+            <div class="max-w-4xl space-y-4">
+                <div class="inline-flex items-center space-x-2 bg-amber-500/20 text-amber-300 border border-amber-500/30 px-3 py-1 rounded-full text-xs font-semibold">
+                    <span> Wall Street Quantitative Analysis Report</span>
+                </div>
+                <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight">解碼亞洲最神秘的高頻量化巨獸：優式資本（UC Capital）</h2>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                    本報告由華爾街機構投資者與市場微觀結構分析師視角出發，全方位拆解台灣最大單一量化自營基金——優式資本。透過零外部募資的純自營（Prop Store）架構、對散戶主導市場不效率性的深刻理解，以及物理級低延遲設施，優式資本展現了世界頂尖的夏普值與風險調整後報酬。
+                </p>
+            </div>
+
+            <!-- Metric Cards Container -->
+            <div class="grid grid-cols-2 lg:grid-cols-5 gap-4 mt-8 pt-6 border-t border-slate-700/80">
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700 hover:border-amber-500/50 transition">
+                    <p class="text-xs text-slate-400 font-medium">槓桿前流動資產</p>
+                    <p class="text-xl sm:text-2xl font-black text-amber-400 mt-1">NT$ 150 億</p>
+                    <p class="text-[10px] text-slate-400 mt-1">100% 自有資金 / 無外部負擔</p>
+                </div>
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700 hover:border-amber-500/50 transition">
+                    <p class="text-xs text-slate-400 font-medium">月均市場交易量</p>
+                    <p class="text-xl sm:text-2xl font-black text-amber-400 mt-1">NT$ 2,500 億</p>
+                    <p class="text-[10px] text-slate-400 mt-1">常態 3 倍資金槓桿操作</p>
+                </div>
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700 hover:border-amber-500/50 transition">
+                    <p class="text-xs text-slate-400 font-medium">平均年化 IRR (2021-25)</p>
+                    <p class="text-xl sm:text-2xl font-black text-emerald-400 mt-1">51.0 %</p>
+                    <p class="text-[10px] text-slate-400 mt-1">複利驅動的絕對報酬</p>
+                </div>
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700 hover:border-amber-500/50 transition">
+                    <p class="text-xs text-slate-400 font-medium">平均夏普值 (Sharpe)</p>
+                    <p class="text-xl sm:text-2xl font-black text-emerald-400 mt-1">2.80</p>
+                    <p class="text-[10px] text-slate-400 mt-1">華爾街頂尖對沖基金水平</p>
+                </div>
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700 hover:border-amber-500/50 transition col-span-2 lg:col-span-1">
+                    <p class="text-xs text-slate-400 font-medium">2025/04 股災最大回撤</p>
+                    <p class="text-xl sm:text-2xl font-black text-sky-400 mt-1">- 6.1 %</p>
+                    <p class="text-[10px] text-slate-400 mt-1">極端壓力下展現強悍風控</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 1: 全景概覽 (EXECUTIVE OVERVIEW) -->
+        <section id="sec-overview" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6">
+            <div class="border-l-4 border-amber-500 pl-4">
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900">一、全景概覽與華爾街投資論文（Investment Thesis）</h3>
+                <p class="text-sm text-slate-500 mt-1">從鼎星資本分拆到亞洲莊家優勢的建立：散戶結構中的超額 Alpha 源泉</p>
+            </div>
+
+            <div class="prose max-w-none text-slate-600 text-sm sm:text-base space-y-4">
+                <p>
+                    <strong>導言與分析師視角：</strong> 本章節旨在建立對優式資本（UC Capital）核心營運體系與商業模式的總體認識。華爾街分析師認為，傳統主動型基金依賴宏觀預測或個股基本面，而優式資本則完全棄絕方向性押注（Beta），轉而建立「莊家優勢（House Edge）」。透過在數百萬筆交易中提取千分之幾的微小定價錯位，將概率上的優勢轉化為近乎無風險的確定性收益。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-900 flex items-center space-x-2">
+                        <span>🌱</span>
+                        <span>資本孕育與分拆獨立（2011 - 2021）</span>
+                    </h4>
+                    <ul class="text-xs sm:text-sm text-slate-600 space-y-2 list-disc list-inside">
+                        <li><strong>鼎星資本時期：</strong> 2011 年由前 J.P. Morgan 研究員劉興漢與張君銘創立，以 2,000 萬元資本起家，抓著台灣交易全面電子化紅利，10 年內資產暴增 270 倍至 56 億元。</li>
+                        <li><strong>2021 年戰略分拆：</strong> 因經營理念與技術投入方向分歧，劉興漢分拆帶領 1 名交易員與 6 名工程師成立優式資本（UC Capital），確立純自營、不對外募資的封閉體制。</li>
+                        <li><strong>戰略自由度：</strong> 無需面對外部 LP 的短期贖回壓力與績效審查，能將獲利 100% 滾入本金或進行無上限的技術基礎設施資本支出。</li>
+                    </ul>
+                </div>
+
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-900 flex items-center space-x-2">
+                        <span>🎯</span>
+                        <span>散戶主導市場與「莊家優勢」</span>
+                    </h4>
+                    <ul class="text-xs sm:text-sm text-slate-600 space-y-2 list-disc list-inside">
+                        <li><strong>利基市場選擇：</strong> 聚焦台灣及東南亞（泰國、越南、馬來西亞）等散戶參與度高（>35%-40%）的新興市場。</li>
+                        <li><strong>定價不效率性（Mispricing）：</strong> 散戶群體易受新聞頭條、社群媒體與羊群效應影響，產生情緒驅動的非理性定價，成為高頻做市商的獲利溫床。</li>
+                        <li><strong>大數法則實踐：</strong> 保持 50% 以上的微觀勝率，在每日數十萬筆高頻微利交易中，聚沙成塔創造穩定的絕對報酬。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: CORE ALPHA STRATEGIES -->
+        <section id="sec-strategies" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6">
+            <div class="border-l-4 border-amber-500 pl-4">
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900">二、核心交易策略與超額報酬（Alpha）解碼</h3>
+                <p class="text-sm text-slate-500 mt-1">互動式探索：ETF 初次級套利、CBAS Delta 中性動態對沖與輿情情緒交易</p>
+            </div>
+
+            <p class="text-sm text-slate-600">
+                <strong>導言與分析師視角：</strong> 本章節剖析優式資本獲取 Alpha 的三大核心支柱。優式資本並非依賴單一模型，而是構建了一套多元且相互補充的套利矩陣。請點擊下方策略標籤或圓餅圖，深入檢視各策略的運作機制與經典戰役案例（如 2025 年 4 月川普關稅股災中的逆勢套利）。
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <!-- Chart Column -->
+                <div class="lg:col-span-5 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <h4 class="text-xs font-bold text-slate-500 text-center uppercase tracking-wider mb-2">估計策略營收/Alpha 權重預估</h4>
+                    <div class="chart-container">
+                        <canvas id="strategyChart"></canvas>
+                    </div>
+                    <p class="text-[11px] text-slate-400 text-center mt-2">※ 點擊圖表區塊可切換右側策略詳情說明</p>
+                </div>
+
+                <!-- Interactive Strategy Content Column -->
+                <div class="lg:col-span-7 space-y-4">
+                    <!-- Nav Tabs -->
+                    <div class="flex border-b border-slate-200 text-xs sm:text-sm font-semibold">
+                        <button id="tab-etf" onclick="selectStrategy('etf')" class="px-4 py-2 border-b-2 border-amber-500 text-amber-600 focus:outline-none">1. ETF 初次級套利</button>
+                        <button id="tab-cbas" onclick="selectStrategy('cbas')" class="px-4 py-2 border-b-2 border-transparent text-slate-500 hover:text-slate-800 focus:outline-none">2. CBAS Delta 對沖</button>
+                        <button id="tab-nlp" onclick="selectStrategy('nlp')" class="px-4 py-2 border-b-2 border-transparent text-slate-500 hover:text-slate-800 focus:outline-none">3. 輿情情緒交易</button>
+                    </div>
+
+                    <!-- Dynamic Card Box -->
+                    <div id="strategy-detail-box" class="bg-slate-900 text-white p-6 rounded-xl space-y-4 shadow-inner min-h-[260px]">
+                        <!-- JS populated content goes here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: TECH MOAT & MICROSTRUCTURE -->
+        <section id="sec-tech" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6">
+            <div class="border-l-4 border-amber-500 pl-4">
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900">三、技術護城河與市場微觀結構套利</h3>
+                <p class="text-sm text-slate-500 mt-1">主機共置、制度漏洞與跨領域物理延遲套利（地震探測器）</p>
+            </div>
+
+            <p class="text-sm text-slate-600">
+                <strong>導言與分析師視角：</strong> 高頻交易是一場針對「微秒（$\mu s$）」甚至「奈秒（ns）」的無情競速。然而優式資本的技術護城河不僅在於機房纜線等長等硬體限制下的速度優勢，更在於深度利用台股獨特的制度規則（如漲跌幅限制與 2 分鐘瞬間價格穩定）以及破天荒的物理數據整合。
+            </p>
+
+            <!-- Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 hover:shadow-md transition">
+                    <div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center text-amber-700 font-bold text-xl mb-3">⚡</div>
+                    <h4 class="font-bold text-slate-900 text-base mb-2">主機共置（Co-Location）</h4>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        租用 TWSE / TPEx 高級機房，伺服器直連撮合主機。在交易所強制「等長佈線」規範下，透過深度優化 NIC 網卡解碼與 Linux Kernel OS 核心，在微秒級戰場取得相對優勢。
+                    </p>
+                </div>
+
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 hover:shadow-md transition">
+                    <div class="w-10 h-10 bg-sky-100 rounded-lg flex items-center justify-center text-sky-700 font-bold text-xl mb-3">📊</div>
+                    <h4 class="font-bold text-slate-900 text-base mb-2">制度漏洞：10% 限制與價格穩定</h4>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        利用台股 10% 漲跌幅鎖死產生的流動性斷層預先插單；並在「瞬間價格穩定措施」強制暫緩撮合的 2 分鐘冷卻期內，透過模擬資訊預測重新開盤價，精準捕捉冷卻流動性。
+                    </p>
+                </div>
+
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 hover:shadow-md transition">
+                    <div class="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center text-emerald-700 font-bold text-xl mb-3">🌍</div>
+                    <h4 class="font-bold text-slate-900 text-base mb-2">極客創新：地震物理延遲套利</h4>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        於台灣東部實體架設地震探測器。利用「電磁訊號速度 (光速) ＞ 地震 P/S 波傳播速度」的物理定律，搶在震波抵達竹科與台北前數秒，自動出清現股或放空期貨避險。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Seismic Latency Visual Flow (HTML/CSS Diagram) -->
+            <div class="bg-slate-900 text-white rounded-xl p-6 space-y-4">
+                <h4 class="text-sm font-bold text-amber-400 uppercase tracking-wider">物理延遲套利原理示意流程 (Physical Seismic Latency Arbitrage Flow)</h4>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-center text-xs">
+                    <div class="bg-slate-800 p-3 rounded border border-slate-700">
+                        <span class="block text-lg mb-1">🌋</span>
+                        <span class="font-semibold text-amber-300">1. 東部發生地震</span>
+                        <p class="text-[11px] text-slate-400 mt-1">產生地震 S/P 震波與電磁訊號</p>
+                    </div>
+                    <div class="bg-slate-800 p-3 rounded border border-slate-700">
+                        <span class="block text-lg mb-1">📡</span>
+                        <span class="font-semibold text-amber-300">2. 自架探測器觸發</span>
+                        <p class="text-[11px] text-slate-400 mt-1">以光速網路傳輸訊號至台北主機</p>
+                    </div>
+                    <div class="bg-slate-800 p-3 rounded border border-slate-700">
+                        <span class="block text-lg mb-1">🤖</span>
+                        <span class="font-semibold text-amber-300">3. 演算法提前數秒處置</span>
+                        <p class="text-[11px] text-slate-400 mt-1">預測科技股衝擊，下達放空/出清指令</p>
+                    </div>
+                    <div class="bg-slate-800 p-3 rounded border border-slate-700">
+                        <span class="block text-lg mb-1">🏢</span>
+                        <span class="font-semibold text-amber-300">4. 震波抵達竹科/大眾反應</span>
+                        <p class="text-[11px] text-slate-400 mt-1">市場爆發恐慌賣壓，UC 已鎖定利潤</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: RISK CONTROL & FINANCIALS -->
+        <section id="sec-risk" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6">
+            <div class="border-l-4 border-amber-500 pl-4">
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900">四、財務表現與系統性風險控管防線</h3>
+                <p class="text-sm text-slate-500 mt-1">高夏普值（Sharpe 2.8）下的資產曲線防禦與軍事化覆盤文化</p>
+            </div>
+
+            <p class="text-sm text-slate-600">
+                <strong>導言與分析師視角：</strong> 高頻交易機構最大的毀滅性風險在於演算法邏輯異常導致的閃電崩盤（Flash Crash）。優式資本透過寫入底層的硬性每日虧損上限（Daily Loss Limit）、自動熔斷以及軍事化的夜間覆盤，實現了極度平滑的淨值增長曲線。
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <!-- Comparison Chart -->
+                <div class="lg:col-span-7 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <h4 class="text-xs font-bold text-slate-500 text-center uppercase tracking-wider mb-2">風險調整後報酬評比 (Sharpe Ratio Comparison)</h4>
+                    <div class="chart-container">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                    <p class="text-[11px] text-slate-400 text-center mt-2">※ 優式資本 Sharpe 2.80 展現近乎市場中性（Market Neutral）的優異表現</p>
+                </div>
+
+                <!-- Risk Governance Points -->
+                <div class="lg:col-span-5 space-y-4">
+                    <div class="bg-slate-900 text-white p-5 rounded-xl space-y-3">
+                        <h4 class="font-bold text-amber-400 text-base flex items-center space-x-2">
+                            <span>🛡️</span>
+                            <span>三層風控防護網</span>
+                        </h4>
+                        <div class="space-y-3 text-xs sm:text-sm text-slate-300">
+                            <div class="border-b border-slate-800 pb-2">
+                                <span class="text-white font-semibold block">1. 底層硬熔斷機制 (Daily Circuit Breaker)</span>
+                                每日設定絕對最大虧損上限。觸及比例無條件平倉並鎖定權限，絕不博弈隔日。
+                            </div>
+                            <div class="border-b border-slate-800 pb-2">
+                                <span class="text-white font-semibold block">2. 動態波動率部位調控 (Volatility Sizing)</span>
+                                當 VIX 指數或個別標的波動劇烈時，系統自動縮減下單規模，避免流動性枯竭風險。
+                            </div>
+                            <div>
+                                <span class="text-white font-semibold block">3. 軍事化覆盤會議 (10 PM Daily Review)</span>
+                                創辦人親自主持每晚 10 點檢討會，精確檢視演算法執行滑價與預測偏差，每日微調參數。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: TALENT & BRANDING (OHTANI BALL) -->
+        <section id="sec-talent" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6">
+            <div class="border-l-4 border-amber-500 pl-4">
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900">五、人才密度、企業文化與非對稱品牌行銷</h3>
+                <p class="text-sm text-slate-500 mt-1">對標矽谷的薪酬結構與 1.4 億標下大谷翔平「50轟50盜」紀念球的精密算計</p>
+            </div>
+
+            <p class="text-sm text-slate-600">
+                <strong>導言與分析師視角：</strong> 量化交易的本質是智力資本競賽。優式資本透過 50% 交易員與 50% 軟體工程師的扁平架構，以及對標矽谷的極高薪酬，搶奪頂尖理工人才。2024 年以約 439.2 萬美元（1.4 億 NTD）拍下大谷翔平紀念球，表面為體育收藏，實則為經過精密計算的「非對稱風險套利（Asymmetric Risk Arbitrage）」公關戰。
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Compensation & Culture -->
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-900 text-base flex items-center space-x-2">
+                        <span>👥</span>
+                        <span>人才結構與頂級薪酬誘因</span>
+                    </h4>
+                    <div class="grid grid-cols-2 gap-3 text-center my-3">
+                        <div class="bg-white p-3 rounded-lg border border-slate-200">
+                            <span class="text-xs text-slate-500 block">2023 員工薪酬中位數</span>
+                            <span class="text-lg font-bold text-slate-900">NT$ 280 萬</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-slate-200">
+                            <span class="text-xs text-slate-500 block">核心成員(7人)年薪</span>
+                            <span class="text-lg font-bold text-amber-600">> NT$ 1,000 萬</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-slate-200">
+                            <span class="text-xs text-slate-500 block">暑期實習生月薪</span>
+                            <span class="text-lg font-bold text-emerald-600">NT$ 16 萬</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-slate-200">
+                            <span class="text-xs text-slate-500 block">尾牙抽獎紅包(2024)</span>
+                            <span class="text-lg font-bold text-sky-600">NT$ 1,000 萬</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-600">
+                        <strong>面試必讀書單：</strong> 要求應徵者閱讀行為經濟學大師理察·塞勒（Richard Thaler）著作《不當行為（Misbehaving）》，篩選具備逆向思考與行為偏差洞察力的跨界人才。
+                    </p>
+                </div>
+
+                <!-- Ohtani Ball Asymmetric Risk Matrix -->
+                <div class="bg-slate-900 text-white p-5 rounded-xl space-y-3 flex flex-col justify-between">
+                    <div>
+                        <h4 class="font-bold text-amber-400 text-base flex items-center space-x-2 mb-2">
+                            <span>⚾</span>
+                            <span>大谷翔平紀念球：非對稱風險套利模型</span>
+                        </h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            創辦人劉興漢剖析拍賣邏輯：競標機制規定每次加價不超過 10 萬美元且不得連續出價。
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-800 p-4 rounded-lg border border-slate-700 space-y-2 text-xs">
+                        <div class="flex justify-between items-center border-b border-slate-700 pb-2">
+                            <span class="text-rose-400 font-semibold">下行風險 (Max Downside Risk)</span>
+                            <span class="text-white font-mono">約 $10 萬美元 (單次加價機會成本)</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-slate-700 pb-2">
+                            <span class="text-emerald-400 font-semibold">全球曝光價值 (Media Value)</span>
+                            <span class="text-white font-mono">無限 (登頂 BBC, Bloomberg, 日本主流媒體)</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-slate-700 pb-2">
+                            <span class="text-sky-400 font-semibold">雇主品牌 (Recruiting Power)</span>
+                            <span class="text-white font-mono">極大化 (吸引亞太頂尖 STEM 人才漏斗)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-amber-400 font-semibold">資產增值與租賃權 (Asset Appreciation)</span>
+                            <span class="text-white font-mono">潛在獲利 (日企接洽展覽/租賃利潤)</span>
+                        </div>
+                    </div>
+
+                    <p class="text-[11px] text-slate-400 italic">
+                        Conclusion: 以金融期權角度視之，此拍賣為「下行風險極有限、上行期權價值無限」的經典勝率套利。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: COMPETITOR MATRIX & MACRO RISKS -->
+        <section id="sec-competitors" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6">
+            <div class="border-l-4 border-amber-500 pl-4">
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900">六、同業競爭格局與總體宏觀風險</h3>
+                <p class="text-sm text-slate-500 mt-1">對決威旭資訊、量趨科技與華爾街巨頭；四大未來戰略挑戰</p>
+            </div>
+
+            <p class="text-sm text-slate-600">
+                <strong>導言與分析師視角：</strong> 優式資本並非孤立存在。在亞太量化賽道中，有偏向 FPGA 硬體極速的威旭資訊，以及深耕加密貨幣合約的量趨科技。同時，華爾街巨頭（Citadel Securities, Jane Street）人均產值高達 310萬 - 320萬美元，長期可能下沉台股市場。
+            </p>
+
+            <!-- Competitors Comparison Table -->
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                    <thead>
+                        <tr class="bg-slate-900 text-amber-400 border-b border-slate-800">
+                            <th class="p-3">機構名稱</th>
+                            <th class="p-3">主力戰場</th>
+                            <th class="p-3">核心技術護城河</th>
+                            <th class="p-3">估計團隊規模</th>
+                            <th class="p-3">策略風格與特徵</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 text-slate-700 bg-slate-50">
+                        <tr class="hover:bg-amber-50/50 transition">
+                            <td class="p-3 font-bold text-slate-900">優式資本 (UC Capital)</td>
+                            <td class="p-3">台股、ETF、CBAS、東南亞股票</td>
+                            <td class="p-3">輿情 NLP、行為經濟學、微觀結構套利</td>
+                            <td class="p-3 font-mono">~ 50 人</td>
+                            <td class="p-3">高頻做市、跨商品動態對沖、高夏普值</td>
+                        </tr>
+                        <tr class="hover:bg-slate-100 transition">
+                            <td class="p-3 font-bold text-slate-900">威旭資訊 (Vici Holdings)</td>
+                            <td class="p-3">跨國多交易所股票、期貨、權證</td>
+                            <td class="p-3">FPGA 晶片自研硬體級加速 (ns 競速)</td>
+                            <td class="p-3 font-mono">120 - 150 人</td>
+                            <td class="p-3">超低延遲造市、每日百萬筆微利堆疊</td>
+                        </tr>
+                        <tr class="hover:bg-slate-100 transition">
+                            <td class="p-3 font-bold text-slate-900">量趨科技 (Quantrend Tech)</td>
+                            <td class="p-3">全球加密貨幣合約 (Binance VIP9)</td>
+                            <td class="p-3">純 Rust 高速底層系統、AI 預測模型</td>
+                            <td class="p-3 font-mono">~ 25 人</td>
+                            <td class="p-3">虛擬貨幣流動性造市、市場中性對沖</td>
+                        </tr>
+                        <tr class="hover:bg-slate-100 transition">
+                            <td class="p-3 font-bold text-slate-900">華爾街國際巨頭 (Citadel/Jane Street)</td>
+                            <td class="p-3">全球全資產類別、亞太市場拓展</td>
+                            <td class="p-3">千億美元資本支出、跨國微波網絡</td>
+                            <td class="p-3 font-mono">數千人 (全球)</td>
+                            <td class="p-3">人均產值 $320萬 美元、全方位覆蓋</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Macro Risks Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
+                <div class="bg-slate-900 text-white p-4 rounded-xl space-y-2 border-t-2 border-rose-500">
+                    <span class="text-rose-400 font-bold text-xs uppercase tracking-wider block">風險一：當沖降稅落日 (2027)</span>
+                    <p class="text-xs text-slate-300">台股當沖佔比高達 35-40% 提供了豐沛散戶流動性。若 2027 年降稅優惠終止，散戶退場將直接壓縮做市商獲利。</p>
+                </div>
+                <div class="bg-slate-900 text-white p-4 rounded-xl space-y-2 border-t-2 border-amber-500">
+                    <span class="text-amber-400 font-bold text-xs uppercase tracking-wider block">風險二：策略容量瓶頸 (Capacity)</span>
+                    <p class="text-xs text-slate-300">月交易量達 2,500 億元後，大單拋出易造成「滑價（Slippage）」與衝擊成本，迫使公司必須轉向中低頻趨勢策略。</p>
+                </div>
+                <div class="bg-slate-900 text-white p-4 rounded-xl space-y-2 border-t-2 border-sky-500">
+                    <span class="text-sky-400 font-bold text-xs uppercase tracking-wider block">風險三：資安與 F-ISAC 監理</span>
+                    <p class="text-xs text-slate-300">金管會對 DMA 線路與自營商資安要求日益嚴苛，強制 MFA、弱點掃描與資安長設置，推升合規營運成本。</p>
+                </div>
+                <div class="bg-slate-900 text-white p-4 rounded-xl space-y-2 border-t-2 border-emerald-500">
+                    <span class="text-emerald-400 font-bold text-xs uppercase tracking-wider block">風險四：海外微波基礎設施資本戰</span>
+                    <p class="text-xs text-slate-300">進軍港股及東南亞時，必須面對建立跨國微波/雷射通訊網的巨大資本消耗戰，直接遭遇華爾街巨頭競爭。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 7: INTERACTIVE QUANT SIMULATOR -->
+        <section id="sec-simulator" class="bg-slate-900 text-white rounded-2xl p-6 sm:p-8 shadow-2xl border border-slate-700 space-y-6">
+            <div class="border-l-4 border-amber-400 pl-4">
+                <h3 class="text-xl sm:text-2xl font-bold text-amber-400">七、華爾街量化策略與風控互動模擬器</h3>
+                <p class="text-sm text-slate-400 mt-1">動態調整槓桿、市場波動度與散戶參與率，實時模擬策略 IRR 與預期最大回撤</p>
+            </div>
+
+            <p class="text-sm text-slate-300">
+                <strong>分析師動態模型說明：</strong> 請透過下方控制滑桿，調整優式資本在不同市場環境與資產配置下的參數。系統將實時計算估計年化 IRR、夏普值以及在極端壓力測試下的最大回撤（Max Drawdown），並更新下方預測曲線圖。
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <!-- Controls Column -->
+                <div class="lg:col-span-5 bg-slate-800 p-6 rounded-xl border border-slate-700 space-y-5 text-xs sm:text-sm">
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <label for="slider-leverage" class="font-semibold text-slate-200">資金運作槓桿 (Leverage Multiple)</label>
+                            <span id="val-leverage" class="font-mono text-amber-400 font-bold">3.0 x</span>
+                        </div>
+                        <input id="slider-leverage" type="range" min="1.0" max="5.0" step="0.5" value="3.0" oninput="updateSimulation()" class="w-full accent-amber-500 bg-slate-700 rounded h-2">
+                        <p class="text-[10px] text-slate-400 mt-1">現有模式：3.0x（高槓桿提升回報，但極端市況下加速回撤）</p>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <label for="slider-volatility" class="font-semibold text-slate-200">市場波動度 (VIX / Price Volatility)</label>
+                            <span id="val-volatility" class="font-mono text-amber-400 font-bold">中等 (Medium)</span>
+                        </div>
+                        <input id="slider-volatility" type="range" min="1" max="3" step="1" value="2" oninput="updateSimulation()" class="w-full accent-amber-500 bg-slate-700 rounded h-2">
+                        <p class="text-[10px] text-slate-400 mt-1">高波動提供更多 ETF 折溢價與套利窗口</p>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <label for="slider-retail" class="font-semibold text-slate-200">散戶交易參與率 (Retail Share %)</label>
+                            <span id="val-retail" class="font-mono text-amber-400 font-bold">38 %</span>
+                        </div>
+                        <input id="slider-retail" type="range" min="15" max="50" step="1" value="38" oninput="updateSimulation()" class="w-full accent-amber-500 bg-slate-700 rounded h-2">
+                        <p class="text-[10px] text-slate-400 mt-1">散戶比例越高，市場定價錯位（Mispricing）越多</p>
+                    </div>
+
+                    <!-- Output Simulation Results -->
+                    <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-400">估計年化 IRR：</span>
+                            <span id="sim-irr" class="text-lg font-mono font-bold text-emerald-400">51.0 %</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-400">估計夏普值 (Sharpe)：</span>
+                            <span id="sim-sharpe" class="text-lg font-mono font-bold text-amber-400">2.80</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-400">壓力測試最大回撤：</span>
+                            <span id="sim-drawdown" class="text-lg font-mono font-bold text-rose-400">- 6.1 %</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Simulation Chart Column -->
+                <div class="lg:col-span-7 bg-slate-800 p-4 rounded-xl border border-slate-700">
+                    <h4 class="text-xs font-bold text-slate-400 text-center uppercase tracking-wider mb-2">模擬資產淨值增長軌跡 (Simulated Portfolio NAV Trajectory)</h4>
+                    <div class="chart-container">
+                        <canvas id="simChart"></canvas>
+                    </div>
+                    <p class="text-[11px] text-slate-400 text-center mt-2">※ 綠線為預估淨值曲線，紅點代表壓力測試事件下的擬真回撤</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-slate-500 border-t border-slate-800 py-8 mt-12 text-center text-xs">
+        <div class="max-w-7xl mx-auto px-4 space-y-2">
+            <p>優式資本（UC Capital）深度研究報告 · 華爾街量化分析師團隊製作</p>
+            <p class="text-slate-600">本研究僅供學術討論與市場微觀結構分析使用，不構成任何投資建議或招攬。圖表數據依據公開報導與機構估算模型編製。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic & Chart Initialization -->
+    <script>
+        // Smooth Scrolling Helper
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                const yOffset = -70; 
+                const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                window.scrollTo({top: y, behavior: 'smooth'});
+            }
+        }
+
+        // Strategy Detail Data
+        const strategyData = {
+            etf: {
+                title: "1. ETF 初級與次級市場高頻套利 (Primary & Secondary ETF Arbitrage)",
+                tag: "估計營收貢獻：~ 45%",
+                desc: "優式資本為台灣最大非金融機構 ETF 交易實體。利用次級市場市價與初級市場成分股 NAV 淨值之間的瞬間離譜折溢價進行高頻套利。",
+                caseTitle: "經典戰役案例：2025 年 4 月川普加徵關稅股災",
+                caseText: "台股連續 3 日重挫逼近 20% 跌幅。許多大型 ETF 被恐慌性賣壓打至極度低於 NAV。優式團隊於次級市場大量吸納折價 ETF，向投信申請申購贖回換得成分股拋售鎖定利潤；同時放空跌停 ETF 並買入反向型 ETF。大跌期間資產回撤僅 -6.1%，隨後數月即創歷史新高。"
+            },
+            cbas: {
+                title: "2. 可轉債資產交換 (CBAS) + Delta 動態中性對沖",
+                tag: "估計營收貢獻：~ 30% (CBAS 市佔率 15-20%)",
+                desc: "利用 CBAS 選擇權買權端（Call Option）僅需 5-10% 權利金的極高槓桿特性，控制高額底層可轉債。結合華爾街標準 Delta 動態對沖技術，在現貨市場建立相應融券空頭部位。",
+                caseTitle: "收益機制與風險特徵",
+                caseText: "演算法隨標的股價波動實時調整避險比例，維持投資組合 Delta 中性。剝離個股方向性漲跌風險，穩穩提取隱含波動率 (Implied Volatility) 與實際波動率的定價偏差利潤，成為「低風險提款機」。"
+            },
+            nlp: {
+                title: "3. 輿情監控 NLP 與行為經濟學情緒交易 (Sentiment Trading)",
+                tag: "估計營收貢獻：~ 25%",
+                desc: "自行開發爬蟲全天候爬取 PTT、Mobile01、財經論壇與新聞評論，建構「情緒溫度計」。專門捕捉散戶極度貪婪 (FOMO) 或恐慌性拋售的不理性行為。",
+                caseTitle: "行為經濟學的量化轉化",
+                caseText: "基於理察·塞勒（Richard Thaler）行為金融學理論。當情緒指標突破極端閾值時，演算法於毫秒級窗口內執行均值回歸 (Mean Reversion) 或動能跟隨 (Trend Following) 交易，搶先大眾重新定價。"
+            }
+        };
+
+        function selectStrategy(type) {
+            // Update Tab styles
+            ['etf', 'cbas', 'nlp'].forEach(t => {
+                const btn = document.getElementById(`tab-${t}`);
+                if (t === type) {
+                    btn.className = "px-4 py-2 border-b-2 border-amber-500 text-amber-600 font-bold focus:outline-none";
+                } else {
+                    btn.className = "px-4 py-2 border-b-2 border-transparent text-slate-500 hover:text-slate-800 focus:outline-none";
+                }
+            });
+
+            // Update Detail Box
+            const data = strategyData[type];
+            const box = document.getElementById('strategy-detail-box');
+            box.innerHTML = `
+                <div class="flex justify-between items-start border-b border-slate-800 pb-3">
+                    <h4 class="text-base font-bold text-amber-400">${data.title}</h4>
+                    <span class="bg-amber-500/20 text-amber-300 text-[11px] font-semibold px-2 py-0.5 rounded border border-amber-500/30 whitespace-nowrap ml-2">${data.tag}</span>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">${data.desc}</p>
+                <div class="bg-slate-800 p-3 rounded-lg border border-slate-700 text-xs space-y-1">
+                    <span class="font-bold text-amber-300 block">${data.caseTitle}</span>
+                    <p class="text-slate-300 leading-normal">${data.caseText}</p>
+                </div>
+            `;
+        }
+
+        // Initialize Strategy Detail Box with ETF default
+        selectStrategy('etf');
+
+        // Chart.js - Label Wrap Helper Logic (16 char limit)
+        function wrapLabel(str) {
+            if (str.length <= 16) return str;
+            return [str.slice(0, 16), str.slice(16)];
+        }
+
+        // --- Chart 1: Strategy Doughnut Chart ---
+        const ctxStrategy = document.getElementById('strategyChart').getContext('2d');
+        const strategyChart = new Chart(ctxStrategy, {
+            type: 'doughnut',
+            data: {
+                labels: ['ETF 初次級套利', 'CBAS Delta 中性對沖', '輿情 NLP 情緒交易', '微觀結構造市'],
+                datasets: [{
+                    data: [45, 30, 15, 10],
+                    backgroundColor: ['#d97706', '#0d9488', '#4f46e5', '#64748b'],
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { boxWidth: 12, font: { size: 11 } }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return ` ${context.label}: 約 ${context.raw}% 營收權重`;
+                            }
+                        }
+                    }
+                },
+                onClick: (e, elements) => {
+                    if (elements.length > 0) {
+                        const index = elements[0].index;
+                        if (index === 0) selectStrategy('etf');
+                        else if (index === 1) selectStrategy('cbas');
+                        else if (index === 2) selectStrategy('nlp');
+                    }
+                }
+            }
+        });
+
+        // --- Chart 2: Performance & Sharpe Ratio Bar Chart ---
+        const ctxPerf = document.getElementById('performanceChart').getContext('2d');
+        const performanceChart = new Chart(ctxPerf, {
+            type: 'bar',
+            data: {
+                labels: ['優式資本 (UC Capital)', '華爾街頂尖對沖基金', '台灣加權指數/0050 ETF'],
+                datasets: [{
+                    label: '夏普值 (Sharpe Ratio)',
+                    data: [2.80, 2.00, 0.11],
+                    backgroundColor: ['#d97706', '#0d9488', '#94a3b8'],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Sharpe Ratio', font: { size: 11 } }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: (ctx) => ` 夏普值: ${ctx.raw} (越高代表風險調整後收益越優)`
+                        }
+                    }
+                }
+            }
+        });
+
+        // --- Chart 3: Interactive Dynamic Quant Simulator ---
+        const ctxSim = document.getElementById('simChart').getContext('2d');
+        let simChart = new Chart(ctxSim, {
+            type: 'line',
+            data: {
+                labels: ['M1', 'M2', 'M3', 'M4', 'M5 (股災壓力)', 'M6', 'M7', 'M8', 'M9', 'M10', 'M11', 'M12'],
+                datasets: [
+                    {
+                        label: '模擬淨值曲線 (NAV Trajectory)',
+                        data: [100, 104, 109, 115, 110, 118, 125, 132, 140, 148, 157, 166],
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        fill: true,
+                        tension: 0.3,
+                        pointRadius: [3, 3, 3, 3, 6, 3, 3, 3, 3, 3, 3, 3],
+                        pointBackgroundColor: ['#10b981', '#10b981', '#10b981', '#10b981', '#f43f5e', '#10b981', '#10b981', '#10b981', '#10b981', '#10b981', '#10b981', '#10b981']
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        grid: { color: '#334155' },
+                        ticks: { color: '#94a3b8' }
+                    },
+                    x: {
+                        grid: { color: '#334155' },
+                        ticks: { color: '#94a3b8' }
+                    }
+                },
+                plugins: {
+                    legend: { labels: { color: '#e2e8f0', font: { size: 11 } } }
+                }
+            }
+        });
+
+        function updateSimulation() {
+            const leverage = parseFloat(document.getElementById('slider-leverage').value);
+            const volLevel = parseInt(document.getElementById('slider-volatility').value);
+            const retailShare = parseInt(document.getElementById('slider-retail').value);
+
+            // Update Labels
+            document.getElementById('val-leverage').innerText = leverage.toFixed(1) + ' x';
+            
+            const volNames = ["低 (Low)", "中等 (Medium)", "極高 (Extreme)"];
+            document.getElementById('val-volatility').innerText = volNames[volLevel - 1];
+            document.getElementById('val-retail').innerText = retailShare + ' %';
+
+            // Mathematical calculation of IRR & Sharpe & Drawdown
+            // Base parameters:
+            let baseIRR = 25.0; // base yield
+            let retailMultiplier = (retailShare / 35.0); // baseline 35%
+            let volMultiplier = (volLevel === 1) ? 0.8 : (volLevel === 2 ? 1.1 : 1.4);
+            
+            let calculatedIRR = baseIRR * leverage * 0.45 * retailMultiplier * volMultiplier;
+            let calculatedSharpe = 3.2 - (leverage * 0.15) + (retailMultiplier * 0.3);
+            let calculatedDrawdown = -1.8 * leverage * (volLevel === 3 ? 1.8 : 1.0);
+
+            // Cap ranges
+            if (calculatedIRR > 95) calculatedIRR = 95;
+            if (calculatedSharpe > 3.8) calculatedSharpe = 3.8;
+            if (calculatedSharpe < 0.8) calculatedSharpe = 0.8;
+
+            document.getElementById('sim-irr').innerText = calculatedIRR.toFixed(1) + ' %';
+            document.getElementById('sim-sharpe').innerText = calculatedSharpe.toFixed(2);
+            document.getElementById('sim-drawdown').innerText = calculatedDrawdown.toFixed(1) + ' %';
+
+            // Generate Simulated Curve Data
+            let monthlyGrowth = (calculatedIRR / 100) / 12;
+            let newData = [100];
+            for (let i = 1; i <= 11; i++) {
+                if (i === 4) {
+                    // Month 5 Simulated Stress Test Drawdown
+                    let shock = newData[i - 1] * (1 + (calculatedDrawdown / 100));
+                    newData.push(parseFloat(shock.toFixed(1)));
+                } else {
+                    let nextVal = newData[i - 1] * (1 + monthlyGrowth + (Math.random() * 0.01 - 0.005));
+                    newData.push(parseFloat(nextVal.toFixed(1)));
+                }
+            }
+
+            simChart.data.datasets[0].data = newData;
+            simChart.update();
+        }
+
+        // Initialize simulation on load
+        updateSimulation();
+    </script>
+</body>
+</html>
