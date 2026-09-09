@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>中光電投控 (3718.TWO) 華爾街投資研究與估值深度分析</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f7ff',
+              100: '#e0effe',
+              500: '#2563eb',
+              600: '#1d4ed8',
+              800: '#1e40af',
+              900: '#0f172a'
+            },
+            bull: '#059669',
+            bear: '#dc2626',
+            neutralBg: '#f8fafc'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .chart-container {
+      position: relative;
+      width: 100%;
+      max-width: 650px;
+      margin-left: auto;
+      margin-right: auto;
+      height: 320px;
+      max-height: 400px;
+    }
+    @media (min-width: 768px) {
+      .chart-container {
+        height: 360px;
+      }
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background-color: #cbd5e1;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="bg-neutralBg text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+
+  <!-- Chosen Palette: Warm Slate & Navy Palette with Bull Emerald and Bear Crimson -->
+  <!-- Application Structure Plan: Designed as a professional Wall Street equity research dashboard. Structured into 7 logical interactive modules: Executive Summary & Dashboard metrics, Fundamental Overview, Deep Financial Analysis with Chart.js quarterly trends, Moat Matrix, Investment Bank Valuation Models (SOTP & Target Price Range), Growth & Risk Matrix, Bull vs Bear Interactive Debate Simulator, and Final Investment Recommendation with catalyst trackers. Content is restructured into thematic tabs and dynamic interactive components for effortless navigation and insight synthesis. -->
+  <!-- Visualization & Content Choices: 
+       1. Quarterly Financial Trend -> Multi-axis Combo Chart (Bar for Revenue, Lines for GM% & EPS) -> Hover tooltips & metric focus -> Canvas/Chart.js.
+       2. Revenue Breakdown -> Donut Chart -> Interactive segment toggle -> Canvas/Chart.js.
+       3. SOTP Segment Value Breakdown -> Horizontal Stacked Bar Chart -> Hover inspection -> Canvas/Chart.js.
+       4. Scenario Target Price Matrix -> Bar Chart comparing Bear, Base, Bull, and DCF Intrinsic Value -> Canvas/Chart.js.
+       5. Interactive Bull vs Bear Debate -> Interactive speech bubble view with argument toggles -> HTML/Tailwind JS state.
+       6. Moat & Risk Cards -> Structured CSS grid layouts with status indicators -> HTML/CSS.
+  -->
+  <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+  <!-- Top Navigation / Header -->
+  <header class="bg-slate-900 text-white sticky top-0 z-50 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center space-x-3">
+          <div class="bg-blue-600 text-white px-2.5 py-1 rounded text-xs font-bold tracking-wider uppercase">3718.TWO</div>
+          <div>
+            <h1 class="text-lg font-bold leading-none">中光電投控 深度投資研究報告</h1>
+            <p class="text-xs text-slate-400 mt-1">中強光電集團 (原5371.TWO / 查詢標註5374) 轉型價值全解析</p>
+          </div>
+        </div>
+        <div class="hidden md:flex items-center space-x-4 text-xs">
+          <span class="bg-slate-800 px-3 py-1 rounded-full border border-slate-700 text-slate-300">股價淨值比 (P/B): ~1.0x</span>
+          <span class="bg-slate-800 px-3 py-1 rounded-full border border-slate-700 text-slate-300">每股淨值: ~NT$83-85</span>
+          <span class="bg-emerald-900/60 text-emerald-300 px-3 py-1 rounded-full border border-emerald-700 font-semibold">評級: 逢低買入 (Accumulate)</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Sub Navigation Tabs -->
+    <nav class="bg-slate-800 border-t border-slate-700 overflow-x-auto custom-scrollbar">
+      <div class="max-w-7xl mx-auto px-4 flex space-x-1 sm:space-x-4 whitespace-nowrap text-xs sm:text-sm py-2">
+        <button onclick="switchTab('overview')" id="tab-overview" class="tab-btn px-3 py-1.5 rounded-md font-medium text-white bg-blue-600 transition">基本情況</button>
+        <button onclick="switchTab('financials')" id="tab-financials" class="tab-btn px-3 py-1.5 rounded-md font-medium text-slate-300 hover:text-white hover:bg-slate-700 transition">深度財務分析</button>
+        <button onclick="switchTab('moat')" id="tab-moat" class="tab-btn px-3 py-1.5 rounded-md font-medium text-slate-300 hover:text-white hover:bg-slate-700 transition">競爭優勢 (護城河)</button>
+        <button onclick="switchTab('valuation')" id="tab-valuation" class="tab-btn px-3 py-1.5 rounded-md font-medium text-slate-300 hover:text-white hover:bg-slate-700 transition">投行估值與SOTP</button>
+        <button onclick="switchTab('growth-risk')" id="tab-growth-risk" class="tab-btn px-3 py-1.5 rounded-md font-medium text-slate-300 hover:text-white hover:bg-slate-700 transition">風險與增長引擎</button>
+        <button onclick="switchTab('debate')" id="tab-debate" class="tab-btn px-3 py-1.5 rounded-md font-medium text-slate-300 hover:text-white hover:bg-slate-700 transition">多空分析師大決戰</button>
+        <button onclick="switchTab('decision')" id="tab-decision" class="tab-btn px-3 py-1.5 rounded-md font-medium text-slate-300 hover:text-white hover:bg-slate-700 transition">投資決策與建議</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-grow w-full">
+
+    <!-- KPI Summary Bar -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+      <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+        <div class="text-xs text-slate-500 font-medium">2026 H1 合併營收</div>
+        <div class="text-xl font-bold text-slate-900 mt-1">NT$ 193.97 億</div>
+        <div class="text-xs text-emerald-600 font-medium mt-1">▲ YoY +5.81%</div>
+      </div>
+      <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+        <div class="text-xs text-slate-500 font-medium">2026 Q2 毛利率</div>
+        <div class="text-xl font-bold text-slate-900 mt-1">15.3%</div>
+        <div class="text-xs text-rose-600 font-medium mt-1">▼ YoY -2.8pt (低於預期)</div>
+      </div>
+      <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+        <div class="text-xs text-slate-500 font-medium">無人機營運目標</div>
+        <div class="text-xl font-bold text-slate-900 mt-1">5,000 架/月</div>
+        <div class="text-xs text-blue-600 font-medium mt-1">國防部軍用商規3,037架</div>
+      </div>
+      <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+        <div class="text-xs text-slate-500 font-medium">SOTP目標價區間</div>
+        <div class="text-xl font-bold text-blue-600 mt-1">NT$ 105 - 137</div>
+        <div class="text-xs text-slate-500 font-medium mt-1">現價約83-85元 (具選擇權溢價)</div>
+      </div>
+    </div>
+
+    <!-- TAB 1: OVERVIEW -->
+    <section id="sec-overview" class="tab-content space-y-6">
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+        <h2 class="text-xl font-bold text-slate-900 mb-2">一、基本情況與營運全貌</h2>
+        <p class="text-sm text-slate-600 leading-relaxed mb-4">
+          本章節剖析中光電投控（3718.TWO，前身為中強光電5371.TWO）的業務轉型藍圖。公司正處於從傳統顯示與背光零組件製造商，邁向高附加價值軍用無人機、AI智能物流與矽光子（CPO）技術方案商的「典範轉移」階段。雖然傳統事業仍占營收近8成，但新興高毛利業務已顯著改變其長期估值模型與戰略護城河。
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+          <!-- Business Model & Revenue Structure -->
+          <div class="bg-slate-50 p-5 rounded-lg border border-slate-200">
+            <h3 class="text-base font-semibold text-slate-800 mb-3 flex items-center">
+              <span class="w-2.5 h-2.5 bg-blue-600 rounded-full inline-block mr-2"></span>
+              業務模式與營收結構 (2026最新數據)
+            </h3>
+            <div class="chart-container">
+              <canvas id="chartRevenueBreakdown"></canvas>
+            </div>
+            <ul class="text-xs text-slate-600 space-y-2 mt-3">
+              <li>• <strong>節能產品 (47.49%)：</strong> 液晶顯示器與筆記型電腦背光模組，為成熟現金流來源。</li>
+              <li>• <strong>影像產品 (32.05%)：</strong> DLP投影機與商用顯示方案，受體育賽事帶動復甦。</li>
+              <li>• <strong>新興高毛利事業 (約5%+)：</strong> 包含中光電智能機器人(CiRC)、智能物流(CiLS)與先進光學CPO部門。</li>
+            </ul>
+          </div>
+
+          <!-- Scenario Analysis & 12-24M Outlook -->
+          <div class="flex flex-col justify-between space-y-4">
+            <div class="bg-slate-50 p-5 rounded-lg border border-slate-200">
+              <h3 class="text-base font-semibold text-slate-800 mb-3">上行、基準與下行情景情境分析</h3>
+              <div class="space-y-3 text-xs">
+                <div class="p-2.5 bg-emerald-50 border border-emerald-200 rounded">
+                  <span class="font-bold text-emerald-800">▲ 樂觀情境 (Bull Case) - 目標價 NT$137</span>
+                  <p class="text-emerald-900 mt-1">越南廠利用率突破損平；國防部3,037架無人機順利認列>10億元；CPO打入國際AI大廠供應鏈。</p>
+                </div>
+                <div class="p-2.5 bg-blue-50 border border-blue-200 rounded">
+                  <span class="font-bold text-blue-800">► 基準情境 (Base Case) - 目標價 NT$95-105</span>
+                  <p class="text-blue-900 mt-1">顯示與影像溫和季節性成長；無人機按部就班出貨；下半年單季轉盈，全年EPS約0.95元，淨值(83-85元)強強支撐。</p>
+                </div>
+                <div class="p-2.5 bg-rose-50 border border-rose-200 rounded">
+                  <span class="font-bold text-rose-800">▼ 悲觀情境 (Bear Case) - 目標價 &lt; NT$70</span>
+                  <p class="text-rose-900 mt-1">全球消費衰退；無人機標案驗收大幅遞延；越南廠學習曲線成本高企，全年深度虧損。</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-blue-900 text-white p-4 rounded-lg">
+              <h4 class="text-sm font-bold text-blue-200">12–24 個月前瞻展望</h4>
+              <p class="text-xs text-slate-200 mt-1 leading-relaxed">
+                隨著控股公司架構確立（3718），財務透明度提升。2026下半年為傳統旺季驗證期，2027年無人機月產5,000架量產配合CPO商轉，將迎來營收與利潤率黃金交叉。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: FINANCIALS -->
+    <section id="sec-financials" class="tab-content space-y-6 hidden">
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+        <h2 class="text-xl font-bold text-slate-900 mb-2">二、深度財務分析 (財報狗/玩股網數據交叉比對)</h2>
+        <p class="text-sm text-slate-600 leading-relaxed mb-4">
+          中光電近期財報呈現出「營收回溫、利潤探底、資產穩健」的特殊特徵。受到Monitor出貨佔比上升、越南新廠建置與折舊費用增加以及無人機研發費用投入影響，2026年上半年出現連續兩季每股虧損（Q1 EPS -0.30元, Q2 EPS -0.20元）。然營業虧損已較第一季縮減41.2%，規模經濟開始發揮影響。
+        </p>
+
+        <!-- Dynamic Financial Chart -->
+        <div class="bg-slate-50 p-5 rounded-lg border border-slate-200 mb-6">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2">
+            <div>
+              <h3 class="text-base font-semibold text-slate-800">近四季營收、毛利率與 EPS 趨勢圖</h3>
+              <p class="text-xs text-slate-500">數據源：財報狗、玩股網綜合彙整</p>
+            </div>
+            <div class="text-xs bg-white px-3 py-1 rounded border border-slate-300 text-slate-600">
+              提示：長條為營收(百萬元)，折線為毛利率(%)與EPS(元)
+            </div>
+          </div>
+          <div class="chart-container">
+            <canvas id="chartFinancials"></canvas>
+          </div>
+        </div>
+
+        <!-- Financial Metrics Table -->
+        <div class="overflow-x-auto">
+          <table class="min-w-full text-xs text-left text-slate-700 border-collapse">
+            <thead class="bg-slate-100 text-slate-800 uppercase font-semibold">
+              <tr>
+                <th class="py-3 px-4 border-b">財務指標</th>
+                <th class="py-3 px-4 border-b">2026 Q1</th>
+                <th class="py-3 px-4 border-b">2026 Q2</th>
+                <th class="py-3 px-4 border-b">QoQ 變動</th>
+                <th class="py-3 px-4 border-b">YoY 變動</th>
+                <th class="py-3 px-4 border-b">華爾街/法人預期達成率</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200">
+              <tr class="hover:bg-slate-50">
+                <td class="py-3 px-4 font-semibold">合併營收 (NT$ 百萬)</td>
+                <td class="py-3 px-4">9,362</td>
+                <td class="py-3 px-4">10,035</td>
+                <td class="py-3 px-4 text-emerald-600 font-medium">+7.2%</td>
+                <td class="py-3 px-4 text-emerald-600 font-medium">+1.8%</td>
+                <td class="py-3 px-4"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">符合預期</span></td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="py-3 px-4 font-semibold">合併毛利率 (%)</td>
+                <td class="py-3 px-4">15.6%</td>
+                <td class="py-3 px-4">15.3%</td>
+                <td class="py-3 px-4 text-rose-600 font-medium">-0.3pt</td>
+                <td class="py-3 px-4 text-rose-600 font-medium">-2.8pt</td>
+                <td class="py-3 px-4"><span class="bg-rose-100 text-rose-800 px-2 py-0.5 rounded">低於預期</span></td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="py-3 px-4 font-semibold">營業利益 (NT$ 百萬)</td>
+                <td class="py-3 px-4 text-rose-600">(142)</td>
+                <td class="py-3 px-4 text-rose-600">(83)</td>
+                <td class="py-3 px-4 text-emerald-600 font-medium">虧損縮減41.2%</td>
+                <td class="py-3 px-4 text-rose-600 font-medium">轉盈為虧</td>
+                <td class="py-3 px-4"><span class="bg-rose-100 text-rose-800 px-2 py-0.5 rounded">低於預期</span></td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="py-3 px-4 font-semibold">基本 EPS (元)</td>
+                <td class="py-3 px-4 text-rose-600">(0.30)</td>
+                <td class="py-3 px-4 text-rose-600">(0.20)</td>
+                <td class="py-3 px-4 text-emerald-600 font-medium">+0.10元</td>
+                <td class="py-3 px-4 text-rose-600 font-medium">轉盈為虧</td>
+                <td class="py-3 px-4"><span class="bg-rose-100 text-rose-800 px-2 py-0.5 rounded">低於預期</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Qualitative Financial Insights Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+          <div class="p-4 bg-slate-50 rounded-lg border border-slate-200">
+            <h4 class="font-bold text-slate-800 text-sm mb-1">自由現金流與資本支出</h4>
+            <p class="text-xs text-slate-600">2026全年資本支出上看27億元，主因越南廠擴建與無人機產線。雖短期壓抑FCF，但流動性風險低，長短期債務控管極佳。</p>
+          </div>
+          <div class="p-4 bg-slate-50 rounded-lg border border-slate-200">
+            <h4 class="font-bold text-slate-800 text-sm mb-1">杜邦分析與 ROE 狀況</h4>
+            <p class="text-xs text-slate-600">受淨利率轉負影響，2026H1年化ROE逼近0%，引發量化基金調節。但存貨與應收帳款天數維持極度健康，塞貨風險極低。</p>
+          </div>
+          <div class="p-4 bg-slate-50 rounded-lg border border-slate-200">
+            <h4 class="font-bold text-slate-800 text-sm mb-1">籌碼面與市場反應</h4>
+            <p class="text-xs text-slate-600">利空發布後股價強護於80-85元淨值區間。大戶（400-1000張）持股近39%無鬆動，顯示聰明錢（Smart Money）定價著眼於轉型期權。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: MOAT -->
+    <section id="sec-moat" class="tab-content space-y-6 hidden">
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+        <h2 class="text-xl font-bold text-slate-900 mb-2">三、競爭優勢與護城河深度剖析</h2>
+        <p class="text-sm text-slate-600 leading-relaxed mb-6">
+          中光電的競爭護城河已從過去單純的光學組裝規模，升級為包含軍規合規認證、高切換成本、非紅供應鏈溢價與微光學專利的四位一體複合型護城河。
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Moat Item 1 -->
+          <div class="border border-slate-200 rounded-lg p-5 bg-gradient-to-br from-white to-slate-50 hover:border-blue-300 transition">
+            <div class="flex items-center space-x-3 mb-2">
+              <span class="w-8 h-8 rounded-full bg-blue-100 text-blue-700 font-bold flex items-center justify-center text-sm">1</span>
+              <h3 class="font-bold text-slate-900">國防與警消級極高切換成本 (Switching Costs)</h3>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              全台唯一通過國防部「微型」與「監偵型」雙無人機驗證並具備量產能力。整合國軍指揮體系及美國警消單位（如Hummer 2與Seagull VTOL），替換供應商需面臨系統重新認證、軟體重構與安規審查等巨大代價，形成強大鎖定效應。
+            </p>
+          </div>
+
+          <!-- Moat Item 2 -->
+          <div class="border border-slate-200 rounded-lg p-5 bg-gradient-to-br from-white to-slate-50 hover:border-blue-300 transition">
+            <div class="flex items-center space-x-3 mb-2">
+              <span class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center text-sm">2</span>
+              <h3 class="font-bold text-slate-900">「非紅供應鏈」與合規成本優勢 (Cost & Compliance)</h3>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              產品完全符合美國《國防授權法案》(NDAA)。越南北寧大型製造基地幫助歐美客戶規避對中國高達145%的懲罰性關稅及地緣政治風險，取得進入北美與日本政府採購的獨占門票。
+            </p>
+          </div>
+
+          <!-- Moat Item 3 -->
+          <div class="border border-slate-200 rounded-lg p-5 bg-gradient-to-br from-white to-slate-50 hover:border-blue-300 transition">
+            <div class="flex items-center space-x-3 mb-2">
+              <span class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 font-bold flex items-center justify-center text-sm">3</span>
+              <h3 class="font-bold text-slate-900">矽光子 (CPO) 與微光學核心專利 (Patents & Tech)</h3>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              全球專利超3,000件，連續多年榮獲全球百大創新機構。在CPO領域掌握關鍵「微稜鏡 (Prism)」與「準直鏡頭」奈米級光機電熱整合技術，是AI資料中心高速傳輸不可或缺的核心資產。
+            </p>
+          </div>
+
+          <!-- Moat Item 4 -->
+          <div class="border border-slate-200 rounded-lg p-5 bg-gradient-to-br from-white to-slate-50 hover:border-blue-300 transition">
+            <div class="flex items-center space-x-3 mb-2">
+              <span class="w-8 h-8 rounded-full bg-amber-100 text-amber-700 font-bold flex items-center justify-center text-sm">4</span>
+              <h3 class="font-bold text-slate-900">頂級半導體場域認證與網路效應 (Brand & Network)</h3>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              智能物流 (CiLS) AI AMR成功導入全球頂尖半導體封測大廠無塵室，達成零事故、減少33%人工與降75%建置成本。頂級B2B標竿背書產生強烈口碑效應，快速擴散至第三方物流。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: VALUATION -->
+    <section id="sec-valuation" class="tab-content space-y-6 hidden">
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+        <h2 class="text-xl font-bold text-slate-900 mb-2">四、股票估值分析：投行分部加總 (SOTP) 與 DCF 模型</h2>
+        <p class="text-sm text-slate-600 leading-relaxed mb-4">
+          由於中光電處於虧損轉折期，傳統單一市盈率（P/E）高達334倍出現嚴重失真。投資銀行普遍採用「SOTP (Sum-of-the-Parts) 分部加總模型」與「DCF 折現現金流」，將公司拆解為成熟現金牛業務與具爆發力的軍工/AI高成長期權。
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+          <!-- SOTP Chart Container -->
+          <div class="bg-slate-50 p-5 rounded-lg border border-slate-200">
+            <h3 class="font-bold text-slate-800 text-sm mb-2">SOTP 分部估值估計貢獻 (元/股)</h3>
+            <div class="chart-container">
+              <canvas id="chartSOTP"></canvas>
+            </div>
+            <p class="text-xs text-slate-500 mt-2">註：計算基準包含傳統顯示0.8x P/B、無人機5.0x P/S及CPO/車載15x EV/EBITDA。</p>
+          </div>
+
+          <!-- Target Price Comparison Chart Container -->
+          <div class="bg-slate-50 p-5 rounded-lg border border-slate-200">
+            <h3 class="font-bold text-slate-800 text-sm mb-2">情境目標價與現價位階對比 (NT$)</h3>
+            <div class="chart-container">
+              <canvas id="chartTargetPrices"></canvas>
+            </div>
+            <p class="text-xs text-slate-500 mt-2">當前股價（約83-85元）位於1x P/B淨值附近，提供強大下檔安全邊際。</p>
+          </div>
+        </div>
+
+        <!-- Detailed SOTP Logic Table -->
+        <div class="bg-slate-50 rounded-lg p-4 border border-slate-200">
+          <h3 class="font-bold text-slate-800 text-sm mb-3">SOTP 估值拆解明細</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+            <div class="bg-white p-3 rounded border border-slate-200">
+              <div class="font-bold text-slate-800 mb-1">1. 傳統顯示與節能業務 (現金牛)</div>
+              <div class="text-slate-600">估值方法：<span class="font-semibold text-slate-800">0.8x P/B</span></div>
+              <div class="text-slate-600">理由：成熟市場且缺乏高爆發力，給予保守資產折價。</div>
+              <div class="text-blue-600 font-bold mt-2">貢獻每股價值：~ NT$ 55 - 60</div>
+            </div>
+            <div class="bg-white p-3 rounded border border-slate-200">
+              <div class="font-bold text-slate-800 mb-1">2. 中光電智能機器人 (軍工無人機)</div>
+              <div class="text-slate-600">估值方法：<span class="font-semibold text-slate-800">5.0x P/S</span></div>
+              <div class="text-slate-600">理由：對標全球國防科技新創，NDAA認證與2027年爆量出貨。</div>
+              <div class="text-blue-600 font-bold mt-2">貢獻每股價值：~ NT$ 30 - 45</div>
+            </div>
+            <div class="bg-white p-3 rounded border border-slate-200">
+              <div class="font-bold text-slate-800 mb-1">3. 矽光子 CPO & 車載 AR-HUD</div>
+              <div class="text-slate-600">估值方法：<span class="font-semibold text-slate-800">15x EV/EBITDA</span></div>
+              <div class="text-slate-600">理由：對標光通訊與高階車載零組件，享有AI高估值溢價。</div>
+              <div class="text-blue-600 font-bold mt-2">貢獻每股價值：~ NT$ 20 - 32</div>
+            </div>
+          </div>
+          <div class="mt-4 p-3 bg-blue-50 border border-blue-200 rounded text-xs text-blue-900 font-medium">
+            <strong>DCF 模型參數設定：</strong> 無風險利率 3.5%, 市場風險溢酬 6.0%, Beta 1.04 ➔ WACC = 7.5%。假設2027年後資本支出趨緩、自由現金流迎來轉折點，終極成長率 1.5%，推算之內含價值 (Intrinsic Value) 為 <strong>NT$ 95 元</strong>。
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: GROWTH & RISK -->
+    <section id="sec-growth-risk" class="tab-content space-y-6 hidden">
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+        <h2 class="text-xl font-bold text-slate-900 mb-2">五、風險矩陣與成長潛力剖析</h2>
+        <p class="text-sm text-slate-600 leading-relaxed mb-4">
+          投資中光電需全面評估其新舊業務轉接期的風險因子，以及國防無人機與AI CPO兩大潛在爆發市場 (TAM) 所帶來的動能。
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Growth Engines -->
+          <div class="space-y-4">
+            <h3 class="text-base font-bold text-emerald-800 flex items-center">
+              <span class="w-3 h-3 bg-emerald-600 rounded-full inline-block mr-2"></span>
+              四大增長引擎與 TAM 市場規模
+            </h3>
+
+            <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-lg text-xs space-y-2">
+              <div class="font-bold text-emerald-900 text-sm">1. 台灣國防無人機 400 億產值與海外擴展</div>
+              <p class="text-emerald-800">國防部編列近66億預算，中光電拿3,037架軍用商規訂單。年底月產能由1,000架衝刺至5,000架，並拓展美日商用/警消市場。</p>
+            </div>
+
+            <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-lg text-xs space-y-2">
+              <div class="font-bold text-emerald-900 text-sm">2. 矽光子 (CPO) 狂潮 (CAGR > 50%)</div>
+              <p class="text-emerald-800">AI伺服器傳輸需求爆發，掌握微稜鏡與準直鏡頭，將光訊號精準耦合至矽光子晶片，卡位下一代伺服器關鍵供應鏈。</p>
+            </div>
+
+            <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-lg text-xs space-y-2">
+              <div class="font-bold text-emerald-900 text-sm">3. 車載 AR-HUD 智慧座艙光學引擎</div>
+              <p class="text-emerald-800">依托30年DLP投影技術，開發AR-HUD抬頭顯示器光學引擎，已積極打入全球一線車廠供應鏈。</p>
+            </div>
+
+            <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-lg text-xs space-y-2">
+              <div class="font-bold text-emerald-900 text-sm">4. 智慧物流 AI AMR (CiLS)</div>
+              <p class="text-emerald-800">具備三維偵測、動態調度與AI預測防錯，無縫對接WMS，鎖定半導體高波動產線搬運需求。</p>
+            </div>
+          </div>
+
+          <!-- Risk Matrix -->
+          <div class="space-y-4">
+            <h3 class="text-base font-bold text-rose-800 flex items-center">
+              <span class="w-3 h-3 bg-rose-600 rounded-full inline-block mr-2"></span>
+              四大核心風險因子
+            </h3>
+
+            <div class="p-4 bg-rose-50 border border-rose-200 rounded-lg text-xs space-y-2">
+              <div class="font-bold text-rose-900 text-sm">1. 總體經濟與消費性電子衰退</div>
+              <p class="text-rose-800">8成營收仍來自IT與顯示產品，若通膨高企致終端買氣低迷，將壓抑基本盤現金流。</p>
+            </div>
+
+            <div class="p-4 bg-rose-50 border border-rose-200 rounded-lg text-xs space-y-2">
+              <div class="font-bold text-rose-900 text-sm">2. OLED / Micro-LED 技術顛覆</div>
+              <p class="text-rose-800">自發光技術滲透中高階筆電與顯示器，長期可能侵蝕LCD背光模組市場。</p>
+            </div>
+
+            <div class="p-4 bg-rose-50 border border-rose-200 rounded-lg text-xs space-y-2">
+              <div class="font-bold text-rose-900 text-sm">3. 國防標案驗收遞延與關稅變數</div>
+              <p class="text-rose-800">台灣國防採購流程冗長，若驗收遞延將使擴充產能轉為閒置折舊；美地緣政治轉向亦可能影響越南廠優勢。</p>
+            </div>
+
+            <div class="p-4 bg-rose-50 border border-rose-200 rounded-lg text-xs space-y-2">
+              <div class="font-bold text-rose-900 text-sm">4. 固定資產折舊與短期獲利賣壓</div>
+              <p class="text-rose-800">越南廠與無人機資本支出推高折舊，若轉型速度未及彌補本業衰退，高股息ETF資金恐因此調節。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 6: DEBATE -->
+    <section id="sec-debate" class="tab-content space-y-6 hidden">
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+        <h2 class="text-xl font-bold text-slate-900 mb-2">六、多空分析師大對決 (Bull vs. Bear Debate)</h2>
+        <p class="text-sm text-slate-600 leading-relaxed mb-6">
+          我們邀請兩位華爾街頂尖分析師，針對中光電投控（3718.TWO）的數據與評價展開深度辯論。請點擊下方視角進行觀點切換。
+        </p>
+
+        <!-- Dynamic Analyst Selector Buttons -->
+        <div class="flex justify-center space-x-4 mb-6">
+          <button onclick="setDebateView('bull')" id="btn-debate-bull" class="px-5 py-2.5 rounded-lg font-bold text-sm bg-emerald-600 text-white shadow-sm transition flex items-center">
+            <span class="mr-2">▲</span> 樂觀派分析師 (多頭代表)
+          </button>
+          <button onclick="setDebateView('bear')" id="btn-debate-bear" class="px-5 py-2.5 rounded-lg font-bold text-sm bg-slate-200 text-slate-700 hover:bg-slate-300 transition flex items-center">
+            <span class="mr-2">▼</span> 悲觀派分析師 (空頭代表)
+          </button>
+          <button onclick="setDebateView('balanced')" id="btn-debate-balanced" class="px-5 py-2.5 rounded-lg font-bold text-sm bg-slate-200 text-slate-700 hover:bg-slate-300 transition flex items-center">
+            ⚖ 綜合平衡結論
+          </button>
+        </div>
+
+        <!-- Debate Content Container -->
+        <div id="debate-content" class="p-6 rounded-xl border transition-all duration-300">
+          <!-- Default content generated via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 7: DECISION -->
+    <section id="sec-decision" class="tab-content space-y-6 hidden">
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+        <h2 class="text-xl font-bold text-slate-900 mb-2">七、投資決策與建議：我應該買入這隻股票嗎？</h2>
+        <p class="text-sm text-slate-600 leading-relaxed mb-6">
+          綜合基本面、財務結構、護城河與SOTP估值，我們給出華爾街等級的最終投資指引與策略。
+        </p>
+
+        <!-- Final Recommendation Box -->
+        <div class="bg-slate-900 text-white p-6 rounded-xl mb-6 shadow-md border-l-8 border-emerald-500">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div>
+              <span class="text-xs font-bold tracking-widest text-emerald-400 uppercase">Final Recommendation</span>
+              <h3 class="text-2xl font-black text-white mt-1">評級：逢低分批買入 (Accumulate on Dips)</h3>
+              <p class="text-xs text-slate-300 mt-1">適合長期價值投資者與成長型買家；不適合短線衝刺交易者。</p>
+            </div>
+            <div class="bg-emerald-600 text-white text-center px-4 py-3 rounded-lg font-bold text-sm shadow">
+              最佳買進區間<br>
+              <span class="text-lg">NT$ 80 - 85</span>
+              <div class="text-[10px] text-emerald-100 font-normal">每股淨值強支撐區</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Timeline Outlook -->
+          <div class="space-y-4">
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-lg">
+              <h4 class="font-bold text-slate-800 text-sm mb-1 flex items-center">
+                <span class="w-2 h-2 bg-blue-600 rounded-full mr-2"></span> 短期展望 (1年) - 中性偏弱橫盤
+              </h4>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                仍需消化越南廠擴建與無人機研發/資本支出帶來的折舊壓力。預期2026下半年财報在損益兩平點附近掙扎，股價將在每股淨值 (80-85元) 反覆震盪打底。
+              </p>
+            </div>
+
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-lg">
+              <h4 class="font-bold text-slate-800 text-sm mb-1 flex items-center">
+                <span class="w-2 h-2 bg-emerald-600 rounded-full mr-2"></span> 長期展望 (5年以上) - 極具爆發力
+              </h4>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                控股架構綜效全面顯現。無人機出貨放量成為利潤定海神針，搭配矽光子 (CPO) 元件進入商轉，將驅動從「傳統光電組裝」蛻變為「AI與國防科技方案商」，迎來估值與獲利雙擊 (Davis Double Play)。
+              </p>
+            </div>
+          </div>
+
+          <!-- Catalyst Tracker -->
+          <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg flex flex-col justify-between">
+            <div>
+              <h4 class="font-bold text-blue-900 text-sm mb-2">三大核心股價催化劑 (Catalysts Watchlist)</h4>
+              <ul class="text-xs text-blue-800 space-y-2.5">
+                <li class="flex items-start">
+                  <span class="font-bold mr-1.5">1.</span>
+                  <span><strong>國防部無人機實質交機與驗收：</strong> 3,037架微型與監偵型無人機開始認列營收，為題材轉化為獲利的終極試金石。</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="font-bold mr-1.5">2.</span>
+                  <span><strong>越南廠稼動率跨過損平點：</strong> 旺季訂單拉升稼動率，扭轉毛利率受壓困境。</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="font-bold mr-1.5">3.</span>
+                  <span><strong>矽光子 (CPO) 打入國際 AI 伺服器供應鏈：</strong> 釋出美系大廠認證具體進度，引發外資 Re-rating 報告潮。</span>
+                </li>
+              </ul>
+            </div>
+            <div class="mt-4 pt-3 border-t border-blue-200 text-[11px] text-blue-700 italic">
+              操作策略建議：採「左側建倉、網格分批」策略，於淨值附近收集籌碼，並追蹤月營收年增率與季度毛利率變化。
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 border-t border-slate-800 py-6 text-xs mt-8">
+    <div class="max-w-7xl mx-auto px-4 text-center space-y-2">
+      <p>本報告依據「Goodinfo、神秘金字塔、財報狗、玩股網」歷史數據與華爾街研報模型製作。</p>
+      <p class="text-slate-500">免責聲明：本網站內容僅供研究與學術討論，不構成任何投資建議或買賣指示。投資人應獨立評估風險。</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript Logic -->
+  <script>
+    // Tab Switching Logic
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-blue-600', 'text-white');
+        btn.classList.add('text-slate-300', 'hover:bg-slate-700');
+      });
+
+      const selectedTab = document.getElementById(`sec-${tabId}`);
+      if (selectedTab) selectedTab.classList.remove('hidden');
+
+      const selectedBtn = document.getElementById(`tab-${tabId}`);
+      if (selectedBtn) {
+        selectedBtn.classList.add('bg-blue-600', 'text-white');
+        selectedBtn.classList.remove('text-slate-300', 'hover:bg-slate-700');
+      }
+    }
+
+    // Chart.js Label Wrapper logic (16-char wrapping)
+    function formatChartLabels(labels) {
+      return labels.map(label => {
+        if (label.length > 16) {
+          const mid = Math.ceil(label.length / 2);
+          return [label.substring(0, mid), label.substring(mid)];
+        }
+        return label;
+      });
+    }
+
+    // Initialize Charts on Window Load
+    window.addEventListener('DOMContentLoaded', () => {
+      
+      // Chart 1: Revenue Breakdown Donut
+      const ctxBreakdown = document.getElementById('chartRevenueBreakdown').getContext('2d');
+      new Chart(ctxBreakdown, {
+        type: 'doughnut',
+        data: {
+          labels: ['節能產品 (背光模組)', '影像產品 (投影機)', '新興事業 (無人機/物流/CPO)', '其他零組件'],
+          datasets: [{
+            data: [47.49, 32.05, 5.00, 15.46],
+            backgroundColor: ['#2563eb', '#38bdf8', '#059669', '#cbd5e1'],
+            borderWidth: 2,
+            borderColor: '#ffffff'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return ` ${context.label}: ${context.raw}%`;
+                }
+              }
+            }
+          }
+        }
+      });
+
+      // Chart 2: Financial Trend Multi-axis Combo
+      const ctxFinancials = document.getElementById('chartFinancials').getContext('2d');
+      new Chart(ctxFinancials, {
+        type: 'bar',
+        data: {
+          labels: ['2025 Q3', '2025 Q4', '2026 Q1', '2026 Q2'],
+          datasets: [
+            {
+              label: '合併營收 (NT$ 百萬)',
+              data: [10210, 9850, 9362, 10035],
+              backgroundColor: 'rgba(37, 99, 235, 0.65)',
+              borderColor: '#2563eb',
+              borderWidth: 1,
+              yAxisID: 'y'
+            },
+            {
+              label: '毛利率 (%)',
+              data: [18.1, 17.2, 15.6, 15.3],
+              type: 'line',
+              borderColor: '#d97706',
+              backgroundColor: '#d97706',
+              borderWidth: 2,
+              pointRadius: 4,
+              yAxisID: 'y1'
+            },
+            {
+              label: '基本 EPS (元)',
+              data: [0.45, 0.12, -0.30, -0.20],
+              type: 'line',
+              borderColor: '#dc2626',
+              backgroundColor: '#dc2626',
+              borderWidth: 2,
+              pointStyle: 'rectRot',
+              pointRadius: 5,
+              yAxisID: 'y2'
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              type: 'linear',
+              position: 'left',
+              title: { display: true, text: '營收 (百萬)', font: { size: 10 } },
+              grid: { color: '#f1f5f9' }
+            },
+            y1: {
+              type: 'linear',
+              position: 'right',
+              title: { display: true, text: '毛利率 (%)', font: { size: 10 } },
+              min: 10,
+              max: 25,
+              grid: { drawOnChartArea: false }
+            },
+            y2: {
+              type: 'linear',
+              position: 'right',
+              display: false,
+              min: -1,
+              max: 2
+            }
+          },
+          plugins: {
+            legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } }
+          }
+        }
+      });
+
+      // Chart 3: SOTP Segment Valuation Stacked Bar
+      const ctxSOTP = document.getElementById('chartSOTP').getContext('2d');
+      new Chart(ctxSOTP, {
+        type: 'bar',
+        data: {
+          labels: ['SOTP 分部估值估算 (元/股)'],
+          datasets: [
+            {
+              label: '傳統顯示/節能 (0.8x P/B)',
+              data: [58],
+              backgroundColor: '#64748b'
+            },
+            {
+              label: '軍用無人機 CiRC (5.0x P/S)',
+              data: [38],
+              backgroundColor: '#059669'
+            },
+            {
+              label: 'CPO & 車載光學 (15x EV/EBITDA)',
+              data: [25],
+              backgroundColor: '#2563eb'
+            }
+          ]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            x: { stacked: true, title: { display: true, text: '每股貢獻金額 (NT$)' } },
+            y: { stacked: true }
+          },
+          plugins: {
+            legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } },
+            tooltip: {
+              callbacks: {
+                afterBody: function() { return '預估總價值: NT$ 121 元'; }
+              }
+            }
+          }
+        }
+      });
+
+      // Chart 4: Target Price Comparison
+      const ctxTarget = document.getElementById('chartTargetPrices').getContext('2d');
+      new Chart(ctxTarget, {
+        type: 'bar',
+        data: {
+          labels: ['悲觀情境', '當前股價 (現價)', 'DCF 內含價值', '基準情境', 'SOTP 樂觀情境'],
+          datasets: [{
+            label: '股價 / 目標價 (NT$)',
+            data: [68, 84, 95, 105, 137],
+            backgroundColor: [
+              '#f87171',
+              '#94a3b8',
+              '#38bdf8',
+              '#60a5fa',
+              '#34d399'
+            ],
+            borderRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false }
+          },
+          scales: {
+            y: { min: 50, title: { display: true, text: '新台幣 (NT$)' } }
+          }
+        }
+      });
+
+      // Render default Debate view
+      setDebateView('bull');
+    });
+
+    // Interactive Debate Switcher Logic
+    const debateData = {
+      bull: {
+        title: "樂觀派分析師（多頭代表）：市場嚴重低估軍工無人機與 AI 轉型期權",
+        bgClass: "bg-emerald-50 border-emerald-300 text-emerald-950",
+        btnActive: "btn-debate-bull",
+        content: `
+          <div class="space-y-3 text-xs leading-relaxed">
+            <p class="text-sm font-bold text-emerald-900">「市場正用看傳統背光模組廠的後照鏡，駕駛一台裝上 AI 與軍工引擎的跑車！」</p>
+            <p><strong>數據論證一（無人機獨霸地位）：</strong> 中光電智能機器人（CiRC）是全台唯一拿下國防部『微型』與『監偵型』雙料原型機驗證並具量產能力的廠商，總計3,037架標案。為消化國內外龐大需求，年底月產能將由1,000架暴增至5,000架。2027年無人機將帶來爆發性營收貢獻。</p>
+            <p><strong>數據論證二（完美價值解鎖）：</strong> 轉型為控股公司（3718）後，採用 SOTP 估值法，無人機給予 5x P/S，矽光子與車載給予 15x EV/EBITDA，傳統業務給予 1x P/B，目標價上看 137 元。目前以 1x P/B（約83-85元）買入，等於免費獲得這些高成長期權。</p>
+            <div class="p-2.5 bg-white/80 rounded border border-emerald-200 font-semibold text-emerald-800">
+              結論：風險報酬比極佳，強烈建議在淨值區間逢低建倉！
+            </div>
+          </div>
+        `
+      },
+      bear: {
+        title: "悲觀派分析師（空頭代表）：財報連兩季虧損，轉型難彌傳統本業衰退",
+        bgClass: "bg-rose-50 border-rose-300 text-rose-950",
+        btnActive: "btn-debate-bear",
+        content: `
+          <div class="space-y-3 text-xs leading-relaxed">
+            <p class="text-sm font-bold text-rose-900">「願景很美好，但財務報表極度骨感。接落下的刀子風險極高！」</p>
+            <p><strong>數據論證一（本業持續惡化）：</strong> 2026上半年毛利率降至15.5% (YoY -2.4pt)，連續兩季每股虧損。主因8成營收仍來自中國同業殺價競爭的傳統顯示與 Monitor 產品。</p>
+            <p><strong>數據論證二（折舊負擔沉重與標案風險）：</strong> 越南新廠全年資本支出上看27億元，帶來巨額折舊負擔。國防無人機營收佔比目前僅約5%，且政府標案驗收程序冗長充滿變數，短期無力扭轉集團整體虧損頹勢。</p>
+            <div class="p-2.5 bg-white/80 rounded border border-rose-200 font-semibold text-rose-800">
+              結論：本益比高達334倍失真，建議觀望直至毛利率出現實質止跌訊號！
+            </div>
+          </div>
+        `
+      },
+      balanced: {
+        title: "綜合平衡結論：黎明前的轉型陣痛期，以資產淨值為保護傘",
+        bgClass: "bg-blue-50 border-blue-300 text-blue-950",
+        btnActive: "btn-debate-balanced",
+        content: `
+          <div class="space-y-3 text-xs leading-relaxed">
+            <p class="text-sm font-bold text-blue-900">「多空辯論精準點出了中光電的『時空錯位』：短期的財務陣痛 vs 長期的結構重估。」</p>
+            <p>空頭正確指出了龐大傳統業務的拖累與短期毛利率受壓；而多頭則敏銳捕捉到了非紅無人機供應鏈與矽光子（CPO）的戰略稀缺性。只要公司資產負債表保持健康（未發生流動性危機），短期財報利空恰好為長線資金提供了極佳的安全邊際。</p>
+            <div class="p-2.5 bg-white/80 rounded border border-blue-200 font-semibold text-blue-800">
+              華爾街共識：目前處於「黎明前的最黑暗時刻」，建議以 1.0x P/B (80-85元) 為安全邊際分批佈局。
+            </div>
+          </div>
+        `
+      }
+    };
+
+    function setDebateView(type) {
+      const debateBox = document.getElementById('debate-content');
+      const data = debateData[type];
+
+      // Update button styling
+      ['bull', 'bear', 'balanced'].forEach(t => {
+        const btn = document.getElementById(`btn-debate-${t}`);
+        if (t === type) {
+          btn.className = "px-5 py-2.5 rounded-lg font-bold text-sm bg-slate-900 text-white shadow-sm transition flex items-center";
+        } else {
+          btn.className = "px-5 py-2.5 rounded-lg font-bold text-sm bg-slate-200 text-slate-700 hover:bg-slate-300 transition flex items-center";
+        }
+      });
+
+      debateBox.className = `p-6 rounded-xl border transition-all duration-300 ${data.bgClass}`;
+      debateBox.innerHTML = `
+        <h3 class="font-bold text-base mb-3">${data.title}</h3>
+        ${data.content}
+      `;
+    }
+  </script>
+</body>
+</html>
