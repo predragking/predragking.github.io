@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tesla 感測器與 Optimus 供應鏈研究</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Noto Sans TC"', '"Microsoft JhengHei"', 'Arial', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif; }
+    .table-wrap { overflow-x: auto; }
+    th { white-space: nowrap; }
+  </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800">
+  <header class="bg-slate-900 text-white">
+    <div class="max-w-7xl mx-auto px-6 py-12">
+      <div class="max-w-4xl">
+        <p class="text-sm tracking-widest text-slate-300 mb-3">TESLA SENSOR SUPPLY CHAIN</p>
+        <h1 class="text-4xl md:text-5xl font-bold leading-tight">
+          Tesla、Cybercab 與 Optimus<br>感測器需求暨台灣供應鏈研究
+        </h1>
+        <p class="mt-5 text-lg text-slate-300 leading-relaxed">
+          聚焦 Camera、CIS、光學鏡頭、機器人視覺與其他感測元件，
+          整理公開資料、歷史供應比例與可合理推估的需求量。
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 py-10">
+
+    <section class="grid md:grid-cols-4 gap-5 mb-10">
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+        <p class="text-sm text-slate-500">Tesla 2025 生產量</p>
+        <p class="text-3xl font-bold mt-2">165.5 萬台</p>
+        <p class="text-sm text-slate-500 mt-2">公開生產數據</p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+        <p class="text-sm text-slate-500">每台基本 Camera 數</p>
+        <p class="text-3xl font-bold mt-2">8 顆</p>
+        <p class="text-sm text-slate-500 mt-2">Tesla FSD 視覺架構</p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+        <p class="text-sm text-slate-500">2025 Camera 潛在需求</p>
+        <p class="text-3xl font-bold mt-2">約 1,324 萬顆</p>
+        <p class="text-sm text-slate-500 mt-2">165.5 萬台 × 8 顆</p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+        <p class="text-sm text-slate-500">Optimus 100 萬台假設</p>
+        <p class="text-3xl font-bold mt-2">700–800 萬</p>
+        <p class="text-sm text-slate-500 mt-2">7–8 顆鏡頭／台</p>
+      </div>
+    </section>
+
+    <section class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-10">
+      <h2 class="text-xl font-bold text-amber-900 mb-3">資料使用原則</h2>
+      <p class="text-amber-900 leading-7">
+        Tesla 並未公開完整的感測器 BOM，也沒有公開目前所有供應商的精確採購比例。
+        因此，本頁將「公開確認」、「產業鏈報導」、「歷史比例」與「需求推估」分開呈現。
+        歷史供應比例不可直接視為 2026 年現況。
+      </p>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-5">一、Tesla 主要感測器需求概覽</h2>
+      <div class="table-wrap bg-white rounded-2xl shadow-sm border border-slate-200">
+        <table class="w-full text-sm">
+          <thead class="bg-slate-100">
+            <tr>
+              <th class="text-left px-5 py-4">事業／產品</th>
+              <th class="text-left px-5 py-4">主要感測元件</th>
+              <th class="text-left px-5 py-4">單機需求</th>
+              <th class="text-left px-5 py-4">需求量級</th>
+              <th class="text-left px-5 py-4">主要供應鏈</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <tr>
+              <td class="px-5 py-4 font-semibold">Tesla 汽車</td>
+              <td class="px-5 py-4">Camera / CIS</td>
+              <td class="px-5 py-4">約 8 顆 Camera</td>
+              <td class="px-5 py-4 font-semibold">約 1,300–1,400 萬顆／年</td>
+              <td class="px-5 py-4">LG Innotek、Samsung Electro-Mechanics、onsemi 等</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-4 font-semibold">Cybercab</td>
+              <td class="px-5 py-4">外部 Camera、車內 Camera、Radar</td>
+              <td class="px-5 py-4">至少 8 顆外部 Camera</td>
+              <td class="px-5 py-4">依產量而定</td>
+              <td class="px-5 py-4">LG Innotek、Samsung Electro-Mechanics 等</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-4 font-semibold">Optimus</td>
+              <td class="px-5 py-4">Vision、Tactile、Force、Torque、Encoder、IMU</td>
+              <td class="px-5 py-4">視不同感測系統而定</td>
+              <td class="px-5 py-4">百萬台量產時可形成千萬級零件需求</td>
+              <td class="px-5 py-4">供應商尚未完整公開</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-5">二、Tesla 汽車 Camera 需求量</h2>
+      <div class="bg-white rounded-2xl border border-slate-200 p-6">
+        <p class="leading-8 mb-5">
+          Tesla FSD 車輛採用 8 顆攝影機的視覺架構。以 2025 年 Tesla 生產
+          1,654,667 台車計算：
+        </p>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="rounded-xl bg-slate-100 p-5">
+            <p class="text-sm text-slate-500">年度汽車產量</p>
+            <p class="text-2xl font-bold mt-1">1,654,667 台</p>
+          </div>
+          <div class="rounded-xl bg-slate-100 p-5">
+            <p class="text-sm text-slate-500">Camera／車</p>
+            <p class="text-2xl font-bold mt-1">8 顆</p>
+          </div>
+          <div class="rounded-xl bg-slate-100 p-5">
+            <p class="text-sm text-slate-500">推算 Camera 需求</p>
+            <p class="text-2xl font-bold mt-1">13,237,336 顆</p>
+          </div>
+        </div>
+        <p class="text-sm text-slate-500 mt-5">
+          以上為數學推算，不代表 Tesla 對單一供應商的實際採購量。
+        </p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-5">三、Tesla Camera Module 供應商</h2>
+      <div class="table-wrap bg-white rounded-2xl shadow-sm border border-slate-200">
+        <table class="w-full text-sm">
+          <thead class="bg-slate-100">
+            <tr>
+              <th class="text-left px-5 py-4">供應商</th>
+              <th class="text-left px-5 py-4">所在地</th>
+              <th class="text-left px-5 py-4">主要產品</th>
+              <th class="text-left px-5 py-4">Tesla 關係</th>
+              <th class="text-left px-5 py-4">公開比例</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <tr>
+              <td class="px-5 py-4 font-semibold">LG Innotek</td>
+              <td class="px-5 py-4">韓國</td>
+              <td class="px-5 py-4">Automotive Camera Module</td>
+              <td class="px-5 py-4">Tesla Camera 供應鏈；Cybercab 供應鏈亦有報導</td>
+              <td class="px-5 py-4">歷史資料約 60–70%</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-4 font-semibold">Samsung Electro-Mechanics</td>
+              <td class="px-5 py-4">韓國</td>
+              <td class="px-5 py-4">Automotive Camera Module</td>
+              <td class="px-5 py-4">Tesla Camera 供應鏈；Cybercab 及 Optimus 均有相關報導</td>
+              <td class="px-5 py-4">歷史資料約 30%，後續訂單增加</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-4">其他供應商</td>
+              <td class="px-5 py-4">多地</td>
+              <td class="px-5 py-4">Camera／Lens／Module</td>
+              <td class="px-5 py-4">部分供應鏈關係未完整公開</td>
+              <td class="px-5 py-4">未公開</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-sm text-slate-500 mt-3">
+        注意：60–70% 與 30% 屬歷史產業資料，不能直接當成 2026 年最新採購比例。
+      </p>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-5">四、Cybercab 感測器需求</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-2xl border border-slate-200 p-6">
+          <h3 class="text-lg font-bold mb-4">主要視覺與感測系統</h3>
+          <ul class="space-y-3 text-slate-700">
+            <li>• 外部 Camera：約 8 顆／車</li>
+            <li>• Cabin Camera：車內攝影機</li>
+            <li>• Cabin Radar：車內雷達</li>
+            <li>• 其他車輛控制與安全感測元件</li>
+          </ul>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-200 p-6">
+          <h3 class="text-lg font-bold mb-4">初期需求示例</h3>
+          <p class="leading-7">
+            若以 20,000–30,000 台 Cybercab 的初期產量假設計算，
+            僅 8 顆外部 Camera 就對應約 160,000–240,000 顆 Camera。
+          </p>
+          <p class="text-sm text-slate-500 mt-4">
+            Samsung Electro-Mechanics 與 LG Innotek 被產業報導為相關 Camera Module 供應商；
+            兩家公司實際分配比例未公開。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-5">五、CIS／Image Sensor 供應鏈</h2>
+      <div class="table-wrap bg-white rounded-2xl shadow-sm border border-slate-200">
+        <table class="w-full text-sm">
+          <thead class="bg-slate-100">
+            <tr>
+              <th class="text-left px-5 py-4">公司</th>
+              <th class="text-left px-5 py-4">角色</th>
+              <th class="text-left px-5 py-4">Tesla 關係</th>
+              <th class="text-left px-5 py-4">比例資料</th>
+              <th class="text-left px-5 py-4">判讀</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <tr>
+              <td class="px-5 py-4 font-semibold">onsemi／Aptina</td>
+              <td class="px-5 py-4">CIS / Image Sensor</td>
+              <td class="px-5 py-4">Tesla 歷史 CIS 供應鏈</td>
+              <td class="px-5 py-4">歷史資料曾估約 6／8 顆</td>
+              <td class="px-5 py-4">約 75% 的歷史估算，不代表 2026 現況</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-4 font-semibold">同欣電</td>
+              <td class="px-5 py-4">CIS 封裝／測試</td>
+              <td class="px-5 py-4">可透過 onsemi 等形成間接供應鏈</td>
+              <td class="px-5 py-4">Tesla 占比未公開</td>
+              <td class="px-5 py-4">台灣 CIS 封裝重要研究標的</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-4">Sony／OmniVision 等</td>
+              <td class="px-5 py-4">CIS</td>
+              <td class="px-5 py-4">車用 CIS 產業鏈</td>
+              <td class="px-5 py-4">Tesla 實際份額未完整公開</td>
+              <td class="px-5 py-4">需逐代確認感測器平台</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-5">六、Optimus 的感測器需求結構</h2>
+      <div class="grid md:grid-cols-5 gap-4">
+        <div class="bg-white rounded-2xl border border-slate-200 p-5">
+          <p class="font-bold">Vision</p>
+          <p class="text-sm text-slate-500 mt-2">Camera、CIS、Lens、Depth sensing</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-200 p-5">
+          <p class="font-bold">Tactile</p>
+          <p class="text-sm text-slate-500 mt-2">手指、手掌觸覺與壓力感測</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-200 p-5">
+          <p class="font-bold">Force / Torque</p>
+          <p class="text-sm text-slate-500 mt-2">關節、手部及抓取力量</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-200 p-5">
+          <p class="font-bold">Position</p>
+          <p class="text-sm text-slate-500 mt-2">Encoder、Joint Position</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-200 p-5">
+          <p class="font-bold">Motion</p>
+          <p class="text-sm text-slate-500 mt-2">IMU、Gyroscope、Accelerometer</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-5">七、Optimus Camera／Lens 需求推估</h2>
+      <div class="bg-white rounded-2xl border border-slate-200 p-6">
+        <p class="leading-8">
+          產業公開資訊曾指出，一台人形機器人可能需要約 7–8 顆鏡頭。
+          因此，若未來 Optimus 達到 100 萬台／年的假設產量：
+        </p>
+        <div class="grid md:grid-cols-3 gap-4 mt-6">
+          <div class="rounded-xl bg-slate-100 p-5">
+            <p class="text-sm text-slate-500">年產量假設</p>
+            <p class="text-2xl font-bold mt-1">100 萬台</p>
+          </div>
+          <div class="rounded-xl bg-slate-100 p-5">
+            <p class="text-sm text-slate-500">鏡頭／台</p>
+            <p class="text-2xl font-bold mt-1">7–8 顆</p>
+          </div>
+          <div class="rounded-xl bg-slate-100 p-5">
+            <p class="text-sm text-slate-500">鏡頭需求</p>
+            <p class="text-2xl font-bold mt-1">700–800 萬顆</p>
+          </div>
+        </div>
+        <p class="text-sm text-slate-500 mt-5">
+          這是產業需求模型，不是 Tesla 官方公布的完整 Optimus BOM。
+        </p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-5">八、Tesla／Optimus 主要感測供應商整理</h2>
+      <div class="table-wrap bg-white rounded-2xl shadow-sm border border-slate-200">
+        <table class="w-full text-sm">
+          <thead class="bg-slate-100">
+            <tr>
+              <th class="text-left px-5 py-4">供應商</th>
+              <th class="text-left px-5 py-4">國家／地區</th>
+              <th class="text-left px-5 py-4">主要產品</th>
+              <th class="text-left px-5 py-4">Tesla 車輛</th>
+              <th class="text-left px-5 py-4">Optimus</th>
+              <th class="text-left px-5 py-4">資料信心</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <tr>
+              <td class="px-5 py-4 font-semibold">LG Innotek</td>
+              <td class="px-5 py-4">韓國</td>
+              <td class="px-5 py-4">Camera Module</td>
+              <td class="px-5 py-4">高</td>
+              <td class="px-5 py-4">相關報導</td>
+              <td class="px-5 py-4">高</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-4 font-semibold">Samsung Electro-Mechanics</td>
+              <td class="px-5 py-4">韓國</td>
+              <td class="px-5 py-4">Camera Module</td>
+              <td class="px-5 py-4">高</td>
+              <td class="px-5 py-4">相關報導</td>
+              <td class="px-5 py-4">高</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-4 font-semibold">onsemi</td>
+              <td class="px-5 py-4">美國</td>
+              <td class="px-5 py-4">CIS</td>
+              <td class="px-5 py-4">歷史供應鏈</td>
+              <td class="px-5 py-4">未完整公開</td>
+              <td class="px-5 py-4">高</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-4 font-semibold">亞光</td>
+              <td class="px-5 py-4">台灣</td>
+              <td class="px-5 py-4">Optical Lens / Camera</td>
+              <td class="px-5 py-4">車載鏡頭供應鏈</td>
+              <td class="px-5 py-4">機器人視覺布局</td>
+              <td class="px-5 py-4">高</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-4 font-semibold">同欣電</td>
+              <td class="px-5 py-4">台灣</td>
+              <td class="px-5 py-4">CIS Packaging</td>
+              <td class="px-5 py-4">間接供應鏈</td>
+              <td class="px-5 py-4">尚待確認</td>
+              <td class="px-5 py-4">高</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-5">九、台灣上市櫃公司研究清單</h2>
+      <div class="table-wrap bg-white rounded-2xl shadow-sm border border-slate-200">
+        <table class="w-full text-sm">
+          <thead class="bg-slate-100">
+            <tr>
+              <th class="text-left px-5 py-4">公司</th>
+              <th class="text-left px-5 py-4">代號</th>
+              <th class="text-left px-5 py-4">核心技術</th>
+              <th class="text-left px-5 py-4">Tesla 關聯</th>
+              <th class="text-left px-5 py-4">Optimus 關聯</th>
+              <th class="text-left px-5 py-4">感測器研究價值</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <tr class="bg-slate-50">
+              <td class="px-5 py-4 font-bold">亞光</td>
+              <td class="px-5 py-4">3019</td>
+              <td class="px-5 py-4">光學鏡頭、車載鏡頭、機器人視覺</td>
+              <td class="px-5 py-4 font-semibold">直接／供應鏈</td>
+              <td class="px-5 py-4 font-semibold">高</td>
+              <td class="px-5 py-4 font-semibold">★★★★★</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-4 font-bold">同欣電</td>
+              <td class="px-5 py-4">6271</td>
+              <td class="px-5 py-4">CIS 封裝／測試</td>
+              <td class="px-5 py-4">間接</td>
+              <td class="px-5 py-4">中</td>
+              <td class="px-5 py-4 font-semibold">★★★★★</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-4 font-bold">聯創電子</td>
+              <td class="px-5 py-4">2499</td>
+              <td class="px-5 py-4">光學鏡頭、Camera</td>
+              <td class="px-5 py-4">供應鏈報導</td>
+              <td class="px-5 py-4">中高</td>
+              <td class="px-5 py-4">★★★★</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-4 font-bold">光寶科</td>
+              <td class="px-5 py-4">2301</td>
+              <td class="px-5 py-4">光電、Camera、車用感測</td>
+              <td class="px-5 py-4">車用布局</td>
+              <td class="px-5 py-4">中</td>
+              <td class="px-5 py-4">★★★★</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-4 font-bold">原相</td>
+              <td class="px-5 py-4">3227</td>
+              <td class="px-5 py-4">CMOS、Vision、3D Sensing</td>
+              <td class="px-5 py-4">間接</td>
+              <td class="px-5 py-4">高相關</td>
+              <td class="px-5 py-4">★★★★</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-4 font-bold">晶相光</td>
+              <td class="px-5 py-4">3530</td>
+              <td class="px-5 py-4">CMOS Image Sensor</td>
+              <td class="px-5 py-4">車用 CIS 布局</td>
+              <td class="px-5 py-4">中</td>
+              <td class="px-5 py-4">★★★★</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-4 font-bold">鈺創</td>
+              <td class="px-5 py-4">5351</td>
+              <td class="px-5 py-4">3D／Depth Sensing</td>
+              <td class="px-5 py-4">間接</td>
+              <td class="px-5 py-4">高相關</td>
+              <td class="px-5 py-4">★★★★</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-4">澤米</td>
+              <td class="px-5 py-4">6742</td>
+              <td class="px-5 py-4">光學、AR／感測</td>
+              <td class="px-5 py-4">間接</td>
+              <td class="px-5 py-4">中</td>
+              <td class="px-5 py-4">★★★</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-4">台亞</td>
+              <td class="px-5 py-4">2340</td>
+              <td class="px-5 py-4">光電、VCSEL</td>
+              <td class="px-5 py-4">間接</td>
+              <td class="px-5 py-4">中高</td>
+              <td class="px-5 py-4">★★★</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-4">艾華</td>
+              <td class="px-5 py-4">6204</td>
+              <td class="px-5 py-4">Sensor／電子元件</td>
+              <td class="px-5 py-4">間接</td>
+              <td class="px-5 py-4">中</td>
+              <td class="px-5 py-4">★★★</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-sm text-slate-500 mt-3">
+        「研究價值」是依供應鏈直接程度與感測產品關聯整理的研究分類，不代表投資評級或報酬預測。
+      </p>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-5">十、需求量級情境模型</h2>
+      <div class="table-wrap bg-white rounded-2xl shadow-sm border border-slate-200">
+        <table class="w-full text-sm">
+          <thead class="bg-slate-100">
+            <tr>
+              <th class="text-left px-5 py-4">應用</th>
+              <th class="text-left px-5 py-4">產量假設</th>
+              <th class="text-left px-5 py-4">單機需求</th>
+              <th class="text-left px-5 py-4">年需求量</th>
+              <th class="text-left px-5 py-4">性質</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <tr>
+              <td class="px-5 py-4">Tesla 汽車</td>
+              <td class="px-5 py-4">約 165 萬台</td>
+              <td class="px-5 py-4">8 Camera</td>
+              <td class="px-5 py-4 font-semibold">約 1,324 萬顆</td>
+              <td class="px-5 py-4">依公開產量推算</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-4">Tesla 汽車年化情境</td>
+              <td class="px-5 py-4">約 172 萬台</td>
+              <td class="px-5 py-4">8 Camera</td>
+              <td class="px-5 py-4 font-semibold">約 1,376 萬顆</td>
+              <td class="px-5 py-4">年化推估</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-4">Cybercab 初期</td>
+              <td class="px-5 py-4">2–3 萬台</td>
+              <td class="px-5 py-4">8 Camera</td>
+              <td class="px-5 py-4">16–24 萬顆</td>
+              <td class="px-5 py-4">情境推估</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-4">Optimus</td>
+              <td class="px-5 py-4">100 萬台</td>
+              <td class="px-5 py-4">7–8 Lens</td>
+              <td class="px-5 py-4 font-semibold">700–800 萬顆</td>
+              <td class="px-5 py-4">量產目標情境</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-4">Optimus 大規模情境</td>
+              <td class="px-5 py-4">1,000 萬台</td>
+              <td class="px-5 py-4">7–8 Lens</td>
+              <td class="px-5 py-4 font-semibold">7,000–8,000 萬顆</td>
+              <td class="px-5 py-4">長期 aspirational 情境</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-5">十一、供應鏈研究重點</h2>
+      <div class="grid lg:grid-cols-3 gap-6">
+        <div class="bg-white rounded-2xl border border-slate-200 p-6">
+          <div class="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold mb-4">01</div>
+          <h3 class="text-lg font-bold">Camera Module</h3>
+          <p class="mt-3 text-slate-600 leading-7">
+            LG Innotek 與 Samsung Electro-Mechanics 是目前最明確的 Tesla Camera Module 供應鏈。
+            Cybercab 進一步增加新的 Camera Module 需求。
+          </p>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-200 p-6">
+          <div class="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold mb-4">02</div>
+          <h3 class="text-lg font-bold">CIS / Image Sensor</h3>
+          <p class="mt-3 text-slate-600 leading-7">
+            onsemi／Aptina 是歷史上重要的 Tesla CIS 供應鏈。
+            台灣同欣電的 CIS 封裝能力值得沿著上游客戶關係進一步追蹤。
+          </p>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-200 p-6">
+          <div class="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold mb-4">03</div>
+          <h3 class="text-lg font-bold">Optical Lens</h3>
+          <p class="mt-3 text-slate-600 leading-7">
+            亞光同時具備車載鏡頭與機器人視覺布局，是台灣感測器產業鏈中值得單獨追蹤的公司。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-slate-900 text-white rounded-3xl p-8 md:p-10">
+      <h2 class="text-2xl font-bold mb-5">十二、研究結論</h2>
+      <div class="space-y-4 text-slate-300 leading-8">
+        <p>
+          第一，Tesla 車輛本身已形成每年約千萬顆 Camera 的需求規模。
+          以 2025 年生產量與每車 8 顆 Camera 計算，約為 1,324 萬顆。
+        </p>
+        <p>
+          第二，Cybercab 將自動駕駛 Camera 需求延伸至 Robotaxi 平台；
+          LG Innotek 與 Samsung Electro-Mechanics 是目前較明確的相關供應鏈公司。
+        </p>
+        <p>
+          第三，Optimus 的長期價值不只在 Camera，而是會增加 Tactile、Force、Torque、
+          Encoder、IMU、Depth Sensing 等多類感測元件。
+        </p>
+        <p>
+          第四，台灣公司中，亞光與同欣電分別代表 Optical／Camera 與 CIS Packaging
+          兩條不同的感測器供應鏈；原相、晶相光、鈺創等則可從 Vision、CIS、
+          3D／Depth Sensing 方向進一步研究。
+        </p>
+        <p>
+          第五，目前最缺乏公開資料的是「Tesla 對各供應商的最新採購比例」。
+          因此不宜把歷史市占率直接套用到 2026 年，更不能把市場傳聞當成 Tesla 官方 BOM。
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-10">
+      <h2 class="text-2xl font-bold mb-5">資料來源與延伸查證方向</h2>
+      <div class="bg-white rounded-2xl border border-slate-200 p-6">
+        <ul class="space-y-3 text-sm text-slate-600 leading-7">
+          <li>• Tesla Investor Relations：季度生產與交付資料。</li>
+          <li>• Tesla 官方 FSD／車輛技術資料：Camera 與感測架構。</li>
+          <li>• Tesla 2026 年 SEC 申報文件：Cybercab、生產及公司營運資訊。</li>
+          <li>• Tesla Careers：Image Sensor Strategic Sourcing 職缺資訊。</li>
+          <li>• 韓國電子產業媒體：LG Innotek、Samsung Electro-Mechanics Tesla Camera Module 供應鏈報導。</li>
+          <li>• 台灣產業及證券市場公開資料：亞光、同欣電、原相、晶相光、鈺創等公司之光學、CIS 與感測器布局。</li>
+        </ul>
+        <p class="text-xs text-slate-400 mt-6">
+          本頁為產業研究資料整理，不構成投資建議。供應商關係、產品世代與採購比例可能隨 Tesla 平台及量產策略變動。
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-slate-200 bg-white">
+    <div class="max-w-7xl mx-auto px-6 py-8 text-sm text-slate-500">
+      Tesla 感測器與 Optimus 供應鏈研究｜資料整理日期：2026 年 9 月
+    </div>
+  </footer>
+</body>
+</html>
