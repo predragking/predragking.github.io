@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mark Minervini：交易的聖杯 (The Holy Grail in Trading) | 中英對照逐字稿與精華</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'Noto Sans TC', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#15803d',
+              900: '#14532d',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .glass-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+    }
+    .dark .glass-card {
+      background: rgba(15, 23, 42, 0.85);
+    }
+    .text-balance {
+      text-wrap: balance;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen font-sans transition-colors duration-200">
+
+  <!-- Header -->
+  <header class="border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-emerald-600 text-white font-bold text-lg shadow-md shadow-emerald-500/20">
+          M
+        </span>
+        <div>
+          <h1 class="text-base sm:text-lg font-bold leading-tight">Mark Minervini 交易聖杯精華</h1>
+          <p class="text-xs text-slate-500 dark:text-slate-400">The Holy Grail in Trading • 中英對照逐字稿</p>
+        </div>
+      </div>
+      
+      <div class="flex items-center space-x-2 sm:space-x-4">
+        <a href="https://www.youtube.com/watch?v=JcFbWRs1myU" target="_blank" rel="noopener noreferrer" 
+           class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-red-50 text-red-600 hover:bg-red-100 dark:bg-red-950/50 dark:text-red-400 border border-red-200 dark:border-red-900 transition">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          <span class="hidden sm:inline">觀看原影片</span>
+        </a>
+        <button id="themeToggle" class="p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+          <svg id="themeIconDark" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+          <svg id="themeIconLight" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-12">
+
+    <!-- Hero / Headline -->
+    <section class="text-center max-w-3xl mx-auto space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        美股冠軍交易哲學
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white text-balance">
+        「交易的聖杯，不是追求單筆暴利，而是最佳化利潤的快速週轉。」
+      </h2>
+      <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
+        講者：<span class="font-semibold text-slate-900 dark:text-slate-200">Mark Minervini</span>（全美投資大賽冠軍、《超級績效》系列作者）。<br class="hidden sm:inline">
+        揭示專業交易員的核心思維：以正期望值的數學優勢（Edge），搭配最佳化獲利目標，實現高頻複利滾動。
+      </p>
+    </section>
+
+    <!-- Key Takeaway Cards (3 Pillars) -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      
+      <!-- Card 1 -->
+      <div class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:shadow-md transition">
+        <div class="w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center font-bold mb-4">
+          01
+        </div>
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">掌握非對稱優勢 (The Edge)</h3>
+        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+          哪怕勝率只有 40%~50%，只要維持 <strong class="text-slate-900 dark:text-slate-100">3:1 的風報比</strong>（平均獲利 15%，停損嚴控在 5%），在數學上就擁有極強的正期望值（每冒 1 元風險賺回 2~3 元）。
+        </p>
+        <div class="p-3 bg-slate-50 dark:bg-slate-800/70 rounded-xl font-mono text-xs text-slate-700 dark:text-slate-300">
+          期望值 = (15% × 40%) / (5% × 60%) = <span class="text-emerald-600 dark:text-emerald-400 font-bold">2.0 (2:1 優勢)</span>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:shadow-md transition">
+        <div class="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold mb-4">
+          02
+        </div>
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">最佳化勝過最大化 (Optimum vs Max)</h3>
+        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+          追求 100% 暴利股票需要漫長等待且機會罕見（巨大機會成本）；而市場上幾乎所有股票一年內都會出現多次 10%~20% 的波段。
+        </p>
+        <div class="p-3 bg-slate-50 dark:bg-slate-800/70 rounded-xl font-mono text-xs text-slate-700 dark:text-slate-300 space-y-1">
+          <div>1 檔 100% 翻倍 = <span class="font-bold text-slate-900 dark:text-slate-100">+100%</span></div>
+          <div>4 筆 20% 複利 = (1.20)⁴ = <span class="font-bold text-emerald-600 dark:text-emerald-400">+107%</span></div>
+          <div>8 筆 10% 複利 = (1.10)⁸ = <span class="font-bold text-emerald-600 dark:text-emerald-400">+114%</span></div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:shadow-md transition">
+        <div class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold mb-4">
+          03
+        </div>
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">翻牌速度即是聖杯 (Turn The Edge Over)</h3>
+        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+          如果你丟硬幣正面賺 \$3、反面賠 \$1，你該做的是盡可能丟 100 次、1,000 次！大數法則會讓機率分布兌現成龐大財富。
+        </p>
+        <div class="p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-xl border border-emerald-200 dark:border-emerald-800/50 text-xs text-emerald-900 dark:text-emerald-300 font-medium">
+          <strong>交易聖杯公式：</strong><br>
+          正期望值優勢 × 資金週轉率 (Turnover Velocity)
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Comparison Table -->
+    <section class="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-sm">
+      <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+        <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        交易觀念對決：散戶迷思 vs. 冠軍聖杯思維
+      </h3>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse text-xs sm:text-sm">
+          <thead>
+            <tr class="border-b border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400">
+              <th class="py-3 px-4 font-semibold w-1/4">面向</th>
+              <th class="py-3 px-4 font-semibold w-3/8 text-rose-600 dark:text-rose-400">散戶常見迷思</th>
+              <th class="py-3 px-4 font-semibold w-3/8 text-emerald-600 dark:text-emerald-400">Mark Minervini 聖杯法則</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
+            <tr>
+              <td class="py-3.5 px-4 font-medium text-slate-900 dark:text-slate-100">追求目標</td>
+              <td class="py-3.5 px-4">追求單筆極大化利潤（Maximum Gain）、死抱等待翻倍飆股</td>
+              <td class="py-3.5 px-4 font-medium text-emerald-600 dark:text-emerald-400">追求最佳化利潤（Optimum Gain），鎖定高機率波段迅速落袋</td>
+            </tr>
+            <tr>
+              <td class="py-3.5 px-4 font-medium text-slate-900 dark:text-slate-100">勝率認知</td>
+              <td class="py-3.5 px-4">誤以為要有 80%~90% 超高勝率才能在市場賺大錢</td>
+              <td class="py-3.5 px-4">即使勝率僅 40%~50%，靠嚴格 3:1 風報比依然能累積巨額財富</td>
+            </tr>
+            <tr>
+              <td class="py-3.5 px-4 font-medium text-slate-900 dark:text-slate-100">交易行為</td>
+              <td class="py-3.5 px-4">執著於摸頂（賣在最高點）或抄底（買在最低點）</td>
+              <td class="py-3.5 px-4">承認預測頂底是不可能的，專注在買點後的正期望值波段</td>
+            </tr>
+            <tr>
+              <td class="py-3.5 px-4 font-medium text-slate-900 dark:text-slate-100">複利策略</td>
+              <td class="py-3.5 px-4">資金卡在單一標的數月甚至數年，承擔巨大時間與機會成本</td>
+              <td class="py-3.5 px-4">不斷將優勢翻轉（Turn edge over），透過高週轉率發揮複利威力</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Transcript Section -->
+    <section class="space-y-6">
+      
+      <!-- Section Header with Language Filter -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
+        <div>
+          <h3 class="text-2xl font-bold text-slate-900 dark:text-white">完整中英逐字稿 (Transcript)</h3>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">共 8 分鐘演講內容，依語意結構分段</p>
+        </div>
+        
+        <!-- Controls -->
+        <div class="flex items-center gap-1.5 p-1 bg-slate-200/70 dark:bg-slate-800 rounded-xl text-xs font-semibold">
+          <button onclick="setLangView('bilingual')" id="btn-bilingual" class="lang-btn px-3 py-1.5 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm transition">中英雙語</button>
+          <button onclick="setLangView('zh')" id="btn-zh" class="lang-btn px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition">繁中為主</button>
+          <button onclick="setLangView('en')" id="btn-en" class="lang-btn px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition">英文原文</button>
+        </div>
+      </div>
+
+      <!-- Transcript Blocks -->
+      <div id="transcript-container" class="space-y-6">
+
+        <!-- Block 1 -->
+        <div class="transcript-card p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              00:01 - 00:50
+            </span>
+            <span class="text-xs font-medium text-emerald-600 dark:text-emerald-400">買點與漲跌極限空間</span>
+          </div>
+
+          <div class="content-zh text-sm sm:text-base text-slate-800 dark:text-slate-200 leading-relaxed font-normal">
+            大家好，今天我想談談交易中的「聖杯」。我會用一張圖表來說明，讓大家真正理解交易與投機的本質是什麼。<br><br>
+            我們首先看這張圖表，假設這個點代表你的<strong>買進點（Buy Point）</strong>。從這個點出發，股價上漲的空間是無限的（當然，股票上漲是沒有上限的）；而下跌的極限則是跌到零——如果股票跌到零，你就會從買點起算賠掉 100% 的投資金額。所以你的上檔是無限，下檔是歸零。
+          </div>
+
+          <div class="content-en text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-mono leading-relaxed border-t border-slate-100 dark:border-slate-800/60 pt-3">
+            Okay everyone, today I want to talk about the holy grail in trading. And I'll do an illustration to uh bring home a point of what trading is about, what speculation is about. So we're going to start off with this graph here, assuming that this point right here, this is representing your buy point, okay? And the upside is infinity. Of course a stock can go up—you know, there is no cap on how much a stock can go up. And of course downside is to zero. A stock can go to zero, right? So you have infinity on the upside, zero on the downside, losing all your investment from the buy point of course.
+          </div>
+        </div>
+
+        <!-- Block 2 -->
+        <div class="transcript-card p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              00:51 - 01:39
+            </span>
+            <span class="text-xs font-medium text-emerald-600 dark:text-emerald-400">50/50 的機率假定</span>
+          </div>
+
+          <div class="content-zh text-sm sm:text-base text-slate-800 dark:text-slate-200 leading-relaxed font-normal">
+            現在我們假設，從那個買點買進之後（不管你是依據何種特定型態買入），<strong>50% 的時間股價處於正報酬區間（上漲），另外 50% 的時間處於負報酬區間（下跌）</strong>。<br><br>
+            當然有時候它處於負報酬的時間比正報酬少得多，可能先跌後漲，也可能先漲後跌。但為了方便分析，我們先假設 50% 時間它在獲利區，50% 時間在虧損區。這張圖就是用來表示買進之後價格的運動軌跡。
+          </div>
+
+          <div class="content-en text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-mono leading-relaxed border-t border-slate-100 dark:border-slate-800/60 pt-3">
+            So now let's assume that from that buy point—whatever it is, whether it's from a specific technical setup, whatever that buy point represents—let's assume that 50% of the time the stock is on the positive side, and 50% of the time it's on the negative side. Now there are times where it's going to be on the negative side maybe a lot less than the positive side, and it'll go negative and then positive, right? And vice versa. But just let's assume that 50% of the time the stock spends its time on a positive side and a negative side, right? So this just represents what the price did after the buy point.
+          </div>
+        </div>
+
+        <!-- Block 3 -->
+        <div class="transcript-card p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              01:40 - 02:24
+            </span>
+            <span class="text-xs font-medium text-emerald-600 dark:text-emerald-400">交易的真正目標：最佳化與一致性</span>
+          </div>
+
+          <div class="content-zh text-sm sm:text-base text-slate-800 dark:text-slate-200 leading-relaxed font-normal">
+            此時你的目標，<strong>絕不是去想出一種能夠預測「波段高點在哪裡」、股價能漲到哪裡的策略</strong>，也不是要找一檔買進後能抱一輩子的股票。<br><br>
+            你當然可以在某個價格買進並抱著 20、30 年且從未跌破成本價，但那是長期投資的想法。我們現在討論的是**高頻率的波段交易（Trading）**，以及如何「最佳化你的交易」——<strong>在最短的時間內取得最大的報酬率，並且能長期穩定、一致地執行（Do it consistently）</strong>。
+          </div>
+
+          <div class="content-en text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-mono leading-relaxed border-t border-slate-100 dark:border-slate-800/60 pt-3">
+            Now your goal is not to try to come up with some type of strategy that figures out where these peaks are going to be, how much the stock's going to go up, or even end up with you know, maybe a stock that keeps going up for a lifetime, right? You can buy a stock maybe at a certain price and hold it for the next 20 or 30 years and it never goes below your buy price, okay? That's obviously some type of long-term investment idea. But we're talking about trading on a regular basis and optimizing your trading so you're getting the biggest return in the shortest amount of time and you're able to do it consistently. That's the main thing is to do it consistently.
+          </div>
+        </div>
+
+        <!-- Block 4 -->
+        <div class="transcript-card p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              02:25 - 04:18
+            </span>
+            <span class="text-xs font-medium text-emerald-600 dark:text-emerald-400">建立 3:1 風報比與數學優勢</span>
+          </div>
+
+          <div class="content-zh text-sm sm:text-base text-slate-800 dark:text-slate-200 leading-relaxed font-normal">
+            要做到這點，你必須計算出：當股價進入正報酬區間時，你能擷取多少利潤？勝負比例可以是 80/20 或任何數字，我這裡用 50/50 當例子，就像拋硬幣一樣，對一半、錯一半。<br><br>
+            這其實就是我長年職業生涯的真實勝率，<strong>勝率大概落在 45% 到 50% 之間</strong>。只要你能遵循固定公式，50% 勝率就能讓你賺大錢。<br><br>
+            關鍵在於：計算出你在上漲側能鎖定多少獲利，對比為了控制風險、迅速停損所付出的成本。我通常希望有 2:1 的盈虧比，但我更偏好 **3:1**！<br>
+            假設你獲利時<strong>平均能賺 15%</strong>，而為了做到這一點，你能將<strong>虧損嚴格控制在 5% 停損</strong>，且不會因為停損太緊而掐死正常震盪空間。這時你就是 3:1 的風報比——<strong>每冒險 1 美元，就能賺回 3 美元</strong>！
+          </div>
+
+          <div class="content-en text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-mono leading-relaxed border-t border-slate-100 dark:border-slate-800/60 pt-3">
+            And to do that, what you have to do is figure out what you can capture when the stock is on that positive side. And now these numbers could be 80/20, you know it could be any numbers. I'm using 50/50 as you know basically the flip of a coin—that you're right half the time, you're wrong half the time. That's been my about my average between about 45 and 50 percent uh profitable trades over a long period of time, my career. And if you can be right 50% of the time, you should do very well if you follow the formula of capturing the gain. Figuring out what gain that you can capture while the stock is on that positive side versus what cost as far as cutting your loss and keeping your risk contained... I want to have a 2 to 1 profit to risk relationship, but let's even start with a 3 to 1. All right, that's what I really prefer is to have a 3 to 1. So let's say you're able to capture 15% gains on the upside on average... and to do that you're able to keep your losses contained at 5% and not choke off that other half of the equation... so now you have a 3 to 1: for every dollar that you're risking, you're making three dollars.
+          </div>
+        </div>
+
+        <!-- Block 5 -->
+        <div class="transcript-card p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              04:19 - 06:00
+            </span>
+            <span class="text-xs font-medium text-emerald-600 dark:text-emerald-400">大數法則與 40% 勝率加權計算</span>
+          </div>
+
+          <div class="content-zh text-sm sm:text-base text-slate-800 dark:text-slate-200 leading-relaxed font-normal">
+            想像一下如果你有一枚硬幣，擲出正面你得到 3 元，擲出反面你只輸 1 元。<strong>你難道不會想盡可能瘋狂地擲這枚硬幣嗎？</strong><br><br>
+            你一定會想盡可能多擲幾次，因為你掌握了<strong>「數學優勢（Edge）」</strong>！擲 100 次賺的錢遠比擲 10 次多；擲 1,000 次賺的又遠比擲 100 次多得多。而且擲得越多，大數法則就越能確保機率分佈兌現。<br><br>
+            退一步說，假設你的勝率跌到<strong>只有 40%</strong>，有 60% 交易是賠錢的。根據打擊率加權公式調整：
+            $$(15\% \times 40\%) \div (5\% \times 60\%) = 6\% \div 3\% = 2.0$$
+            你依然擁有 <strong>2:1 的期望優勢</strong>！哪怕 100 筆交易錯了 60 筆，你每冒 1 元風險依然淨賺 2 元。只要你能持續提高週轉頻率（Turn that edge over），你照樣能賺進大把財富！
+          </div>
+
+          <div class="content-en text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-mono leading-relaxed border-t border-slate-100 dark:border-slate-800/60 pt-3">
+            So imagine if you had a coin—and of course a coin flip is 50/50—and let's say when you hit heads, you got paid $3, and when the coin landed on tails you lost a dollar. Wouldn't you want to flip that coin as much as possible? Right, you'd want to flip that coin as much as you possibly could because you have an edge! And if you were able to flip that coin 100 times, you're going to make a heck of a lot more money than if you flipped it 10 times... So let's say that you're only right 40% of the time and 60% of the time you're on the losing side... when you adjust it for your batting average, you simply take your percentage gain times your percentage of winning trades, divided by your percentage loss times the percentage of losing trades. So this would come out to 2 to 1! You'd still be a 2 to 1 trader... and again you'd be making a fortune if you can do that and turn that edge over!
+          </div>
+        </div>
+
+        <!-- Block 6 -->
+        <div class="transcript-card p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              06:01 - 07:45
+            </span>
+            <span class="text-xs font-medium text-emerald-600 dark:text-emerald-400">複利力量：100% vs. 4次20% vs. 8次10%</span>
+          </div>
+
+          <div class="content-zh text-sm sm:text-base text-slate-800 dark:text-slate-200 leading-relaxed font-normal">
+            所以，交易絕不是去抓最大漲幅、摸頭賣最高或抄底買最低。這實質上不可能，完全沒必要，而且<strong>根本不是最佳解</strong>。<br><br>
+            這聽起來很反直覺：為什麼不要追求最大利潤？因為追求最大單筆利潤會付出昂貴的<strong>機會成本（Opportunity Cost）</strong>。<br>
+            看這組數學比較：
+            <ul class="list-disc pl-5 mt-2 space-y-1 text-slate-700 dark:text-slate-300">
+              <li>1 檔漲 100% 的翻倍股，回報率是 <strong>+100%</strong>。</li>
+              <li>但若你連續做 4 筆各漲 20% 的交易並進行複利滾動，回報率是 <strong>+107%</strong>（$1.20^4 = 2.0736$）。</li>
+              <li>若你找到 8 筆各漲 10% 的波段並複利滾動，回報率更高達 <strong>+114%</strong>（$1.10^8 = 2.1436$）！</li>
+            </ul>
+            <br>
+            哪一種在市場上比較容易找到？找一檔翻倍股容易，還是找 20% 的波段容易？顯然 20% 容易得多；而 10% 又比 20% 更容易——因為幾乎市場上所有股票一年內都會出現好幾次 10% 的漲幅！
+          </div>
+
+          <div class="content-en text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-mono leading-relaxed border-t border-slate-100 dark:border-slate-800/60 pt-3">
+            So now what trading is not about is trying to figure out to get the biggest gain and to capture these peaks, or to buy at the lows. That's virtually impossible, and it's unnecessary, and it also may not be optimal. Here's the key: you're not looking for the biggest gain. That may sound counterintuitive—why would I want to have the largest gain? Well, because the largest gain may cost you an opportunity cost. So if you were to have one stock that went up 100%, obviously that would be a 100% return, correct? If you were to buy four stocks that went up 20% and you compounded that... you'd be up 107%, just about the same as the 100%. If you found eight stocks or eight trades that went up 10% and you compounded those, you'd be up 114%! So the question is: first of all, which one is easier to find? Is it easier to find a stock that goes up 100% or 20%? Obviously 20% would be easier than 100%, and 10% would be easier than 20%—because almost every stock goes up 10% many times per year.
+          </div>
+        </div>
+
+        <!-- Block 7 -->
+        <div class="transcript-card p-6 rounded-2xl border-2 border-emerald-500/40 bg-gradient-to-br from-emerald-50/50 to-white dark:from-emerald-950/20 dark:to-slate-900 shadow-md space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-semibold bg-emerald-600 text-white">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              07:46 - 08:08
+            </span>
+            <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">★ 核心結論：交易聖杯</span>
+          </div>
+
+          <div class="content-zh text-sm sm:text-base text-slate-900 dark:text-slate-100 font-semibold leading-relaxed">
+            在一段時間之內，你能擁有多少次這樣的獲利機會？這就回到了核心：在承擔特定風險的前提下，去找出「最佳化目標（Optimal Level）」，而不是去妄想「最大化目標（Maximum Level）」。<br><br>
+            <strong>最大獲利絕不是你該追求的，你該追求的是『最佳化獲利』——唯有如此，你才能把你的數學優勢，在最短時間內翻牌、週轉最多次！</strong><br><br>
+            <span class="text-emerald-600 dark:text-emerald-400 text-lg">「而這，就是交易的聖杯。」</span>
+          </div>
+
+          <div class="content-en text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-mono leading-relaxed border-t border-emerald-200 dark:border-emerald-900/60 pt-3">
+            So now, how many opportunities are you going to have in a period of time? And that is where we go back to figuring out the optimal level versus the risk, versus the maximum level. Maximum level is not what you're looking for. You're looking for the optimum level, so you can turn that edge over as many times as possible. And that is the holy grail.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 dark:border-slate-800 py-8 text-center text-xs text-slate-500 dark:text-slate-400">
+    <div class="max-w-6xl mx-auto px-4 space-y-2">
+      <p>Original Content: Mark Minervini Explains the Holy Grail in Trading (YouTube: JcFbWRs1myU)</p>
+      <p>Compiled & Organized for Active Traders • Tailwind CSS Responsive Layout</p>
+    </div>
+  </footer>
+
+  <!-- Script for Theme & Language Switching -->
+  <script>
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const iconDark = document.getElementById('themeIconDark');
+    const iconLight = document.getElementById('themeIconLight');
+
+    function updateTheme(isDark) {
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+        iconDark.classList.remove('hidden');
+        iconLight.classList.add('hidden');
+      } else {
+        document.documentElement.classList.remove('dark');
+        iconDark.classList.add('hidden');
+        iconLight.classList.remove('hidden');
+      }
+    }
+
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    updateTheme(prefersDark);
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      updateTheme(isDark);
+    });
+
+    // Language view filtering
+    function setLangView(mode) {
+      const zhElements = document.querySelectorAll('.content-zh');
+      const enElements = document.querySelectorAll('.content-en');
+      const buttons = document.querySelectorAll('.lang-btn');
+
+      buttons.forEach(btn => {
+        btn.classList.remove('bg-white', 'dark:bg-slate-700', 'text-slate-900', 'dark:text-white', 'shadow-sm');
+        btn.classList.add('text-slate-600', 'dark:text-slate-400');
+      });
+
+      const activeBtn = document.getElementById('btn-' + mode);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-white', 'dark:bg-slate-700', 'text-slate-900', 'dark:text-white', 'shadow-sm');
+        activeBtn.classList.remove('text-slate-600', 'dark:text-slate-400');
+      }
+
+      if (mode === 'bilingual') {
+        zhElements.forEach(el => el.classList.remove('hidden'));
+        enElements.forEach(el => el.classList.remove('hidden'));
+      } else if (mode === 'zh') {
+        zhElements.forEach(el => el.classList.remove('hidden'));
+        enElements.forEach(el => el.classList.add('hidden'));
+      } else if (mode === 'en') {
+        zhElements.forEach(el => el.classList.add('hidden'));
+        enElements.forEach(el => el.classList.remove('hidden'));
+      }
+    }
+  </script>
+</body>
+</html>
